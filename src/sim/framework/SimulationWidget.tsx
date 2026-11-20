@@ -19,7 +19,7 @@ import { Plot } from "./Plots";
 import { useHighlight } from "./highlight";
 import { SimAudioEngine } from "./audio";
 import { decodeSimParams, decodeSpeed, encodeSimParams } from "./urlState";
-import { formatQuantity } from "../core/units";
+import { formatQuantityFixed } from "../core/units";
 import { useAppStore } from "@/app/store";
 
 const PHYSICS_DT = 1 / 120; // fixed timestep, seconds
@@ -523,7 +523,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         readout={readout}
         onChange={onParamChange}
         onPreset={applyPreset}
-        format={(v, unit, digits) => formatQuantity(v, unit, i18n.language, digits)}
+        format={(v, unit, digits) => formatQuantityFixed(v, unit, i18n.language, digits)}
         t={t}
         onHoverParam={setHoverVar}
       />

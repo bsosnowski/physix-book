@@ -82,7 +82,7 @@ export function ControlPanel({
               className="min-w-0 flex-1 accent-sky-600"
               aria-label={t(spec.labelKey)}
             />
-            <span className="w-20 shrink-0 text-right font-mono text-xs tabular-nums text-zinc-600 dark:text-zinc-400">
+            <span className="w-24 shrink-0 truncate text-right font-mono text-xs tabular-nums text-zinc-600 dark:text-zinc-400">
               {format(values[spec.key] ?? spec.default, spec.unit, spec.digits ?? 1)}
             </span>
           </label>
@@ -90,11 +90,11 @@ export function ControlPanel({
       </div>
 
       {readoutSpecs.length > 0 && (
-        <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1 border-t border-zinc-200 pt-2 text-sm dark:border-zinc-800">
+        <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 border-t border-zinc-200 pt-2 text-sm sm:grid-cols-3 dark:border-zinc-800">
           {readoutSpecs.map((r) => (
-            <div key={r.key} className="flex items-baseline gap-1.5">
-              <dt className="text-xs text-zinc-500">{t(r.labelKey)}</dt>
-              <dd className="font-mono text-xs font-medium tabular-nums">
+            <div key={r.key} className="flex min-w-0 items-baseline justify-between gap-1.5">
+              <dt className="truncate text-xs text-zinc-500">{t(r.labelKey)}</dt>
+              <dd className="shrink-0 font-mono text-xs font-medium tabular-nums">
                 {format(readout[r.key] ?? 0, r.unit, r.digits ?? 2)}
               </dd>
             </div>

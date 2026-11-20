@@ -185,9 +185,33 @@ test.describe("simulation widget — projectile", () => {
     }
   });
 
+  test("readouts use fixed precision and never shift layout while ticking", async ({ page }) => {
+    const w = widget(page);
+    const time = readout(page, "Time");
+    // padded format: starts at 0,00/0.00 — never a bare "0"
+    await expect(time).toHaveText(/^0[.,]00/);
+    await w.getByRole("button", { name: /Play/ }).click();
+    await expect.poll(async () => parseFloat((await time.innerText()).replace(",", ".")), { timeout: 5000 }).toBeGreaterThan(0.5);
+    // sample label positions across several ticks — must be pixel-stable
+    const positions = async () =>
+      w.locator("dl dt").evaluateAll((els) => els.map((e) => Math.round(e.getBoundingClientRect().x)));
+    const p1 = await positions();
+    await page.waitForTimeout(350);
+    const p2 = await positions();
+    await page.waitForTimeout(350);
+    const p3 = await positions();
+    expect(p2).toEqual(p1);
+    expect(p3).toEqual(p1);
+    // every numeric readout keeps its decimals (e.g. "1,20 m", not "1,2 m")
+    const texts = await w.locator("dl dd").allInnerTexts();
+    for (const t of texts) {
+      expect(t).toMatch(/\d[.,]\d{2}/);
+    }
+  });
+
   test("play advances time, pause freezes it, reset zeroes it", async ({ page }) => {
     const time = readout(page, "Time");
-    await expect(time).toHaveText(/^0\s/);
+    await expect(time).toHaveText(/^0[.,]00\s/);
     await widget(page).getByRole("button", { name: /Play/ }).click();
     await expect
       .poll(async () => parseFloat((await time.innerText()).replace(",", ".")), { timeout: 5000 })
@@ -197,7 +221,7 @@ test.describe("simulation widget — projectile", () => {
     await page.waitForTimeout(400);
     await expect(time).toHaveText(frozen);
     await widget(page).getByRole("button", { name: /Reset/ }).first().click();
-    await expect(time).toHaveText(/^0\s/);
+    await expect(time).toHaveText(/^0[.,]00\s/);
   });
 
   test("flight completes: auto-pauses and reports the analytic range", async ({ page }) => {
@@ -233,7 +257,7 @@ test.describe("simulation widget — projectile", () => {
     await step.click();
     const t1 = parseFloat((await time.innerText()).replace(",", "."));
     expect(t1).toBeGreaterThan(0);
-    expect(t1).toBeLessThan(0.05); // one 1/120 s tick, rounded to 2 digits
+    expect(t1).toBeLessThan(0.05); // one 1/120 s tick, shown as 0.01
     await page.waitForTimeout(300);
     await expect(time).toHaveText(await time.innerText()); // still paused
   });
@@ -338,12 +362,12 @@ test.describe("simulation widget — waves & orbits", () => {
     await showWidget(page, w);
     const probeI = w.locator("dl > div", { hasText: "Probe intensity" }).locator("dd");
     const maxOrder = w.locator("dl > div", { hasText: "Max order" }).locator("dd");
-    await expect(probeI).toHaveText("1");
+    await expect(probeI).toHaveText("1.00");
     expect(await num(maxOrder)).toBe(3); // d=5, λ=1.5
     // fine preset: d=8, λ=0.7 → floor(11.43) = 11; probe still 1
     await w.getByRole("button", { name: "Fine fringes" }).click();
     expect(await num(maxOrder)).toBe(11);
-    await expect(probeI).toHaveText("1");
+    await expect(probeI).toHaveText("1.00");
     // canvas actually painted (field image, not blank)
     const painted = await w.locator("canvas").first().evaluate((c: HTMLCanvasElement) => {
       const d = c.getContext("2d")!.getImageData(0, 0, c.width, c.height).data;
