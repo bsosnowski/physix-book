@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import katex from "katex";
 import type { ParamSpec, Preset, ReadoutSpec } from "./types";
+import { useHighlight } from "./highlight";
 
 /** KaTeX-rendered symbol (matches the equations in the prose). */
 function MathSymbol({ tex }: { tex: string }) {
@@ -21,6 +22,7 @@ interface Props {
   onPreset: (params: Record<string, number>) => void;
   format: (value: number, unit: string, digits?: number) => string;
   t: (key: string) => string;
+  onHoverParam?: (key: string | null) => void;
 }
 
 /** Schema-driven sliders + numeric readouts. Zero sim-specific code. */
@@ -34,7 +36,9 @@ export function ControlPanel({
   onPreset,
   format,
   t,
+  onHoverParam,
 }: Props) {
+  const hoverVar = useHighlight((s) => s.hoverVar);
   return (
     <div className="border-t border-zinc-200 bg-zinc-50/60 px-4 py-3 dark:border-zinc-800 dark:bg-zinc-900/60">
       {presets.length > 0 && (
@@ -56,7 +60,15 @@ export function ControlPanel({
 
       <div className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
         {specs.map((spec) => (
-          <label key={spec.key} className="flex items-center gap-2 text-sm">
+          <label
+            key={spec.key}
+            className={
+              "flex items-center gap-2 rounded px-1 text-sm transition-colors " +
+              (hoverVar === spec.key ? "bg-amber-100 dark:bg-amber-500/20" : "")
+            }
+            onMouseEnter={() => onHoverParam?.(spec.key)}
+            onMouseLeave={() => onHoverParam?.(null)}
+          >
             <span className="w-24 shrink-0 truncate" title={t(spec.labelKey)}>
               <MathSymbol tex={spec.symbol} />
             </span>

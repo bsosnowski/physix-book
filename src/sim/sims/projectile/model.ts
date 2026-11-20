@@ -41,6 +41,21 @@ export const projectileModel: SimModel<ProjectileParams, ProjectileState> = {
     { key: "range", labelKey: "projectile.readout.range", unit: "m" },
     { key: "maxY", labelKey: "projectile.readout.maxY", unit: "m" },
   ],
+  plots: [
+    {
+      kind: "time",
+      titleKey: "projectile.plot.pos",
+      series: [
+        { key: "x", labelKey: "projectile.readout.x" },
+        { key: "y", labelKey: "projectile.readout.y" },
+      ],
+    },
+    {
+      kind: "time",
+      titleKey: "projectile.plot.vel",
+      series: [{ key: "vy", labelKey: "projectile.readout.vy", color: "#059669" }],
+    },
+  ],
   presets: [
     { id: "earth", labelKey: "projectile.preset.earth", params: { g: 9.81, drag: 0 } },
     { id: "moon", labelKey: "projectile.preset.moon", params: { g: 1.62, drag: 0 } },
@@ -118,6 +133,7 @@ export const projectileModel: SimModel<ProjectileParams, ProjectileState> = {
       x: s.motion.pos.x,
       y: s.motion.pos.y,
       speed: length(s.motion.vel),
+      vy: s.motion.vel.y,
       range: s.range,
       maxY: s.maxY,
     };

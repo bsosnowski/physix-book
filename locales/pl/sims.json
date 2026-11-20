@@ -3,7 +3,10 @@
     "play": "Odtwórz",
     "pause": "Pauza",
     "reset": "Resetuj",
-    "speed": "Prędkość"
+    "step": "Krok",
+    "speed": "Prędkość",
+    "fullscreen": "Pełny ekran",
+    "exitFullscreen": "Zamknij pełny ekran"
   },
   "widget": {
     "presets": "Ustawienia",
@@ -23,6 +26,7 @@
       "x": "Odległość",
       "y": "Wysokość",
       "speed": "Prędkość",
+      "vy": "Prędkość pionowa",
       "range": "Zasięg",
       "maxY": "Maks. wysokość"
     },
@@ -32,11 +36,141 @@
       "mars": "Mars",
       "air": "Z oporem powietrza"
     },
+    "plot": {
+      "pos": "Położenie od czasu",
+      "vel": "Prędkość pionowa od czasu"
+    },
     "axis": {
       "x": "x [m]",
       "y": "y [m]"
     },
     "apex": "apogeum",
     "rangeLabel": "zasięg"
+  },
+  "pendulum": {
+    "title": "Wahadło",
+    "param": {
+      "L": "Długość",
+      "g": "Grawitacja",
+      "theta0": "Kąt wychylenia",
+      "damping": "Tłumienie"
+    },
+    "readout": {
+      "t": "Czas",
+      "theta": "Kąt",
+      "omega": "Prędkość kątowa",
+      "energy": "Energia / masa",
+      "periodSmall": "Okres (małe kąty)",
+      "periodExact": "Okres (dokładny)"
+    },
+    "plot": {
+      "angle": "Kąt od czasu",
+      "phase": "Portret fazowy",
+      "smallAngle": "małe kąty"
+    },
+    "preset": {
+      "small": "Małe wychylenie",
+      "large": "Duże wychylenie",
+      "damped": "Tłumione",
+      "moon": "Na Księżycu"
+    },
+    "view": {
+      "exact": "wahadło dokładne",
+      "smallAngle": "przybliżenie małych kątów"
+    }
+  },
+  "spring": {
+    "title": "Oscylator sprężynowy",
+    "param": {
+      "m": "Masa",
+      "k": "Stała sprężyny",
+      "c": "Tłumienie",
+      "x0": "Wychylenie początkowe"
+    },
+    "readout": {
+      "t": "Czas",
+      "x": "Wychylenie",
+      "v": "Prędkość",
+      "energy": "Energia",
+      "period": "Okres (bez tłumienia)",
+      "zeta": "Współczynnik tłumienia ζ"
+    },
+    "plot": {
+      "x": "Wychylenie od czasu",
+      "phase": "Portret fazowy"
+    },
+    "preset": {
+      "free": "Bez tłumienia",
+      "under": "Słabo tłumione",
+      "critical": "Tłumienie krytyczne",
+      "over": "Silnie tłumione"
+    },
+    "view": {
+      "equilibrium": "położenie równowagi"
+    }
+  },
+  "incline": {
+    "title": "Równia pochyła z tarciem",
+    "param": {
+      "angle": "Kąt nachylenia",
+      "mu": "Współczynnik tarcia",
+      "m": "Masa",
+      "g": "Grawitacja"
+    },
+    "readout": {
+      "t": "Czas",
+      "a": "Przyspieszenie",
+      "v": "Prędkość",
+      "s": "Droga",
+      "criticalAngle": "Kąt graniczny",
+      "friction": "Siła tarcia"
+    },
+    "plot": {
+      "v": "Prędkość od czasu",
+      "s": "Droga od czasu"
+    },
+    "preset": {
+      "frictionless": "Bez tarcia",
+      "sticky": "Duże tarcie (stoi)",
+      "verge": "Na granicy",
+      "ice": "Lodowa równia"
+    },
+    "view": {
+      "friction": "tarcie",
+      "stuck": "Tarcie statyczne utrzymuje klocek",
+      "sliding": "Zsuwa się",
+      "finished": "Dotarł do dołu"
+    }
+  },
+  "collision": {
+    "title": "Zderzenia jednowymiarowe",
+    "param": {
+      "m1": "Masa 1",
+      "m2": "Masa 2",
+      "v1": "Prędkość początkowa 1",
+      "v2": "Prędkość początkowa 2",
+      "e": "Współczynnik restytucji"
+    },
+    "readout": {
+      "t": "Czas",
+      "v1": "Prędkość 1",
+      "v2": "Prędkość 2",
+      "momentum": "Pęd całkowity",
+      "kinetic": "Energia kinetyczna",
+      "collisions": "Zderzenia"
+    },
+    "plot": {
+      "v": "Prędkości od czasu",
+      "energy": "Energia i pęd od czasu"
+    },
+    "preset": {
+      "elasticEqual": "Sprężyste, równe masy",
+      "inelastic": "Idealnie niesprężyste",
+      "heavyLight": "Ciężki w lekki",
+      "lightHeavy": "Lekki w ciężki"
+    },
+    "view": {
+      "walls": "Ściany są sprężyste — zmieniają pęd całkowity (impuls zewnętrzny)."
+    }
   }
 }

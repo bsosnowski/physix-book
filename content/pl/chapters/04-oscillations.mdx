@@ -1,0 +1,96 @@
+---
+sourceHash: 639cae326bfa
+slug: oscillations
+order: 4
+title: Drgania
+description: Wahadła, sprężyny i dlaczego małe kąty mają znaczenie.
+sections:
+  - id: oscylator-harmoniczny
+    title: Oscylator harmoniczny
+  - id: wahadlo
+    title: Wahadło
+  - id: tlumienie
+    title: Tłumienie
+---
+
+# Drgania
+
+Wszystko, co tkwi w trwałej równowadze i zostanie trącone, zaczyna
+drgać. Dlatego ta sama matematyka opisuje sprężyny, wahadła, obwody
+i cząsteczki.
+
+## Oscylator harmoniczny
+
+Sprężyna ciągnie z powrotem proporcjonalnie do wychylenia (prawo
+Hooke'a), więc
+
+$$
+m\ddot{x} = -kx
+\quad\Longrightarrow\quad
+x(t) = x_0 \cos(\omega t), \qquad \omega = \sqrt{\frac{k}{m}}
+$$
+
+Okres $T = 2\pi\sqrt{m/k}$ zależy od urządzenia, a **nie** od amplitudy —
+naciągnij dwa razy mocniej, a zegar nadal tyka w tym samym tempie.
+
+<Sim id="spring-mass" />
+
+**Eksperymenty:** podwój masę — ile razy wzrośnie okres? Oglądaj *portret
+fazowy* (prędkość od wychylenia): ruch bez tłumienia zatacza zamkniętą
+elipsę, bo energia jest zachowana.
+
+## Wahadło
+
+Dla wahadła o długości <M v="L">L</M> puszczonego z kąta
+<M v="theta0">\theta_0</M> dokładne równanie ma postać
+
+$$
+\ddot{\theta} = -\frac{g}{L}\sin\theta
+$$
+
+Słynny wzór $T_0 = 2\pi\sqrt{L/g}$ powstaje przez zastąpienie
+$\sin\theta \approx \theta$ — słuszne tylko dla małych wychyleń. Przy
+dużych amplitudach prawdziwy okres jest *dłuższy*:
+
+$$
+T = T_0 \cdot \frac{1}{\mathrm{AGM}\!\left(1, \cos\frac{\theta_0}{2}\right)}
+$$
+
+Symulacja całkuje dokładne równanie (ciągłe) obok przybliżenia małych
+kątów (przerywany duch), więc możesz obserwować ich rozbieżność:
+
+<Sim id="pendulum" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Małe wychylenie** ($15^\circ$): wynik dokładny i przybliżony niemal
+   się pokrywają. Porównaj oba odczyty okresu.
+2. **Duże wychylenie** ($120^\circ$): duch ucieka do przodu — prawdziwe
+   wahadło jest wolniejsze. O ile dłuższy jest dokładny okres? (Odczytaj
+   obie wartości.)
+3. Zmień **długość** w trakcie ruchu: wahadło natychmiast przyspiesza lub
+   zwalnia — $T \propto \sqrt{L}$.
+4. Zabierz je na **Księżyc**: ile razy wzrośnie okres?
+
+## Tłumienie
+
+Rzeczywiste oscylatory tracą energię. Dodając opór lepki $-c\dot{x}$:
+
+$$
+m\ddot{x} + c\dot{x} + kx = 0
+$$
+
+Zachowanie zależy od **współczynnika tłumienia**
+$\zeta = c / 2\sqrt{km}$:
+
+- $\zeta < 1$ — **słabo tłumione**: drga wewnątrz zanikającej obwiedni,
+- $\zeta = 1$ — **tłumienie krytyczne**: wraca do równowagi najszybciej,
+  jak się da, bez przestrzelenia (zawieszenia samochodów, samozamykacze),
+- $\zeta > 1$ — **silnie tłumione**: pełznie powoli z powrotem.
+
+Wypróbuj trzy ustawienia tłumienia w symulatorze sprężyny powyżej
+i obserwuj, jak portret fazowy spiraluje do początku układu. Potem dodaj
+<M v="damping">\gamma</M> do wahadła i patrz, jak maleje odczyt energii.
+
+> **Pytanie projektowe:** projektujesz samozamykacz drzwi. Jakie ζ
+> wybierzesz i dlaczego „więcej tłumienia” nie zawsze znaczy lepiej?

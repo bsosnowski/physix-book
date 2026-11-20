@@ -6,6 +6,10 @@ import type { AnySimModule } from "./framework/types";
  */
 const loaders: Record<string, () => Promise<{ default: AnySimModule }>> = {
   projectile: () => import("./sims/projectile"),
+  pendulum: () => import("./sims/pendulum"),
+  "spring-mass": () => import("./sims/spring-mass"),
+  incline: () => import("./sims/incline"),
+  collision: () => import("./sims/collision"),
 };
 
 const cache = new Map<string, Promise<AnySimModule>>();

@@ -1,0 +1,83 @@
+---
+sourceHash: 2989a90244e2
+slug: newton-laws
+order: 2
+title: Zasady dynamiki Newtona
+description: Siły, masa i trzy zasady; laboratorium równi pochyłej.
+sections:
+  - id: trzy-zasady
+    title: Trzy zasady
+  - id: rownia-pochyla
+    title: Równia pochyła
+---
+
+# Zasady dynamiki Newtona
+
+Kinematyka opisuje ruch; dynamika go wyjaśnia. Pomostem między nimi jest
+**siła**.
+
+## Trzy zasady
+
+1. **Bezwładność.** Ciało pozostaje w spoczynku lub w ruchu jednostajnym
+   prostoliniowym, dopóki nie zadziała na nie wypadkowa siła zewnętrzna.
+2. **$\vec{F} = m\vec{a}$.** Wypadkowa siła działająca na ciało równa się
+   iloczynowi jego masy i przyspieszenia:
+
+$$
+\sum \vec{F} = m \frac{d\vec{v}}{dt}
+$$
+
+3. **Akcja–reakcja.** Jeśli ciało A działa na ciało B siłą $\vec{F}_{AB}$,
+   to B działa na A siłą $-\vec{F}_{AB}$.
+
+Druga zasada jest silnikiem prawie każdej symulacji w tej książce: podaj
+nam siły, a my potrafimy całkować ruch w przód w czasie.
+
+## Równia pochyła
+
+Połóż klocek o masie <M v="m">m</M> na równi nachylonej pod kątem
+<M v="angle">\alpha</M>. Działają na niego trzy siły: grawitacja $m\vec{g}$,
+siła reakcji podłoża $N$ i tarcie $f$. Rozkładając grawitację na składowe
+równoległą i prostopadłą do równi:
+
+$$
+F_\parallel = mg\sin\alpha, \qquad N = mg\cos\alpha
+$$
+
+**Tarcie statyczne** może dostarczyć co najwyżej $f_{max} = \mu N$, więc
+klocek zaczyna się zsuwać dopiero, gdy
+
+$$
+mg\sin\alpha > \mu\, mg\cos\alpha
+\quad\Longleftrightarrow\quad
+\tan\alpha > \mu
+$$
+
+Zauważ, że masa się skraca: to, czy klocek się zsunie, zależy tylko od
+kąta i współczynnika tarcia. Kąt graniczny to $\alpha_c = \arctan\mu$.
+Podczas zsuwania przyspieszenie wynosi
+
+$$
+a = g\left(\sin\alpha - \mu\cos\alpha\right)
+$$
+
+<Sim id="incline" />
+
+**Eksperymenty do wypróbowania**
+
+1. Zacznij od ustawienia **Duże tarcie**. Klocek stoi. Powoli zwiększaj
+   kąt — przy jakim kącie klocek ruszy? Porównaj z odczytem *Kąt
+   graniczny*, $\arctan\mu$.
+2. Wybierz ustawienie **Na granicy** ($\mu = 0{,}58$, $\alpha = 30^\circ$).
+   Zwiększ kąt o jeden stopień, potem zmniejsz o jeden. Tarcie statyczne
+   jest progiem, a nie efektem stopniowym.
+3. Gdy klocek się zsuwa, zmień jego **masę**. Czy przyspieszenie się
+   zmienia? Wyjaśnij, korzystając z powyższego wzoru.
+4. Rozpędź klocek na stromej równi, a potem wypłaszcz ją na żywo. Tarcie
+   go wyhamuje — i klocek zatrzyma się *bez zsuwania z powrotem*.
+   Dlaczego tarcie nigdy nie może popchnąć go w górę?
+5. Użyj przycisku **Krok** przy zatrzymanej symulacji, aby oglądać ruch
+   po jednym kroku całkowania (1/120 s).
+
+> Wykres prędkości jest linią prostą podczas zsuwania — stałe
+> przyspieszenie to odcisk palca stałej siły wypadkowej.

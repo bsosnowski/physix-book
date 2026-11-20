@@ -2,10 +2,12 @@
 slug: newton-laws
 order: 2
 title: Newton's Laws of Motion
-description: Forces, mass and the three laws that run classical mechanics.
+description: Forces, mass and the three laws; the inclined plane laboratory.
 sections:
   - id: the-three-laws
     title: The three laws
+  - id: the-inclined-plane
+    title: The inclined plane
 ---
 
 # Newton's Laws of Motion
@@ -30,5 +32,51 @@ $$
 The second law is the engine of almost every simulation in this book: give
 us the forces, and we can integrate the motion forward in time.
 
-> **Coming soon (M2):** an inclined plane with adjustable angle and
-> friction, and an Atwood machine.
+## The inclined plane
+
+Place a block of mass <M v="m">m</M> on a ramp tilted at
+<M v="angle">\alpha</M>. Three forces act on it: gravity $m\vec{g}$, the
+normal force $N$, and friction $f$. Splitting gravity into components
+parallel and perpendicular to the slope:
+
+$$
+F_\parallel = mg\sin\alpha, \qquad N = mg\cos\alpha
+$$
+
+**Static friction** can supply at most $f_{max} = \mu N$, so the block
+starts to slide only when
+
+$$
+mg\sin\alpha > \mu\, mg\cos\alpha
+\quad\Longleftrightarrow\quad
+\tan\alpha > \mu
+$$
+
+Notice the mass cancels: whether the block slides depends only on the
+angle and the friction coefficient. The critical angle is
+$\alpha_c = \arctan\mu$. Once sliding, the acceleration is
+
+$$
+a = g\left(\sin\alpha - \mu\cos\alpha\right)
+$$
+
+<Sim id="incline" />
+
+**Experiments to try**
+
+1. Start with the **Sticky** preset. The block holds still. Slowly raise
+   the angle slider — at what angle does it break free? Compare with the
+   *Critical angle* readout, $\arctan\mu$.
+2. Set the **On the verge** preset ($\mu = 0{,}58$, $\alpha = 30^\circ$).
+   Nudge the angle up by one degree, then down by one. Static friction is
+   a threshold, not a gradual effect.
+3. While the block slides, change its **mass**. Does the acceleration
+   change? Explain using the formula above.
+4. Let the block pick up speed on a steep slope, then flatten the ramp
+   live. Friction decelerates it — and it stops *without sliding back*.
+   Why can friction never push it uphill?
+5. Use the **Step** button while paused to inspect the motion one
+   physics tick (1/120 s) at a time.
+
+> The velocity graph is a straight line while sliding — constant
+> acceleration is the fingerprint of constant net force.

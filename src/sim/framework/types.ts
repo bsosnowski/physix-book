@@ -37,10 +37,42 @@ export interface Preset {
   params: Record<string, number>;
 }
 
+export interface TimeSeriesSpec {
+  /** Readout key to plot against time. */
+  key: string;
+  labelKey: string;
+  color?: string;
+}
+
+export interface TimePlotSpec {
+  kind: "time";
+  titleKey: string;
+  series: readonly TimeSeriesSpec[];
+}
+
+export interface PhasePlotSpec {
+  kind: "phase";
+  titleKey: string;
+  xKey: string;
+  yKey: string;
+  xLabelKey: string;
+  yLabelKey: string;
+}
+
+export type PlotSpec = TimePlotSpec | PhasePlotSpec;
+
+/** One history sample; `values` are the model's readouts at time t. */
+export interface HistorySample {
+  t: number;
+  values: Record<string, number>;
+}
+
 export interface SimModel<P = Record<string, number>, S = unknown> {
   readonly params: readonly ParamSpec[];
   readonly readouts: readonly ReadoutSpec[];
   readonly presets?: readonly Preset[];
+  /** Optional live graphs rendered under the animation. */
+  readonly plots?: readonly PlotSpec[];
   /** Create initial state from parameters. */
   init(params: P): S;
   /**

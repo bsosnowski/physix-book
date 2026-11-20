@@ -7,14 +7,23 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { loadSim } from "../registry";
-import { defaultParams, type AnySimModule, type ParamSpec } from "./types";
+import {
+  defaultParams,
+  type AnySimModule,
+  type HistorySample,
+  type ParamSpec,
+} from "./types";
 import { ControlPanel } from "./ControlPanel";
+import { Plot } from "./Plots";
+import { useHighlight } from "./highlight";
 import { formatQuantity } from "../core/units";
 import { useAppStore } from "@/app/store";
 
 const PHYSICS_DT = 1 / 120; // fixed timestep, seconds
 const MAX_STEPS_PER_FRAME = 30; // avoid spiral of death after tab sleep
 const READOUT_INTERVAL_MS = 100;
+const HISTORY_INTERVAL = 1 / 30; // seconds of sim time between samples
+const HISTORY_CAP = 3600; // 2 minutes at 30 Hz
 const SPEEDS = [0.25, 0.5, 1, 2];
 
 interface Props {
@@ -36,6 +45,8 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   const [done, setDone] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [readout, setReadout] = useState<Record<string, number>>({});
+  const [fullscreen, setFullscreen] = useState(false);
+  const setHoverVar = useHighlight((s) => s.setHoverVar);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,7 +58,23 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   const visibleRef = useRef(false);
   const moduleRef = useRef<AnySimModule | null>(null);
   const langRef = useRef({ t, locale: i18n.language, dark });
-  const sizeRef = useRef({ width: 0, height: 0, dpr: 1 });
+  const sizeRef = useRef({ width: 0, height: 0, dpr: 1, fullscreen: false });
+  sizeRef.current.fullscreen = fullscreen;
+  const historyRef = useRef<HistorySample[]>([]);
+  const lastSampleTRef = useRef(-Infinity);
+
+  const sample = useCallback((force = false) => {
+    const m = moduleRef.current;
+    const st = stateRef.current as { t?: number } | null;
+    if (!m || !st) return;
+    const t = typeof st.t === "number" ? st.t : 0;
+    if (!force && t - lastSampleTRef.current < HISTORY_INTERVAL) return;
+    lastSampleTRef.current = t;
+    historyRef.current.push({ t, values: m.model.readout(stateRef.current, paramsRef.current) });
+    if (historyRef.current.length > HISTORY_CAP) {
+      historyRef.current.splice(0, historyRef.current.length - HISTORY_CAP);
+    }
+  }, []);
 
   paramsRef.current = params;
   playingRef.current = playing;
@@ -66,6 +93,8 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         setModule(m);
         setParams(initial);
         stateRef.current = m.model.init(initial);
+        historyRef.current = [];
+        lastSampleTRef.current = -Infinity;
         setReadout(m.model.readout(stateRef.current, initial));
         setDone(false);
         setPlaying(false);
@@ -83,6 +112,8 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     if (!m) return;
     const p = nextParams ?? paramsRef.current;
     stateRef.current = m.model.init(p);
+    historyRef.current = [];
+    lastSampleTRef.current = -Infinity;
     setReadout(m.model.readout(stateRef.current, p));
     setDone(false);
     doneRef.current = false;
@@ -124,6 +155,21 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     setPlaying(true);
   }, [reset]);
 
+  /** Advance one physics tick while paused (frame-by-frame inspection). */
+  const stepOnce = useCallback(() => {
+    const m = moduleRef.current;
+    if (!m || doneRef.current) return;
+    setPlaying(false);
+    const res = m.model.step(stateRef.current, paramsRef.current, PHYSICS_DT);
+    stateRef.current = res.state;
+    sample(true);
+    setReadout(m.model.readout(stateRef.current, paramsRef.current));
+    if (res.done) {
+      doneRef.current = true;
+      setDone(true);
+    }
+  }, [sample]);
+
   // --- canvas sizing (HiDPI + resize) ---------------------------------------
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -133,18 +179,20 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
       const rect = container.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       const width = rect.width;
-      const height = Math.max(240, Math.min(420, width * 0.55));
+      const height = sizeRef.current.fullscreen
+        ? Math.max(240, rect.height)
+        : Math.max(240, Math.min(420, width * 0.55));
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
-      sizeRef.current = { width, height, dpr };
+      sizeRef.current = { width, height, dpr, fullscreen: sizeRef.current.fullscreen };
     };
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(container);
     return () => ro.disconnect();
-  }, [module]);
+  }, [module, fullscreen]);
 
   // --- visibility: pause off-screen / hidden tab, optional autoplay ---------
   useEffect(() => {
@@ -206,6 +254,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
           setDone(true);
           setPlaying(false);
         }
+        if (steps > 0) sample(finished);
         if (now - lastReadout > READOUT_INTERVAL_MS || finished) {
           lastReadout = now;
           setReadout(m.model.readout(stateRef.current, paramsRef.current));
@@ -227,7 +276,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     };
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [module]);
+  }, [module, sample]);
 
   const reducedMotion = useMemo(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -251,7 +300,13 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   }
 
   return (
-    <figure className="my-8 overflow-hidden rounded-xl border border-zinc-200 font-sans shadow-sm dark:border-zinc-800">
+    <figure
+      className={
+        fullscreen
+          ? "fixed inset-2 z-[60] my-0 flex flex-col overflow-auto rounded-xl border border-zinc-300 bg-white font-sans shadow-2xl dark:border-zinc-700 dark:bg-zinc-950"
+          : "my-8 overflow-hidden rounded-xl border border-zinc-200 font-sans shadow-sm dark:border-zinc-800"
+      }
+    >
       <figcaption className="flex flex-wrap items-center gap-2 border-b border-zinc-200 bg-zinc-50 px-4 py-2 dark:border-zinc-800 dark:bg-zinc-900">
         <span className="mr-auto text-sm font-semibold">
           {t(module.titleKey)}
@@ -271,6 +326,14 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         >
           ⟲ {t("toolbar.reset")}
         </button>
+        <button
+          onClick={stepOnce}
+          disabled={playing || done}
+          title={t("toolbar.step")}
+          className="rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 disabled:opacity-40 dark:border-zinc-700 dark:hover:bg-zinc-800"
+        >
+          ⏭ {t("toolbar.step")}
+        </button>
         <label className="flex items-center gap-1 text-sm text-zinc-500">
           {t("toolbar.speed")}
           <select
@@ -285,11 +348,31 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
             ))}
           </select>
         </label>
+        <button
+          onClick={() => setFullscreen(!fullscreen)}
+          title={t(fullscreen ? "toolbar.exitFullscreen" : "toolbar.fullscreen")}
+          className="rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+        >
+          {fullscreen ? "🗗" : "🗖"}
+        </button>
       </figcaption>
 
-      <div ref={containerRef} className="bg-white dark:bg-zinc-950">
+      <div
+        ref={containerRef}
+        className={fullscreen ? "min-h-0 flex-1 bg-white dark:bg-zinc-950" : "bg-white dark:bg-zinc-950"}
+      >
         <canvas ref={canvasRef} role="img" aria-label={t(module.titleKey)} />
       </div>
+
+      {module.model.plots && module.model.plots.length > 0 && (
+        <div className="grid gap-px border-t border-zinc-200 bg-zinc-200 sm:grid-cols-2 dark:border-zinc-800 dark:bg-zinc-800">
+          {module.model.plots.map((p, i) => (
+            <div key={i} className="bg-white dark:bg-zinc-950">
+              <Plot spec={p} historyRef={historyRef} dark={dark} t={t} />
+            </div>
+          ))}
+        </div>
+      )}
 
       <ControlPanel
         specs={module.model.params}
@@ -301,6 +384,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         onPreset={applyPreset}
         format={(v, unit, digits) => formatQuantity(v, unit, i18n.language, digits)}
         t={t}
+        onHoverParam={setHoverVar}
       />
       {reducedMotion && (
         <p className="border-t border-zinc-200 px-4 py-2 text-xs text-zinc-400 dark:border-zinc-800">

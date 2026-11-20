@@ -285,13 +285,21 @@ suggested experiments ("Set θ=45°, verify range is maximal") → exercises.
 - [x] `HOW-TO-ADD-A-SIMULATION.md` authoring guide.
 - [x] Bundle hygiene: katex/vendor split; sim = own 5 kB lazy chunk.
 
-### M2 — Mechanics chapters (week 2)
-- [ ] Live graph component (time-series + phase-space plots).
-- [ ] Step-once button + fullscreen mode in the widget toolbar.
-- [ ] Sims: inclined plane, collisions, pendulum, spring-mass.
-- [ ] Chapters 1–4 written with derivations + guided experiments (EN),
-      Polish translations in parallel per chapter.
-- [ ] Param↔equation highlighting (`<M>` component).
+### M2 — Mechanics chapters (week 2) ✅ DONE
+- [x] Live graph component: schema-declared time-series + phase portraits,
+      history buffer in a ref (30 Hz sampling, 2 min cap), throttled canvas
+      redraw — no React re-renders per frame.
+- [x] Step-once button (1/120 s ticks) + fullscreen mode in the toolbar.
+- [x] Sims: inclined plane (static/kinetic friction, exact kinematics,
+      live angle), 1D collisions (restitution, exact contact-time solve,
+      momentum/KE readouts), pendulum (exact ODE + small-angle ghost,
+      AGM-exact period readout), spring-mass (ζ presets, phase spiral).
+- [x] Chapters 1–4 with derivations + guided experiments, EN **and** PL,
+      all `sourceHash`-stamped; `i18n:status` fully green.
+- [x] Param↔equation highlighting: `<M v="…">` in prose ↔ slider hover
+      (bidirectional, zustand highlight store).
+- [x] 43 model tests total (analytic solutions, conservation laws,
+      friction thresholds, restitution definition, damping regimes).
 
 ### M3 — Waves & gravitation (week 3)
 - [ ] Wave superposition + interference sims (field rendering on canvas).

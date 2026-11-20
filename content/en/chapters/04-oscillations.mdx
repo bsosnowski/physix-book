@@ -1,0 +1,93 @@
+---
+slug: oscillations
+order: 4
+title: Oscillations
+description: Pendulums, springs, and why small angles matter.
+sections:
+  - id: the-harmonic-oscillator
+    title: The harmonic oscillator
+  - id: the-pendulum
+    title: The pendulum
+  - id: damping
+    title: Damping
+---
+
+# Oscillations
+
+Anything that sits in a stable equilibrium and gets nudged will oscillate.
+That is why the same mathematics describes springs, pendulums, circuits
+and molecules.
+
+## The harmonic oscillator
+
+A spring pulls back proportionally to displacement (Hooke's law), so
+
+$$
+m\ddot{x} = -kx
+\quad\Longrightarrow\quad
+x(t) = x_0 \cos(\omega t), \qquad \omega = \sqrt{\frac{k}{m}}
+$$
+
+The period $T = 2\pi\sqrt{m/k}$ depends on the hardware, **not** on the
+amplitude — pull it twice as far, it still ticks at the same rate.
+
+<Sim id="spring-mass" />
+
+**Experiments:** double the mass — by what factor does the period grow?
+Watch the *phase portrait* (velocity vs displacement): undamped motion
+traces a closed ellipse, because energy is conserved.
+
+## The pendulum
+
+For a pendulum of length <M v="L">L</M> released from
+<M v="theta0">\theta_0</M>, the exact equation is
+
+$$
+\ddot{\theta} = -\frac{g}{L}\sin\theta
+$$
+
+The famous formula $T_0 = 2\pi\sqrt{L/g}$ comes from replacing
+$\sin\theta \approx \theta$ — valid only for small swings. At large
+amplitudes the true period is *longer*:
+
+$$
+T = T_0 \cdot \frac{1}{\mathrm{AGM}\!\left(1, \cos\frac{\theta_0}{2}\right)}
+$$
+
+The simulation runs the exact equation (solid) alongside the small-angle
+approximation (dashed ghost) so you can watch them disagree:
+
+<Sim id="pendulum" />
+
+**Experiments to try**
+
+1. **Small swing** ($15^\circ$): exact and approximation agree almost
+   perfectly. Compare both period readouts.
+2. **Large swing** ($120^\circ$): the ghost runs ahead — the real pendulum
+   is slower. How much longer is the exact period? (Read both values.)
+3. Change **length** mid-swing: the pendulum instantly swings faster or
+   slower — $T \propto \sqrt{L}$.
+4. Take it to the **Moon**: by what factor does the period grow?
+
+## Damping
+
+Real oscillators lose energy. Adding viscous drag $-c\dot{x}$:
+
+$$
+m\ddot{x} + c\dot{x} + kx = 0
+$$
+
+The behaviour depends on the **damping ratio**
+$\zeta = c / 2\sqrt{km}$:
+
+- $\zeta < 1$ — **underdamped**: oscillates inside a decaying envelope,
+- $\zeta = 1$ — **critically damped**: returns to equilibrium as fast as
+  possible without overshooting (car suspensions, door closers),
+- $\zeta > 1$ — **overdamped**: crawls back slowly.
+
+Try the three damping presets on the spring simulator above and watch the
+phase portrait spiral into the origin. Then add <M v="damping">\gamma</M>
+to the pendulum and watch its energy readout decay.
+
+> **Design question:** you are engineering a door closer. Which ζ do you
+> choose, and why is "more damping" not always better?

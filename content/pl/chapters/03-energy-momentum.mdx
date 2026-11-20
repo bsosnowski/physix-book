@@ -1,0 +1,79 @@
+---
+sourceHash: 2681db95acf9
+slug: energy-momentum
+order: 3
+title: Energia i pęd
+description: Zasady zachowania i anatomia zderzenia.
+sections:
+  - id: dwie-zasady-zachowania
+    title: Dwie zasady zachowania
+  - id: zderzenia
+    title: Zderzenia
+---
+
+# Energia i pęd
+
+Niektóre wielkości uparcie nie chcą się zmieniać. Dwie z nich — pęd
+i energia — zamieniają skomplikowane problemy w jednolinijkowe odpowiedzi.
+
+## Dwie zasady zachowania
+
+**Pęd** ciała to $\vec{p} = m\vec{v}$. Druga zasada Newtona mówi, że siła
+jest szybkością zmiany pędu, więc bez sił zewnętrznych pęd całkowity jest
+stały:
+
+$$
+\vec{p}_{calk} = \sum_i m_i \vec{v}_i = \text{const}
+$$
+
+**Energia kinetyczna** to $E_k = \tfrac{1}{2}mv^2$. W przeciwieństwie do
+pędu *nie* zawsze jest zachowana — może ukryć się w odkształceniach,
+cieple i dźwięku. Zderzenie nazywamy **sprężystym**, gdy energia
+kinetyczna wychodzi z niego nienaruszona.
+
+## Zderzenia
+
+Dla dwóch ciał na prostej zachowanie pędu plus **współczynnik restytucji**
+<M v="e">e</M> w pełni wyznaczają wynik:
+
+$$
+e = \frac{v_2' - v_1'}{v_1 - v_2}
+\qquad
+\begin{cases}
+e = 1 & \text{sprężyste} \\
+0 < e < 1 & \text{częściowo niesprężyste} \\
+e = 0 & \text{idealnie niesprężyste (ciała sklejają się)}
+\end{cases}
+$$
+
+Rozwiązanie tych dwóch równań daje
+
+$$
+v_1' = \frac{m_1 v_1 + m_2 v_2 + m_2 e (v_2 - v_1)}{m_1 + m_2},
+\qquad
+v_2' = \frac{m_1 v_1 + m_2 v_2 + m_1 e (v_1 - v_2)}{m_1 + m_2}
+$$
+
+Obserwuj odczyty: **pęd pozostaje stały przy każdym zderzeniu ciał**,
+podczas gdy energia kinetyczna spada, ilekroć $e < 1$.
+
+<Sim id="collision" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Sprężyste, równe masy**: ciała po prostu wymieniają się prędkościami.
+   Sprawdź dla $v_1 = 3$, $v_2 = -1$.
+2. **Idealnie niesprężyste**: po zderzeniu oba ciała poruszają się
+   z prędkością środka masy $v_{cm} = (m_1 v_1 + m_2 v_2)/(m_1+m_2)$.
+   Oblicz ją, a potem porównaj z odczytami. Ile energii kinetycznej
+   zginęło?
+3. **Ciężki w lekki** ($m_1 \gg m_2$, cel nieruchomy): wykaż ze wzorów, że
+   lekkie ciało odlatuje z prędkością prawie $2v_1$. Wypróbuj.
+4. **Lekki w ciężki**: pocisk odbija się z niemal pierwotną prędkością.
+   Jaka codzienna sytuacja tak wygląda?
+5. Oglądaj wykres *Energia i pęd*: linia pędu jest płaska przy zderzeniach
+   ciał, ale skacze przy ścianach. Dlaczego? (Wskazówka: ściany są
+   zewnętrzne.)
+
+> Największa strata energii zachodzi przy $e = 0$: energii kinetycznej
+> ruchu środka masy nie da się usunąć — zabrania tego zachowanie pędu.

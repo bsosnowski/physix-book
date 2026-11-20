@@ -3,7 +3,10 @@
     "play": "Play",
     "pause": "Pause",
     "reset": "Reset",
-    "speed": "Speed"
+    "step": "Step",
+    "speed": "Speed",
+    "fullscreen": "Fullscreen",
+    "exitFullscreen": "Exit fullscreen"
   },
   "widget": {
     "presets": "Presets",
@@ -23,6 +26,7 @@
       "x": "Distance",
       "y": "Height",
       "speed": "Speed",
+      "vy": "Vertical velocity",
       "range": "Range",
       "maxY": "Apex"
     },
@@ -32,11 +36,141 @@
       "mars": "Mars",
       "air": "With air drag"
     },
+    "plot": {
+      "pos": "Position vs time",
+      "vel": "Vertical velocity vs time"
+    },
     "axis": {
       "x": "x [m]",
       "y": "y [m]"
     },
     "apex": "apex",
     "rangeLabel": "range"
+  },
+  "pendulum": {
+    "title": "Pendulum",
+    "param": {
+      "L": "Length",
+      "g": "Gravity",
+      "theta0": "Release angle",
+      "damping": "Damping"
+    },
+    "readout": {
+      "t": "Time",
+      "theta": "Angle",
+      "omega": "Angular velocity",
+      "energy": "Energy / mass",
+      "periodSmall": "Period (small-angle)",
+      "periodExact": "Period (exact)"
+    },
+    "plot": {
+      "angle": "Angle vs time",
+      "phase": "Phase portrait",
+      "smallAngle": "small-angle"
+    },
+    "preset": {
+      "small": "Small swing",
+      "large": "Large swing",
+      "damped": "Damped",
+      "moon": "On the Moon"
+    },
+    "view": {
+      "exact": "exact pendulum",
+      "smallAngle": "small-angle approximation"
+    }
+  },
+  "spring": {
+    "title": "Spring–mass oscillator",
+    "param": {
+      "m": "Mass",
+      "k": "Spring constant",
+      "c": "Damping",
+      "x0": "Initial displacement"
+    },
+    "readout": {
+      "t": "Time",
+      "x": "Displacement",
+      "v": "Velocity",
+      "energy": "Energy",
+      "period": "Period (undamped)",
+      "zeta": "Damping ratio ζ"
+    },
+    "plot": {
+      "x": "Displacement vs time",
+      "phase": "Phase portrait"
+    },
+    "preset": {
+      "free": "Undamped",
+      "under": "Underdamped",
+      "critical": "Critically damped",
+      "over": "Overdamped"
+    },
+    "view": {
+      "equilibrium": "equilibrium"
+    }
+  },
+  "incline": {
+    "title": "Inclined plane with friction",
+    "param": {
+      "angle": "Ramp angle",
+      "mu": "Friction coefficient",
+      "m": "Mass",
+      "g": "Gravity"
+    },
+    "readout": {
+      "t": "Time",
+      "a": "Acceleration",
+      "v": "Velocity",
+      "s": "Distance",
+      "criticalAngle": "Critical angle",
+      "friction": "Friction force"
+    },
+    "plot": {
+      "v": "Velocity vs time",
+      "s": "Distance vs time"
+    },
+    "preset": {
+      "frictionless": "Frictionless",
+      "sticky": "Sticky (holds)",
+      "verge": "On the verge",
+      "ice": "Icy slope"
+    },
+    "view": {
+      "friction": "friction",
+      "stuck": "Static friction holds the block",
+      "sliding": "Sliding",
+      "finished": "Reached the bottom"
+    }
+  },
+  "collision": {
+    "title": "1D collisions",
+    "param": {
+      "m1": "Mass 1",
+      "m2": "Mass 2",
+      "v1": "Initial velocity 1",
+      "v2": "Initial velocity 2",
+      "e": "Restitution"
+    },
+    "readout": {
+      "t": "Time",
+      "v1": "Velocity 1",
+      "v2": "Velocity 2",
+      "momentum": "Total momentum",
+      "kinetic": "Kinetic energy",
+      "collisions": "Collisions"
+    },
+    "plot": {
+      "v": "Velocities vs time",
+      "energy": "Energy & momentum vs time"
+    },
+    "preset": {
+      "elasticEqual": "Elastic, equal masses",
+      "inelastic": "Perfectly inelastic",
+      "heavyLight": "Heavy hits light",
+      "lightHeavy": "Light hits heavy"
+    },
+    "view": {
+      "walls": "Walls are elastic — they change total momentum (external impulse)."
+    }
   }
 }

@@ -1,0 +1,77 @@
+---
+slug: energy-momentum
+order: 3
+title: Energy & Momentum
+description: Conservation laws and the anatomy of a collision.
+sections:
+  - id: two-conservation-laws
+    title: Two conservation laws
+  - id: collisions
+    title: Collisions
+---
+
+# Energy & Momentum
+
+Some quantities refuse to change. Two of them — momentum and energy —
+turn messy problems into one-line answers.
+
+## Two conservation laws
+
+The **momentum** of a body is $\vec{p} = m\vec{v}$. Newton's second law
+says force is the rate of change of momentum, so with no external force,
+total momentum is constant:
+
+$$
+\vec{p}_{total} = \sum_i m_i \vec{v}_i = \text{const}
+$$
+
+The **kinetic energy** is $E_k = \tfrac{1}{2}mv^2$. Unlike momentum, it is
+*not* always conserved — it can hide in deformation, heat and sound. A
+collision is called **elastic** when kinetic energy survives it intact.
+
+## Collisions
+
+For two bodies on a line, momentum conservation plus the **coefficient of
+restitution** <M v="e">e</M> fully determine the outcome:
+
+$$
+e = \frac{v_2' - v_1'}{v_1 - v_2}
+\qquad
+\begin{cases}
+e = 1 & \text{elastic} \\
+0 < e < 1 & \text{partially inelastic} \\
+e = 0 & \text{perfectly inelastic (bodies stick)}
+\end{cases}
+$$
+
+Solving the two equations gives
+
+$$
+v_1' = \frac{m_1 v_1 + m_2 v_2 + m_2 e (v_2 - v_1)}{m_1 + m_2},
+\qquad
+v_2' = \frac{m_1 v_1 + m_2 v_2 + m_1 e (v_1 - v_2)}{m_1 + m_2}
+$$
+
+Watch the readouts: **momentum stays constant through every collision**,
+while kinetic energy drops whenever $e < 1$.
+
+<Sim id="collision" />
+
+**Experiments to try**
+
+1. **Elastic, equal masses**: the bodies simply exchange velocities.
+   Verify with $v_1 = 3$, $v_2 = -1$.
+2. **Perfectly inelastic**: after impact both move at the center-of-mass
+   velocity $v_{cm} = (m_1 v_1 + m_2 v_2)/(m_1+m_2)$. Compute it, then
+   check the readouts. How much kinetic energy was lost?
+3. **Heavy hits light** ($m_1 \gg m_2$, target at rest): show from the
+   formulas that the light body leaves at almost $2v_1$. Try it.
+4. **Light hits heavy**: the projectile bounces back at nearly its
+   original speed. Which everyday situation is this?
+5. Watch the *Energy & momentum* graph: the momentum line is flat through
+   ball–ball collisions but jumps at the walls. Why? (Hint: the walls are
+   external.)
+
+> Maximum energy loss happens at $e = 0$: the kinetic energy of the
+> center-of-mass motion can never be removed — momentum conservation
+> forbids it.
