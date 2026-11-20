@@ -152,6 +152,39 @@ test.describe("simulation widget — projectile", () => {
     expect(await w.locator(".katex").count()).toBeGreaterThanOrEqual(4);
   });
 
+  test("toolbar layout is stable across play/pause states in both locales", async ({ page }) => {
+    for (const [locale, playLabel] of [["pl", "Odtwórz"], ["en", "Play"]] as const) {
+      await page.goto(`/${locale}/chapter/kinematics`);
+      const w = widget(page);
+      await expect(w).toBeAttached();
+      await showWidget(page, w);
+      const playBtn = w.locator("figcaption button").first();
+      const fullscreenBtn = w.locator("figcaption button").last();
+      const geom = async () => {
+        // Measure relative to the toolbar itself — absolute viewport y
+        // shifts when the browser scroll-anchors on content changes.
+        const bar = (await w.locator("figcaption").boundingBox())!;
+        const last = (await fullscreenBtn.boundingBox())!;
+        return {
+          btnW: (await playBtn.boundingBox())!.width,
+          lastY: last.y - bar.y,
+          barH: bar.height,
+        };
+      };
+      const before = await geom();
+      await playBtn.click(); // → Pause/Pauza
+      await expect(playBtn).not.toContainText(playLabel);
+      const during = await geom();
+      await playBtn.click(); // → back to Play/Odtwórz
+      const after = await geom();
+      // constant button width, no re-wrap (same row y), no height jump
+      expect(during.btnW).toBeCloseTo(before.btnW, 0);
+      expect(after.btnW).toBeCloseTo(before.btnW, 0);
+      expect(during.lastY).toBeCloseTo(before.lastY, 0);
+      expect(during.barH).toBeCloseTo(before.barH, 0);
+    }
+  });
+
   test("play advances time, pause freezes it, reset zeroes it", async ({ page }) => {
     const time = readout(page, "Time");
     await expect(time).toHaveText(/^0\s/);

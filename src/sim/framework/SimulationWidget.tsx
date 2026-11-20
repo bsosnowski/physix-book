@@ -345,36 +345,42 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
           : "my-8 overflow-hidden rounded-xl border border-zinc-200 font-sans shadow-sm dark:border-zinc-800"
       }
     >
-      <figcaption className="flex flex-wrap items-center gap-2 border-b border-zinc-200 bg-zinc-50 px-4 py-2 dark:border-zinc-800 dark:bg-zinc-900">
-        <span className="mr-auto text-sm font-semibold">
+      <figcaption className="border-b border-zinc-200 bg-zinc-50 px-4 py-2 dark:border-zinc-800 dark:bg-zinc-900">
+        {/* Title on its own row: long localized titles must never squeeze
+            the toolbar into re-wrapping when button labels change. */}
+        <div className="mb-1.5 truncate text-sm font-semibold">
           {t(module.titleKey)}
-        </span>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
         <button
           onClick={() => {
             if (done) return restart();
             explicitPlayRef.current = !playing;
             setPlaying(!playing);
           }}
-          className="rounded-md bg-sky-600 px-3 py-1 text-sm font-medium text-white hover:bg-sky-500"
+          className="inline-flex w-32 items-center justify-center gap-1.5 rounded-md bg-sky-600 px-3 py-1 text-sm font-medium text-white hover:bg-sky-500"
         >
-          {done ? `⟲ ${t("toolbar.reset")}` : playing ? `⏸ ${t("toolbar.pause")}` : `▶ ${t("toolbar.play")}`}
+          <span aria-hidden className="w-4 text-center">{done ? "⟲" : playing ? "⏸" : "▶"}</span>
+          <span className="truncate">{done ? t("toolbar.reset") : playing ? t("toolbar.pause") : t("toolbar.play")}</span>
         </button>
         <button
           onClick={() => {
             reset();
             setPlaying(false);
           }}
-          className="rounded-md border border-zinc-300 px-3 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="inline-flex items-center gap-1.5 rounded-md border border-zinc-300 px-3 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
-          ⟲ {t("toolbar.reset")}
+          <span aria-hidden className="w-4 text-center">⟲</span>
+          {t("toolbar.reset")}
         </button>
         <button
           onClick={stepOnce}
           disabled={playing || done}
           title={t("toolbar.step")}
-          className="rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 disabled:opacity-40 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="inline-flex items-center gap-1.5 rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 disabled:opacity-40 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
-          ⏭ {t("toolbar.step")}
+          <span aria-hidden className="w-4 text-center">⏭</span>
+          {t("toolbar.step")}
         </button>
         <label className="flex items-center gap-1 text-sm text-zinc-500">
           {t("toolbar.speed")}
@@ -393,17 +399,18 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         <button
           onClick={share}
           title={t("toolbar.share")}
-          className="rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="inline-flex w-9 items-center justify-center rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
           {copied ? "✓" : "🔗"}
         </button>
         <button
           onClick={() => setFullscreen(!fullscreen)}
           title={t(fullscreen ? "toolbar.exitFullscreen" : "toolbar.fullscreen")}
-          className="rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+          className="inline-flex w-9 items-center justify-center rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
         >
           {fullscreen ? "🗗" : "🗖"}
         </button>
+        </div>
       </figcaption>
 
       <div
