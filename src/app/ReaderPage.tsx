@@ -6,6 +6,7 @@ import { loadChapter } from "virtual:chapter-loader";
 import manifest from "virtual:chapters";
 import { FALLBACK_CHAIN, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { mdxComponents } from "@/components/mdx";
+import { cancelScroll, scrollToElement } from "@/util/smoothScroll";
 
 type Status = "loading" | "ready" | "notfound";
 
@@ -20,8 +21,10 @@ export function ReaderPage() {
 
   /**
    * Scroll to the section in the URL hash. Headings render asynchronously
-   * (lazy MDX chunk), so retry briefly until the element exists. The fixed
-   * header is compensated by the headings' scroll-mt classes.
+   * (lazy MDX chunk), so retry briefly until the element exists. The
+   * animator compensates the fixed header, is cancellable (last click
+   * wins) and instant under prefers-reduced-motion. After landing, focus
+   * moves to the heading for keyboard/screen-reader users.
    */
   const scrollToHash = useCallback((rawHash: string) => {
     if (!rawHash) return false;
@@ -33,12 +36,16 @@ export function ReaderPage() {
     }
     const el = document.getElementById(id);
     if (!el) return false;
-    el.scrollIntoView({ block: "start" });
+    scrollToElement(el, () => {
+      el.setAttribute("tabindex", "-1");
+      el.focus({ preventScroll: true });
+    });
     return true;
   }, []);
 
   useEffect(() => {
     let cancelled = false;
+    cancelScroll(); // chapter switch beats any in-flight section scroll
     setStatus("loading");
     setChapter(null);
 
@@ -53,8 +60,29 @@ export function ReaderPage() {
             setFellBack(loc !== locale);
             setResolvedLocale(loc);
             setStatus("ready");
-            // Deep link: honour #section if present, else start at the top.
-            if (!scrollToHash(window.location.hash)) window.scrollTo(0, 0);
+            // Deep link: honour #section once the heading has mounted
+            // (retry a few frames — the MDX chunk resolves before React
+            // commits it to the DOM). Otherwise start at the top.
+            if (window.location.hash) {
+              let tries = 0;
+              let lastH = 0;
+              let stable = 0;
+              const attempt = () => {
+                if (cancelled) return;
+                // Wait for layout to settle: KaTeX fonts and lazy sim
+                // widgets keep changing the document height after mount;
+                // scrolling earlier lands at a stale offset.
+                const h = document.documentElement.scrollHeight;
+                stable = h === lastH ? stable + 1 : 0;
+                lastH = h;
+                if ((stable >= 6 || tries > 120) && scrollToHash(window.location.hash)) return;
+                tries++;
+                requestAnimationFrame(attempt);
+              };
+              requestAnimationFrame(attempt);
+            } else {
+              window.scrollTo(0, 0);
+            }
             return;
           }
         }
@@ -118,7 +146,7 @@ export function ReaderPage() {
           {t("reader.untranslated")}
         </div>
       )}
-      <article className="prose-book" lang={resolvedLocale}>
+      <article className="prose-book animate-reader-fade" lang={resolvedLocale}>
         <MDXProvider components={mdxComponents}>
           {Chapter && <Chapter />}
         </MDXProvider>

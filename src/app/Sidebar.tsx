@@ -5,6 +5,7 @@ import manifest from "virtual:chapters";
 import { FALLBACK_CHAIN, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { useAppStore } from "./store";
 import clsx from "@/util/clsx";
+import { scrollToElement } from "@/util/smoothScroll";
 
 /** Localized TOC with per-chapter fallback to the source locale. */
 export function Sidebar() {
@@ -102,6 +103,7 @@ export function Sidebar() {
                       <li key={s.id}>
                         <a
                           href={`#${s.id}`}
+                          aria-current={location.hash === `#${s.id}` ? "location" : undefined}
                           onClick={(e) => {
                             // Plain anchors don't notify the router; push the
                             // hash through it so the reader scrolls reliably
@@ -111,10 +113,9 @@ export function Sidebar() {
                             const target = `/${locale}/chapter/${ch.slug}#${s.id}`;
                             if (location.pathname + location.hash === target) {
                               // Same anchor clicked again: no router event will
-                              // fire, so scroll directly.
-                              document
-                                .getElementById(s.id)
-                                ?.scrollIntoView({ block: "start" });
+                              // fire, so scroll directly (animated).
+                              const el = document.getElementById(s.id);
+                              if (el) scrollToElement(el);
                             } else {
                               void navigate(target);
                             }

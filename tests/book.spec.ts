@@ -104,6 +104,55 @@ test.describe("content rendering", () => {
       .toBeLessThan(120); // near viewport top (below fixed header)
   });
 
+  test("rapid subsection switching mid-animation settles on the last target", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const nearTop = (id: string) =>
+      page.locator(`#${id}`).evaluate((el) => Math.abs(el.getBoundingClientRect().top));
+    // click A, then B ~80ms later — mid-flight interrupt, last click wins
+    await aside.getByRole("link", { name: "The pendulum", exact: true }).click();
+    await page.waitForTimeout(80);
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => nearTop("damping"), { timeout: 3000 }).toBeLessThan(120);
+    // and it stays there (no snap-back to A)
+    await page.waitForTimeout(400);
+    expect(await nearTop("damping")).toBeLessThan(120);
+    expect(await nearTop("the-pendulum")).toBeGreaterThan(200);
+  });
+
+  test("reduced motion: section jumps are instant", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: "Damping", exact: true }).click();
+    // no animation: position correct almost immediately
+    await page.waitForTimeout(100);
+    const top = await page.locator("#damping").evaluate((el) => Math.abs(el.getBoundingClientRect().top));
+    expect(top).toBeLessThan(120);
+  });
+
+  test("user wheel during animation cancels it without snap-back", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: "Damping", exact: true }).click();
+    await page.waitForTimeout(60); // mid-flight
+    await page.mouse.wheel(0, -300); // user takes over
+    await page.waitForTimeout(150);
+    const y1 = await page.evaluate(() => window.scrollY);
+    await page.waitForTimeout(400); // animator must NOT continue
+    const y2 = await page.evaluate(() => window.scrollY);
+    expect(Math.abs(y2 - y1)).toBeLessThan(40);
+  });
+
+  test("section navigation moves focus to the heading", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => page.evaluate(() => document.activeElement?.id), { timeout: 3000 }).toBe("damping");
+    await expect(page.locator("aside a[aria-current='location']")).toHaveText("Damping");
+  });
+
   test("sidebar subsection links scroll reliably, including re-clicks", async ({ page }) => {
     await page.goto("/en/chapter/oscillations");
     await expect(page.locator("article h1")).toBeVisible();
