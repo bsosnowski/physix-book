@@ -1,0 +1,93 @@
+---
+sourceHash: 5d7a1ce19aa0
+slug: current-power
+order: 10
+title: Praca i moc prądu
+description: Ciepło Joule’a, kilowatogodziny i rachunek za prąd.
+sections:
+  - id: praca-i-moc
+    title: Praca i moc
+  - id: kilowatogodzina
+    title: Kilowatogodzina
+---
+
+# Praca i moc prądu
+
+Prąd wykonuje pracę: kręci silnikami, oświetla pokoje i — nieuchronnie —
+podgrzewa. Cała księgowość mieści się w jednym równaniu.
+
+## Praca i moc
+
+Przeniesienie ładunku $\Delta Q$ przez różnicę potencjałów $V$ wykonuje
+pracę $W = V\,\Delta Q$. Podziel przez czas:
+
+$$
+P = \frac{W}{t} = V I
+$$
+
+Połącz z prawem Ohma, a pojawią się dwie kolejne postacie:
+
+$$
+P = VI = I^2 R = \frac{V^2}{R}
+$$
+
+W oporniku **całość** zamienia się w ciepło (prawo Joule’a):
+$Q = I^2 R t$. To usterka w linii przesyłowej i zaleta w czajniku.
+
+<Sim id="joule-heating" />
+
+Animacja jest przyspieszona — jedna sekunda na ekranie to minuta
+grzania — ale fizyka liczy uczciwie w SI: obserwuj licznik energii w kJ
+i temperaturę posłuszną $Q = mc\,\Delta T$, gdzie
+$c_{wody} = 4186$ J/(kg·K).
+
+**Eksperymenty do wypróbowania**
+
+1. Ustawienie **Idealna izolacja**: grzanie jest linią prostą na wykresie
+   temperatury. Sprawdź nachylenie względem $P/(mc)$.
+2. Zmniejsz napięcie o połowę: nachylenie maleje **czterokrotnie**
+   ($P \propto V^2$). Potwierdź na wykresie.
+3. **Prawdziwy czajnik**: około 2 kW w 1 kg wody. Przewiduj czas do
+   zagotowania z $Q = mc\Delta T$, potem obserwuj (pamiętaj o 60×).
+4. **Nieszczelny garnek**: ze stratami temperatura stabilizuje się tam,
+   gdzie $P = \kappa\,(T - T_0)$. Znajdź tę temperaturę równowagi.
+5. Po zagotowaniu energia wciąż płynie, ale temperatura stoi na
+   100 °C. Gdzie teraz podziewa się energia?
+
+## Kilowatogodzina
+
+Zakłady energetyczne sprzedają energię, nie moc. Kilowatogodzina to
+kilowat pobierany przez godzinę:
+
+$$
+1\ \text{kWh} = 1000\ \text{W} \times 3600\ \text{s} = 3{,}6\ \text{MJ}
+$$
+
+Odczyt kosztu w symulatorze używa przykładowych 0,8 zł za kWh — wstaw
+własną taryfę.
+
+<Exercise title="Koszt filiżanki herbaty">
+Ile kosztuje podgrzanie 0,25 kg wody z 20 °C do 100 °C w idealnie
+sprawnym czajniku przy 0,8 zł za kWh?
+
+<Solution>
+$Q = mc\Delta T = 0{,}25 \times 4186 \times 80 \approx 83{,}7$ kJ
+$= 0{,}0233$ kWh → koszt ≈ **0,019 zł** — niecałe dwa grosze.
+Grzanie wody jest tanie; *utrzymywanie* jej gorącej cały dzień kosztuje
+(straty działają 24/7).
+</Solution>
+</Exercise>
+
+<Exercise title="Dlaczego linie przesyłowe używają wysokiego napięcia">
+Linia o oporze $R$ dostarcza moc $P$ przy napięciu $V$. Pokaż, że straty
+cieplne samej linii maleją jak $1/V^2$ — i dlaczego sieci używają setek
+kilowoltów.
+
+<Solution>
+Dostarczenie $P$ przy $V$ wymaga $I = P/V$. Straty linii to
+$I^2R = P^2R/V^2$. Dziesięć razy wyższe napięcie → sto razy mniejsze
+straty. Transformatory czynią tę zamianę tanią dla prądu zmiennego —
+to główny powód, dla którego AC Tesli pokonało niskonapięciową sieć DC
+Edisona.
+</Solution>
+</Exercise>

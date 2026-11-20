@@ -1,0 +1,110 @@
+---
+slug: current-ohm
+order: 9
+title: Current, Resistance & Ohm's Law
+description: Charge in motion, R = ρL/A, and circuits in series and parallel.
+sections:
+  - id: what-is-current
+    title: What is current?
+  - id: resistance-and-ohms-law
+    title: Resistance and Ohm's law
+  - id: series-and-parallel
+    title: Series and parallel
+---
+
+# Current, Resistance & Ohm's Law
+
+Static charge is a stored promise; **current** is that promise being kept.
+Connect a battery to a wire and the electric field inside pushes free
+electrons into a slow, steady drift.
+
+## What is current?
+
+Current is charge per unit time through a cross-section:
+
+$$
+I = \frac{\Delta Q}{\Delta t} \qquad [I] = \text{A} = \text{C/s}
+$$
+
+Surprise: individual electrons drift at fractions of a millimetre per
+second, yet the lamp lights instantly — the *field* propagates near light
+speed and sets **all** electrons moving at once, like water in a full pipe.
+
+## Resistance and Ohm's law
+
+Collisions with the lattice impede the drift. For a uniform wire:
+
+$$
+R = \rho\,\frac{L}{A}
+$$
+
+— longer means more resistance, thicker means less, and $\rho$ is the
+material's resistivity. For ohmic conductors, current is proportional to
+voltage:
+
+$$
+I = \frac{V}{R}
+$$
+
+Double <M v="V">V</M> and the carriers below double their pace. Double
+<M v="R1">R_1</M> and they slow down. That proportionality *is* Ohm's law.
+
+<Sim id="circuit" />
+
+## Series and parallel
+
+**Series** — one path. The same current flows through everything, and
+the voltage drops add up (Kirchhoff's voltage law):
+
+$$
+R_{series} = R_1 + R_2 + R_3, \qquad V = V_1 + V_2 + V_3
+$$
+
+**Parallel** — several paths. Each branch sees the full voltage, and the
+currents add (Kirchhoff's current law):
+
+$$
+\frac{1}{R_{parallel}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}
+$$
+
+The total parallel resistance is always *smaller than the smallest
+branch* — more lanes on the motorway.
+
+**Experiments to try**
+
+1. Start in **Series**: verify the three voltage readouts add up to the
+   battery voltage, and that the biggest resistor takes the biggest drop.
+2. Flip the topology slider to **Parallel**: now every branch reads the
+   full 12 V, but currents differ. Check $I_{total} = I_1+I_2+I_3$.
+3. **Three equal** in parallel: total resistance should be exactly
+   $R/3$. Verify against the readout.
+4. Try **Near short circuit**: tiny resistance, huge current — watch the
+   carriers race. Why do fuses exist?
+5. Change voltage *live* while watching the current–time graph: a
+   straight proportionality, step by step.
+
+<Exercise title="Christmas lights">
+Twenty identical lamps in series share 230 V. One lamp's filament breaks.
+What happens to the others — and how must they be wired so one failure
+doesn't kill the whole string?
+
+<Solution>
+In series the broken filament opens the only path: current stops
+everywhere, all lamps go out ($I = 0$). Wiring lamps in parallel gives
+each its own path across 230 V — one failure leaves the rest untouched.
+That is why household outlets are parallel circuits.
+</Solution>
+</Exercise>
+
+<Exercise title="Design a voltage divider">
+You have a 12 V battery and need 4 V across $R_2$. Choose $R_1$ and
+$R_2$ in series (ignore $R_3$ by setting it to 1 Ω — small enough to
+neglect, or account for it exactly).
+
+<Solution>
+Series drops are proportional to resistance: $V_2 = V\,R_2/(R_1+R_2+R_3)$.
+With $R_3 = 1\,\Omega$: pick $R_2 = 20\,\Omega$, then
+$R_1 = R_2(V/V_2 - 1) - R_3 = 20 \cdot 2 - 1 = 39\,\Omega$. Check:
+$12 \cdot 20/60 = 4$ V. ✓
+</Solution>
+</Exercise>

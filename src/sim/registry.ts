@@ -13,6 +13,8 @@ const loaders: Record<string, () => Promise<{ default: AnySimModule }>> = {
   "standing-wave": () => import("./sims/standing-wave"),
   interference: () => import("./sims/interference"),
   orbit: () => import("./sims/orbit"),
+  circuit: () => import("./sims/circuit"),
+  "joule-heating": () => import("./sims/joule-heating"),
 };
 
 const cache = new Map<string, Promise<AnySimModule>>();

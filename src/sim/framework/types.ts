@@ -82,7 +82,17 @@ export interface SimModel<P = Record<string, number>, S = unknown> {
   step(state: S, params: P, dt: number): { state: S; done: boolean };
   /** Numeric readouts for the control panel (throttled by the widget). */
   readout(state: S, params: P): Record<string, number>;
+  /** Optional pointer interaction in world coordinates (drag objects). */
+  pointer?: (state: S, x: number, y: number, phase: "down" | "move" | "up") => S;
 }
+
+export interface Viewport {
+  width: number;
+  height: number;
+}
+
+/** Screen (CSS px) → world coordinates; inverse of the view's mapping. */
+export type ScreenToWorld = (vp: Viewport, px: number, py: number) => { x: number; y: number };
 
 export interface DrawContext {
   ctx: CanvasRenderingContext2D;
@@ -98,6 +108,8 @@ export interface DrawContext {
 
 export interface SimView<S = unknown> {
   draw(dc: DrawContext, state: S): void;
+  /** Required when the model implements `pointer`. */
+  toWorld?: ScreenToWorld;
 }
 
 export interface SimModule<P = Record<string, number>, S = unknown> {
@@ -109,6 +121,8 @@ export interface SimModule<P = Record<string, number>, S = unknown> {
 
 export type AnySimModule = SimModule<any, any>;
 
-export function defaultParams(model: SimModel): Record<string, number> {
+export function defaultParams(
+  model: Pick<SimModel<any, any>, "params">,
+): Record<string, number> {
   return Object.fromEntries(model.params.map((p) => [p.key, p.default]));
 }

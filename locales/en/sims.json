@@ -261,5 +261,66 @@
       "bound": "Bound orbit (E < 0)",
       "unbound": "Unbound trajectory (E > 0)"
     }
+  },
+  "circuit": {
+    "title": "DC circuit — Ohm's law",
+    "param": {
+      "V": "Battery voltage",
+      "R1": "Resistor 1",
+      "R2": "Resistor 2",
+      "R3": "Resistor 3",
+      "parallel": "Parallel (1) / series (0)"
+    },
+    "readout": {
+      "itotal": "Total current",
+      "rtotal": "Total resistance",
+      "v1": "V across R₁",
+      "v2": "V across R₂",
+      "v3": "V across R₃",
+      "ptotal": "Total power"
+    },
+    "plot": {
+      "vi": "Current & voltage vs time"
+    },
+    "preset": {
+      "series": "Series",
+      "parallel": "Parallel",
+      "equal": "Three equal (parallel)",
+      "shortish": "Near short circuit"
+    },
+    "view": {
+      "series": "Series: one path — same current everywhere",
+      "parallel": "Parallel: same voltage across each branch"
+    }
+  },
+  "heating": {
+    "title": "Joule heating — electric kettle",
+    "param": {
+      "V": "Voltage",
+      "R": "Heater resistance",
+      "water": "Water mass",
+      "loss": "Heat loss"
+    },
+    "readout": {
+      "t": "Time",
+      "temp": "Temperature",
+      "power": "Power",
+      "energyKJ": "Energy delivered",
+      "kwh": "Energy",
+      "cost": "Cost (≈0.8/kWh)"
+    },
+    "plot": {
+      "temp": "Water temperature vs time"
+    },
+    "preset": {
+      "kettle": "Real kettle (230 V)",
+      "lowVoltage": "12 V battery",
+      "insulated": "Perfectly insulated",
+      "leaky": "Leaky pot"
+    },
+    "view": {
+      "timeScale": "Time-lapse: 1 s of animation = 1 min of heating",
+      "boiling": "Boiling! Temperature stays at 100 °C"
+    }
   }
 }

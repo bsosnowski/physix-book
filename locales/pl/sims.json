@@ -261,5 +261,66 @@
       "bound": "Orbita związana (E < 0)",
       "unbound": "Tor niezwiązany (E > 0)"
     }
+  },
+  "circuit": {
+    "title": "Obwód prądu stałego — prawo Ohma",
+    "param": {
+      "V": "Napięcie baterii",
+      "R1": "Opornik 1",
+      "R2": "Opornik 2",
+      "R3": "Opornik 3",
+      "parallel": "Równolegle (1) / szeregowo (0)"
+    },
+    "readout": {
+      "itotal": "Prąd całkowity",
+      "rtotal": "Opór całkowity",
+      "v1": "Napięcie na R₁",
+      "v2": "Napięcie na R₂",
+      "v3": "Napięcie na R₃",
+      "ptotal": "Moc całkowita"
+    },
+    "plot": {
+      "vi": "Prąd i napięcie od czasu"
+    },
+    "preset": {
+      "series": "Szeregowo",
+      "parallel": "Równolegle",
+      "equal": "Trzy równe (równolegle)",
+      "shortish": "Blisko zwarcia"
+    },
+    "view": {
+      "series": "Szeregowo: jedna droga — wszędzie ten sam prąd",
+      "parallel": "Równolegle: to samo napięcie na każdej gałęzi"
+    }
+  },
+  "heating": {
+    "title": "Ciepło Joule’a — czajnik elektryczny",
+    "param": {
+      "V": "Napięcie",
+      "R": "Opór grzałki",
+      "water": "Masa wody",
+      "loss": "Straty ciepła"
+    },
+    "readout": {
+      "t": "Czas",
+      "temp": "Temperatura",
+      "power": "Moc",
+      "energyKJ": "Dostarczona energia",
+      "kwh": "Energia",
+      "cost": "Koszt (≈0,8/kWh)"
+    },
+    "plot": {
+      "temp": "Temperatura wody od czasu"
+    },
+    "preset": {
+      "kettle": "Prawdziwy czajnik (230 V)",
+      "lowVoltage": "Bateria 12 V",
+      "insulated": "Idealna izolacja",
+      "leaky": "Nieszczelny garnek"
+    },
+    "view": {
+      "timeScale": "Przyspieszenie: 1 s animacji = 1 min grzania",
+      "boiling": "Wrzenie! Temperatura zostaje na 100 °C"
+    }
   }
 }

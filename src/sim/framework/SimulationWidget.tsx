@@ -410,7 +410,34 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         ref={containerRef}
         className={fullscreen ? "min-h-0 flex-1 bg-white dark:bg-zinc-950" : "bg-white dark:bg-zinc-950"}
       >
-        <canvas ref={canvasRef} role="img" aria-label={t(module.titleKey)} />
+        <canvas
+          ref={canvasRef}
+          role="img"
+          aria-label={t(module.titleKey)}
+          style={module.model.pointer ? { touchAction: "none", cursor: "grab" } : undefined}
+          onPointerDown={(e) => {
+            const m = moduleRef.current;
+            if (!m?.model.pointer || !m.view.toWorld) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const { x, y } = m.view.toWorld(sizeRef.current, e.clientX - rect.left, e.clientY - rect.top);
+            stateRef.current = m.model.pointer(stateRef.current, x, y, "down");
+            e.currentTarget.setPointerCapture(e.pointerId);
+          }}
+          onPointerMove={(e) => {
+            const m = moduleRef.current;
+            if (!m?.model.pointer || !m.view.toWorld || !e.currentTarget.hasPointerCapture(e.pointerId)) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const { x, y } = m.view.toWorld(sizeRef.current, e.clientX - rect.left, e.clientY - rect.top);
+            stateRef.current = m.model.pointer(stateRef.current, x, y, "move");
+          }}
+          onPointerUp={(e) => {
+            const m = moduleRef.current;
+            if (!m?.model.pointer || !m.view.toWorld) return;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const { x, y } = m.view.toWorld(sizeRef.current, e.clientX - rect.left, e.clientY - rect.top);
+            stateRef.current = m.model.pointer(stateRef.current, x, y, "up");
+          }}
+        />
       </div>
 
       {module.model.plots && module.model.plots.length > 0 && (

@@ -1,0 +1,92 @@
+---
+slug: current-power
+order: 10
+title: Work & Power of Current
+description: Joule heating, kilowatt-hours and the electricity bill.
+sections:
+  - id: work-and-power
+    title: Work and power
+  - id: the-kilowatt-hour
+    title: The kilowatt-hour
+---
+
+# Work & Power of Current
+
+Current does work: it spins motors, lights rooms and — inevitably —
+heats things up. The bookkeeping is one equation deep.
+
+## Work and power
+
+Moving charge $\Delta Q$ through a potential difference $V$ does work
+$W = V\,\Delta Q$. Divide by time:
+
+$$
+P = \frac{W}{t} = V I
+$$
+
+Combine with Ohm's law and two more forms appear:
+
+$$
+P = VI = I^2 R = \frac{V^2}{R}
+$$
+
+In a resistor **all** of it becomes heat (Joule's law):
+$Q = I^2 R t$. This is a bug in a transmission line and a feature in a
+kettle.
+
+<Sim id="joule-heating" />
+
+The animation is a time-lapse — one second on screen is one minute of
+heating — but the physics runs in honest SI units: watch the energy
+counter in kJ and the temperature obey $Q = mc\,\Delta T$ with
+$c_{water} = 4186$ J/(kg·K).
+
+**Experiments to try**
+
+1. **Perfectly insulated** preset: heating is a straight line on the
+   temperature graph. Verify the slope against $P/(mc)$.
+2. Halve the voltage: the slope drops **fourfold** ($P \propto V^2$).
+   Confirm on the graph.
+3. **Real kettle**: about 2 kW into 1 kg of water. Predict the time to
+   boil from $Q = mc\Delta T$, then watch (remember the 60× time-lapse).
+4. **Leaky pot**: with losses, temperature levels off where
+   $P = \kappa\,(T - T_0)$. Find that equilibrium temperature.
+5. Once boiling starts, energy keeps flowing but temperature stops at
+   100 °C. Where does the energy go now?
+
+## The kilowatt-hour
+
+Utilities bill energy, not power. One kilowatt-hour is a kilowatt drawn
+for an hour:
+
+$$
+1\ \text{kWh} = 1000\ \text{W} \times 3600\ \text{s} = 3.6\ \text{MJ}
+$$
+
+The simulator's cost readout uses an illustrative 0.8 per kWh — your
+actual tariff goes here.
+
+<Exercise title="Cost of a cup of tea">
+How much does it cost to heat 0.25 kg of water from 20 °C to 100 °C in a
+perfectly efficient kettle, at 0.8 per kWh?
+
+<Solution>
+$Q = mc\Delta T = 0.25 \times 4186 \times 80 \approx 83.7$ kJ
+$= 0.0233$ kWh → cost ≈ **0.019** — under two groszy/forint/cents.
+Heating water is cheap; *keeping* it hot all day is what costs money
+(losses run 24/7).
+</Solution>
+</Exercise>
+
+<Exercise title="Why transmission lines use high voltage">
+A line of resistance $R$ delivers power $P$ at voltage $V$. Show that
+the line's own heating loss scales as $1/V^2$ — and why grids use
+hundreds of kilovolts.
+
+<Solution>
+Delivering $P$ at $V$ requires $I = P/V$. Line loss is
+$I^2R = P^2R/V^2$. Ten times the voltage → hundred times less loss.
+Transformers make the voltage trade cheap for AC — the core reason
+Tesla's AC beat Edison's low-voltage DC grid.
+</Solution>
+</Exercise>

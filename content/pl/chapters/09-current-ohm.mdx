@@ -1,0 +1,111 @@
+---
+sourceHash: 63872a4aebb8
+slug: current-ohm
+order: 9
+title: Prąd elektryczny, opór i prawo Ohma
+description: Ładunek w ruchu, R = ρL/A oraz obwody szeregowe i równoległe.
+sections:
+  - id: czym-jest-prad
+    title: Czym jest prąd?
+  - id: opor-i-prawo-ohma
+    title: Opór i prawo Ohma
+  - id: szeregowo-i-rownolegle
+    title: Szeregowo i równolegle
+---
+
+# Prąd elektryczny, opór i prawo Ohma
+
+Ładunek statyczny to obietnica w magazynie; **prąd** to jej realizacja.
+Podłącz baterię do przewodu, a pole elektryczne wewnątrz popchnie
+swobodne elektrony w powolny, jednostajny dryf.
+
+## Czym jest prąd?
+
+Prąd to ładunek przepływający przez przekrój w jednostce czasu:
+
+$$
+I = \frac{\Delta Q}{\Delta t} \qquad [I] = \text{A} = \text{C/s}
+$$
+
+Niespodzianka: pojedyncze elektrony dryfują z prędkością ułamków
+milimetra na sekundę, a jednak żarówka zapala się natychmiast — *pole*
+rozchodzi się z prędkością bliską prędkości światła i wprawia w ruch
+**wszystkie** elektrony naraz, jak woda w pełnej rurze.
+
+## Opór i prawo Ohma
+
+Zderzenia z siecią krystaliczną hamują dryf. Dla jednorodnego przewodu:
+
+$$
+R = \rho\,\frac{L}{A}
+$$
+
+— dłuższy znaczy większy opór, grubszy mniejszy, a $\rho$ to opór
+właściwy materiału. Dla przewodników omowych prąd jest proporcjonalny do
+napięcia:
+
+$$
+I = \frac{V}{R}
+$$
+
+Podwój <M v="V">V</M>, a nośniki poniżej podwoją tempo. Podwój
+<M v="R1">R_1</M>, a zwolnią. Ta proporcjonalność *jest* prawem Ohma.
+
+<Sim id="circuit" />
+
+## Szeregowo i równolegle
+
+**Szeregowo** — jedna droga. Ten sam prąd płynie przez wszystko,
+a spadki napięcia się sumują (prawo Kirchhoffa dla napięć):
+
+$$
+R_{szereg} = R_1 + R_2 + R_3, \qquad V = V_1 + V_2 + V_3
+$$
+
+**Równolegle** — kilka dróg. Każda gałąź widzi pełne napięcie, a prądy
+się sumują (prawo Kirchhoffa dla prądów):
+
+$$
+\frac{1}{R_{rown}} = \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3}
+$$
+
+Opór całkowity połączenia równoległego jest zawsze *mniejszy od
+najmniejszej gałęzi* — więcej pasów na autostradzie.
+
+**Eksperymenty do wypróbowania**
+
+1. Zacznij od **Szeregowo**: sprawdź, że trzy odczyty napięć sumują się
+   do napięcia baterii i że największy opornik zabiera największy spadek.
+2. Przestaw suwak topologii na **Równolegle**: każda gałąź czyta teraz
+   pełne 12 V, ale prądy się różnią. Sprawdź $I_{calk} = I_1+I_2+I_3$.
+3. **Trzy równe** równolegle: opór całkowity powinien wynosić dokładnie
+   $R/3$. Porównaj z odczytem.
+4. Wypróbuj **Blisko zwarcia**: mały opór, ogromny prąd — patrz, jak
+   nośniki pędzą. Po co są bezpieczniki?
+5. Zmieniaj napięcie *na żywo*, obserwując wykres prądu: prosta
+   proporcjonalność, krok po kroku.
+
+<Exercise title="Lampki choinkowe">
+Dwadzieścia identycznych lampek szeregowo dzieli 230 V. Przepala się
+żarnik jednej. Co stanie się z resztą — i jak je połączyć, żeby jedna
+awaria nie gasiła całego łańcucha?
+
+<Solution>
+W połączeniu szeregowym przepalony żarnik przerywa jedyną drogę: prąd
+ustaje wszędzie, wszystkie lampki gasną ($I = 0$). Połączenie równoległe
+daje każdej własną drogę na 230 V — awaria jednej nie rusza pozostałych.
+Dlatego gniazdka domowe są połączone równolegle.
+</Solution>
+</Exercise>
+
+<Exercise title="Zaprojektuj dzielnik napięcia">
+Masz baterię 12 V i potrzebujesz 4 V na $R_2$. Dobierz $R_1$ i $R_2$
+szeregowo (ustaw $R_3$ na 1 Ω — pomiń go lub uwzględnij dokładnie).
+
+<Solution>
+Spadki szeregowe są proporcjonalne do oporów:
+$V_2 = V\,R_2/(R_1+R_2+R_3)$. Przy $R_3 = 1\,\Omega$: wybierz
+$R_2 = 20\,\Omega$, wtedy $R_1 = R_2(V/V_2 - 1) - R_3 = 20 \cdot 2 - 1
+= 39\,\Omega$. Sprawdzenie: $12 \cdot 20/60 = 4$ V. ✓
+</Solution>
+</Exercise>
