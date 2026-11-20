@@ -603,5 +603,29 @@
       "myopic": "Ognisko przed siatkówką — krótkowzroczność",
       "hyperopic": "Ognisko za siatkówką — dalekowzroczność"
     }
+  },
+  "pulse": {
+    "title": "Impuls biegnący i odbicie",
+    "param": {
+      "end": "Koniec (0 sztywny, 1 swobodny)",
+      "speed": "Prędkość fali",
+      "width": "Szerokość impulsu"
+    },
+    "readout": {
+      "t": "Czas",
+      "peakX": "Położenie szczytu",
+      "peakY": "Wychylenie szczytu"
+    },
+    "preset": {
+      "fixed": "Koniec sztywny",
+      "free": "Koniec swobodny",
+      "narrow": "Wąski impuls",
+      "fast": "Szybka struna"
+    },
+    "view": {
+      "fixed": "koniec sztywny — odbicie odwraca impuls",
+      "free": "koniec swobodny (kółko na pręcie) — odbicie bez odwrócenia",
+      "reflected": "odbity!"
+    }
   }
 }

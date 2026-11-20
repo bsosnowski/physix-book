@@ -603,5 +603,29 @@
       "myopic": "Focus in front of retina — myopia",
       "hyperopic": "Focus behind retina — hyperopia"
     }
+  },
+  "pulse": {
+    "title": "Traveling pulse & reflection",
+    "param": {
+      "end": "End (0 fixed, 1 free)",
+      "speed": "Wave speed",
+      "width": "Pulse width"
+    },
+    "readout": {
+      "t": "Time",
+      "peakX": "Peak position",
+      "peakY": "Peak displacement"
+    },
+    "preset": {
+      "fixed": "Fixed end",
+      "free": "Free end",
+      "narrow": "Narrow pulse",
+      "fast": "Fast string"
+    },
+    "view": {
+      "fixed": "fixed end — reflection inverts the pulse",
+      "free": "free end (ring on pole) — reflection keeps it upright",
+      "reflected": "reflected!"
+    }
   }
 }

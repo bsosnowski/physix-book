@@ -6,6 +6,8 @@ description: Superposition, standing waves and two-source interference.
 sections:
   - id: superposition
     title: Superposition
+  - id: traveling-pulses
+    title: Traveling pulses
   - id: standing-waves
     title: Standing waves
   - id: interference
@@ -36,6 +38,26 @@ $$
 The pattern no longer travels — every point oscillates in place with
 amplitude $A\sin(kx)$. Points where $\sin(kx) = 0$ are **nodes** and
 never move at all.
+
+## Traveling pulses
+
+Before standing waves, meet a single **pulse** — one bump racing down
+the string at speed $v$, keeping its shape (the wave equation is
+non-dispersive). The interesting physics happens at the end:
+
+- **Fixed end** (tied to a wall): the pulse reflects **inverted**. The
+  wall must stay at zero, so the reflected pulse cancels the incident
+  one exactly at the boundary — Newton's third law in wave form.
+- **Free end** (a ring sliding on a pole): reflects **upright**, and the
+  end momentarily swings to *double* amplitude.
+
+<Sim id="pulse" />
+
+**Experiments:** run both presets and watch the peak-displacement
+readout flip sign (fixed) or keep it (free). Use ⏸ + Step to freeze the
+exact moment of reflection — at the fixed end the string is momentarily
+*flat*: all the energy is kinetic. This inversion rule is why standing
+waves need nodes at fixed ends.
 
 ## Standing waves
 

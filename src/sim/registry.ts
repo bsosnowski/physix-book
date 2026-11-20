@@ -22,6 +22,7 @@ const loaders: Record<string, () => Promise<{ default: AnySimModule }>> = {
   "magnet-field": () => import("./sims/magnet-field"),
   motor: () => import("./sims/motor"),
   eye: () => import("./sims/eye"),
+  pulse: () => import("./sims/pulse"),
   refraction: () => import("./sims/refraction"),
   lens: () => import("./sims/lens"),
   charges: () => import("./sims/charges"),

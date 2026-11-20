@@ -1,5 +1,5 @@
 ---
-sourceHash: 028e0bd630eb
+sourceHash: cab444700241
 slug: waves
 order: 5
 title: Fale
@@ -7,6 +7,8 @@ description: Superpozycja, fale stojące i interferencja dwóch źródeł.
 sections:
   - id: superpozycja
     title: Superpozycja
+  - id: impulsy-biegnace
+    title: Impulsy biegnące
   - id: fale-stojace
     title: Fale stojące
   - id: interferencja
@@ -37,6 +39,27 @@ $$
 Wzór przestaje wędrować — każdy punkt drga w miejscu z amplitudą
 $A\sin(kx)$. Punkty, gdzie $\sin(kx) = 0$, to **węzły** — nie poruszają
 się wcale.
+
+## Impulsy biegnące
+
+Przed falami stojącymi poznaj pojedynczy **impuls** — jeden garb
+pędzący po strunie z prędkością $v$, zachowujący kształt (równanie
+falowe jest niedyspersyjne). Ciekawa fizyka dzieje się na końcu:
+
+- **Koniec sztywny** (przywiązany do ściany): impuls odbija się
+  **odwrócony**. Ściana musi stać w zerze, więc odbity impuls kasuje
+  padający dokładnie na granicy — trzecia zasada Newtona w falowej
+  postaci.
+- **Koniec swobodny** (kółko na pręcie): odbija się **prosto**, a koniec
+  chwilowo wychyla się do *podwójnej* amplitudy.
+
+<Sim id="pulse" />
+
+**Eksperymenty:** uruchom oba ustawienia i patrz, jak odczyt wychylenia
+szczytu zmienia znak (sztywny) albo go zachowuje (swobodny). Użyj ⏸
++ Krok, by zamrozić dokładną chwilę odbicia — na sztywnym końcu struna
+jest chwilowo *płaska*: cała energia jest kinetyczna. Ta reguła odwrócenia
+tłumaczy, dlaczego fale stojące muszą mieć węzły na sztywnych końcach.
 
 ## Fale stojące
 
