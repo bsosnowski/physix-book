@@ -1,0 +1,104 @@
+---
+sourceHash: 15bc6695e1c2
+slug: electrostatics
+order: 7
+title: Elektrostatyka — ładunek i pole
+description: Elektryzowanie ciał, przewodniki i izolatory, prawo Coulomba.
+sections:
+  - id: elektryzowanie-cial
+    title: Elektryzowanie ciał
+  - id: przewodniki-i-izolatory
+    title: Przewodniki i izolatory
+  - id: prawo-coulomba-i-pole
+    title: Prawo Coulomba i pole
+---
+
+# Elektrostatyka — ładunek i pole
+
+Potrzyj balon o włosy, a przyklei się do ściany. Bez kleju, bez
+magnetyzmu — to **ładunek elektryczny**, trzeci fundamentalny aktor tej
+książki po masie i… no cóż, znowu masie. Ładunek ma dwa znaki i —
+w przeciwieństwie do mas — jednoimienne ładunki się *odpychają*.
+
+## Elektryzowanie ciał
+
+Ładunek nigdy nie powstaje — tylko się przemieszcza. Trzy sposoby:
+
+- **Tarcie (tryboelektryzacja):** pocieranie przenosi elektrony między
+  materiałami. Szkło je oddaje (staje się +), guma zabiera (−).
+- **Dotyk:** dotknięcie naładowanego ciała dzieli jego nadmiar ładunku.
+- **Indukcja:** pobliski ładunek *przestawia* ładunki w obojętnym ciele
+  bez dotykania — bliższa strona staje się przeciwna, i dlatego balon
+  klei się do obojętnej ściany.
+
+Całkowity ładunek układu izolowanego jest zawsze zachowany.
+
+## Przewodniki i izolatory
+
+W **przewodnikach** (metale, słona woda, ty) część elektronów wędruje
+swobodnie; w **izolatorach** (szkło, plastik, suche powietrze) każdy
+elektron jest przywiązany do swojego atomu. Konsekwencje:
+
+- Nadmiar ładunku na przewodniku rozchodzi się po **powierzchni**,
+  a pole *wewnątrz* jest zerowe — ładunki przestawiają się, aż je
+  wyzerują.
+- Na izolatorze ładunek zostaje dokładnie tam, gdzie go położono
+  (ta łatka na balonie).
+- Obojętny izolator też reaguje: jego cząsteczki się **polaryzują**,
+  przesuwając ładunek odrobinę wewnątrz każdej z nich.
+
+## Prawo Coulomba i pole
+
+Dwa ładunki punktowe przyciągają się lub odpychają wzdłuż łączącej je
+linii:
+
+$$
+F = k\,\frac{|q_1 q_2|}{r^2}, \qquad k \approx 9\times10^9\ \text{N·m}^2/\text{C}^2
+$$
+
+Ten sam kształt odwrotnych kwadratów co grawitacja — ale nieporównanie
+silniejszy i z dwoma znakami. Zamiast sił na odległość wyobrażamy sobie
+**pole**: $\vec{E} = \vec{F}/q$, wektor w każdym punkcie mówiący
+dodatniemu ładunkowi próbnemu, dokąd iść. Linie pola zaczynają się na +
+i kończą na −; ich gęstość to siła pola.
+
+<Sim id="charges" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Dipol**: rozsuwaj i zsuwaj ładunki — patrz, jak linie pola się
+   rozciągają. Wzór zawsze wychodzi z + i wchodzi do −.
+2. **Jednoimienne**: znajdź punkt, w którym małe strzałki siatki znikają
+   (pole się zeruje). Czy jest dokładnie w połowie? Teraz zrób ładunki
+   nierówne — dokąd przesuwa się punkt zerowy?
+3. Ustaw <M v="q2">q_2</M> na 0: promieniste pole pojedynczego ładunku,
+   idealne $1/r^2$. Wypuść **ładunek próbny** i patrz, jak przyspiesza
+   na zewnątrz.
+4. Przy dipolu wypuść ładunek próbny: jego zakrzywiony ślad pokrywa się
+   z linią pola *tylko dlatego, że startuje ze spoczynku* — z prędkością
+   początkową przestrzeliłby (bezwładność!).
+5. Przyciągnij ładunek ujemny do dodatniego i patrz, jak ładunek próbny
+   zostaje pochłonięty — a potem odrodzony. To iskra w miniaturze.
+
+<Exercise title="Obojętna ściana">
+Ujemnie naładowany balon klei się do elektrycznie obojętnej ściany.
+Ściana ma zerowy ładunek netto — skąd przyciąganie?
+
+<Solution>
+Indukcja/polaryzacja: pole balonu odpycha elektrony przy powierzchni
+ściany odrobinę dalej, zostawiając bliższą powierzchnię dodatnią.
+Przyciągana strona + jest *bliżej* niż odpychana −, a siła Coulomba rośnie
+z bliskością — więc przyciąganie wygrywa mimo zerowego ładunku netto.
+</Solution>
+</Exercise>
+
+<Exercise title="Podwajanie odległości">
+Dwa ładunki przyciągają się siłą F. Podwajasz oba ładunki i podwajasz
+ich odległość. Jaka jest nowa siła?
+
+<Solution>
+$F' = k(2q_1)(2q_2)/(2r)^2 = 4/4 \cdot F = F$ — bez zmian. Oba podwojenia
+dokładnie się kasują; miły sprawdzian, że ufasz wzorowi bardziej niż
+intuicji.
+</Solution>
+</Exercise>

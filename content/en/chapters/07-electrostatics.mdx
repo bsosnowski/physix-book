@@ -1,0 +1,100 @@
+---
+slug: electrostatics
+order: 7
+title: Electric Charge & Field
+description: Charging bodies, conductors and insulators, Coulomb's law.
+sections:
+  - id: charging-bodies
+    title: Charging bodies
+  - id: conductors-and-insulators
+    title: Conductors and insulators
+  - id: coulombs-law-and-the-field
+    title: Coulomb's law and the field
+---
+
+# Electric Charge & Field
+
+Rub a balloon on your hair and it sticks to the wall. No glue, no
+magnetism — **electric charge**, the third fundamental actor of this
+book after mass and… well, mass again. Charge comes in two signs, and
+unlike masses, like charges *repel*.
+
+## Charging bodies
+
+Charge is never created — only moved. Three ways to move it:
+
+- **Friction (triboelectric):** rubbing transfers electrons between
+  materials. Glass loses them (becomes +), rubber gains them (−).
+- **Contact:** touching a charged body shares its excess charge.
+- **Induction:** a nearby charge *rearranges* the charges in a neutral
+  body without touching it — the near side becomes opposite, and that
+  is why the balloon sticks to a neutral wall.
+
+The total charge of an isolated system is conserved, always.
+
+## Conductors and insulators
+
+In **conductors** (metals, salty water, you) some electrons roam freely;
+in **insulators** (glass, plastic, dry air) every electron is locked to
+its atom. Consequences:
+
+- Excess charge on a conductor spreads to its **surface** and the field
+  *inside* is zero — the charges rearrange until they cancel it.
+- On an insulator, charge stays exactly where you put it (that balloon
+  patch).
+- A neutral insulator still responds: its molecules **polarize**,
+  shifting charge slightly within each molecule.
+
+## Coulomb's law and the field
+
+Two point charges push or pull along the line joining them:
+
+$$
+F = k\,\frac{|q_1 q_2|}{r^2}, \qquad k \approx 9\times10^9\ \text{N·m}^2/\text{C}^2
+$$
+
+Same inverse-square shape as gravity — but vastly stronger, and with
+two signs. Instead of forces-at-a-distance we picture a **field**:
+$\vec{E} = \vec{F}/q$, a vector at every point telling a positive test
+charge which way to go. Field lines start on + and end on −; their
+density is the field's strength.
+
+<Sim id="charges" />
+
+**Experiments to try**
+
+1. **Dipole**: drag the charges apart and together — watch the field
+   lines stretch. The line pattern always leaves + and enters −.
+2. **Like charges**: find the point where the small grid arrows vanish
+   (the field cancels). Is it exactly midway? Now make the charges
+   unequal — where does the null point move?
+3. Set <M v="q2">q_2</M> to 0: a single charge's radial field, perfect
+   $1/r^2$. Release the **test charge** and watch it accelerate outward.
+4. With the dipole, release the test charge: its curved trail is a
+   field line *only because it starts at rest* — with initial velocity
+   it would overshoot (inertia!).
+5. Drag a negative charge close to the positive one and watch the test
+   charge get absorbed — then respawn. That is a spark, in miniature.
+
+<Exercise title="The neutral wall">
+A negatively charged balloon sticks to an electrically neutral wall.
+The wall has zero net charge — so why is there attraction?
+
+<Solution>
+Induction/polarization: the balloon's field pushes the wall's surface
+electrons slightly away, leaving the near surface positively charged.
+The attracted + side is *closer* than the repelled − side, and Coulomb
+force grows with proximity — so attraction wins despite zero net charge.
+</Solution>
+</Exercise>
+
+<Exercise title="Doubling distance">
+Two charges attract with force F. You double both charges and double
+their separation. What is the new force?
+
+<Solution>
+$F' = k(2q_1)(2q_2)/(2r)^2 = 4/4 \cdot F = F$ — unchanged. The two
+doublings cancel exactly; a neat check that you trust the formula more
+than your intuition.
+</Solution>
+</Exercise>

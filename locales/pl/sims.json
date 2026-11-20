@@ -375,5 +375,28 @@
       "diverging": "rozpraszająca",
       "dragHint": "przeciągnij strzałkę przedmiotu wzdłuż ławy"
     }
+  },
+  "charges": {
+    "title": "Ładunki punktowe i pole elektryczne",
+    "param": {
+      "q1": "Ładunek 1",
+      "q2": "Ładunek 2",
+      "showTest": "Wypuść ładunek próbny (1)"
+    },
+    "readout": {
+      "eProbe": "Pole przy sondzie",
+      "vProbe": "Potencjał przy sondzie",
+      "testSpeed": "Prędkość próbnego",
+      "testKE": "Energia kinetyczna próbnego"
+    },
+    "preset": {
+      "dipole": "Dipol (+ −)",
+      "like": "Jednoimienne",
+      "unequal": "Nierówne +4 / −1",
+      "single": "Pojedynczy + z ładunkiem próbnym"
+    },
+    "view": {
+      "dragHint": "przeciągaj ładunki · zmieniaj znaki suwakami"
+    }
   }
 }

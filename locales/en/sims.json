@@ -375,5 +375,28 @@
       "diverging": "diverging",
       "dragHint": "drag the object arrow along the bench"
     }
+  },
+  "charges": {
+    "title": "Point charges & the electric field",
+    "param": {
+      "q1": "Charge 1",
+      "q2": "Charge 2",
+      "showTest": "Release test charge (1)"
+    },
+    "readout": {
+      "eProbe": "Field at probe",
+      "vProbe": "Potential at probe",
+      "testSpeed": "Test speed",
+      "testKE": "Test kinetic energy"
+    },
+    "preset": {
+      "dipole": "Dipole (+ −)",
+      "like": "Like charges",
+      "unequal": "Unequal +4 / −1",
+      "single": "Single + with test charge"
+    },
+    "view": {
+      "dragHint": "drag the charges · flip signs with the sliders"
+    }
   }
 }
