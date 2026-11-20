@@ -172,5 +172,93 @@
     "view": {
       "walls": "Ściany są sprężyste — zmieniają pęd całkowity (impuls zewnętrzny)."
     }
+  },
+  "wave": {
+    "title": "Fala stojąca na strunie",
+    "param": {
+      "n": "Numer harmonicznej",
+      "A": "Amplituda",
+      "v": "Prędkość fali"
+    },
+    "readout": {
+      "t": "Czas",
+      "lambda": "Długość fali",
+      "f": "Częstotliwość",
+      "period": "Okres",
+      "yProbe": "Wychylenie strzałki"
+    },
+    "plot": {
+      "probe": "Ruch strzałki od czasu"
+    },
+    "preset": {
+      "fundamental": "Ton podstawowy (n=1)",
+      "second": "2. harmoniczna",
+      "fifth": "5. harmoniczna",
+      "tight": "Większe naprężenie"
+    },
+    "view": {
+      "resultant": "fala stojąca (suma)",
+      "components": "składowe biegnące",
+      "nodes": "węzły (nieruchome)"
+    }
+  },
+  "interference": {
+    "title": "Interferencja dwóch źródeł",
+    "param": {
+      "lambda": "Długość fali",
+      "d": "Odległość źródeł"
+    },
+    "readout": {
+      "t": "Czas",
+      "ratio": "d / λ",
+      "maxOrder": "Maks. rząd m",
+      "probeDelta": "Różnica dróg (sonda)",
+      "probeIntensity": "Natężenie (sonda)"
+    },
+    "preset": {
+      "wide": "Szerokie prążki",
+      "classic": "Klasyczne",
+      "fine": "Drobne prążki",
+      "singleLambda": "d = λ"
+    },
+    "view": {
+      "probe": "sonda",
+      "legend": "jasne = wzmocnienie (Δr = mλ) · ciemne = wygaszenie (Δr = (m+½)λ)"
+    }
+  },
+  "orbit": {
+    "title": "Mechanika orbitalna",
+    "param": {
+      "mu": "Grawitacja μ = GM",
+      "r0": "Odległość startowa",
+      "vt": "Prędkość styczna"
+    },
+    "readout": {
+      "t": "Czas",
+      "r": "Odległość",
+      "speed": "Prędkość",
+      "energy": "Energia / masa",
+      "energyDrift": "Dryf energii",
+      "hDrift": "Dryf momentu pędu",
+      "vCircular": "v dla koła",
+      "vEscape": "v ucieczki"
+    },
+    "plot": {
+      "r": "Odległość od czasu",
+      "drift": "Dryf wielkości zachowanych"
+    },
+    "preset": {
+      "circular": "Kołowa",
+      "elliptical": "Eliptyczna",
+      "comet": "Kometa",
+      "escape": "Ucieczka",
+      "plunge": "Upadek"
+    },
+    "view": {
+      "crashed": "Upadek na gwiazdę — zresetuj, aby spróbować ponownie",
+      "escaped": "Ucieczka z układu (E > 0) — zresetuj, aby spróbować ponownie",
+      "bound": "Orbita związana (E < 0)",
+      "unbound": "Tor niezwiązany (E > 0)"
+    }
   }
 }

@@ -1,0 +1,98 @@
+---
+sourceHash: 028e0bd630eb
+slug: waves
+order: 5
+title: Fale
+description: Superpozycja, fale stojące i interferencja dwóch źródeł.
+sections:
+  - id: superpozycja
+    title: Superpozycja
+  - id: fale-stojace
+    title: Fale stojące
+  - id: interferencja
+    title: Interferencja dwóch źródeł
+---
+
+# Fale
+
+Fala to zaburzenie, które wędruje, nie przenosząc materii. Najważniejszy
+fakt o falach to **zasada superpozycji**: gdy dwie fale się nakładają,
+wychylenia po prostu się dodają.
+
+## Superpozycja
+
+Wyślij dwie identyczne fale w przeciwnych kierunkach wzdłuż struny:
+
+$$
+y_1 = \tfrac{A}{2}\sin(kx - \omega t), \qquad
+y_2 = \tfrac{A}{2}\sin(kx + \omega t)
+$$
+
+Ich suma jest **falą stojącą**:
+
+$$
+y = y_1 + y_2 = A \sin(kx)\,\cos(\omega t)
+$$
+
+Wzór przestaje wędrować — każdy punkt drga w miejscu z amplitudą
+$A\sin(kx)$. Punkty, gdzie $\sin(kx) = 0$, to **węzły** — nie poruszają
+się wcale.
+
+## Fale stojące
+
+Struna o długości $L$ zamocowana na obu końcach mieści tylko fale
+z węzłami na końcach, więc $L = n\,\lambda/2$. Dozwolone częstotliwości:
+
+$$
+\lambda_n = \frac{2L}{n}, \qquad
+f_n = \frac{v}{\lambda_n} = n\,\frac{v}{2L}, \qquad n = 1, 2, 3, \dots
+$$
+
+Dlatego struna gitary brzmi tonem podstawowym i alikwotami — i dlatego
+jej naciągnięcie (większe $v = \sqrt{T/\rho}$) podwyższa dźwięk.
+
+<Sim id="standing-wave" />
+
+**Eksperymenty do wypróbowania**
+
+1. Policz węzły dla każdej harmonicznej <M v="n">n</M>. Jest ich zawsze
+   $n+1$ (razem z końcami). Przerywane czerwona i zielona krzywe to
+   składowe biegnące — obserwuj, jak przesuwają się, podczas gdy ich
+   suma stoi w miejscu.
+2. Włącz **Większe naprężenie**: wzór się nie zmienia, ale wszystko drga
+   szybciej — $f \propto v$. Sprawdź odczyt częstotliwości.
+3. Oglądaj wykres *Ruch strzałki*: czysty cosinus o okresie $1/f_n$.
+4. Która harmoniczna ma węzeł dokładnie w środku struny? Dlaczego
+   parzyste harmoniczne znikają, gdy szarpniesz strunę dokładnie
+   na środku?
+
+## Interferencja
+
+Dwa spójne źródła punktowe emitują identyczne fale koliste. W każdym
+punkcie o wyniku decyduje **różnica dróg** $\Delta r = |r_1 - r_2|$:
+
+$$
+\Delta r = m\lambda \;\Rightarrow\; \text{wzmocnienie}, \qquad
+\Delta r = \left(m + \tfrac{1}{2}\right)\lambda \;\Rightarrow\; \text{wygaszenie}
+$$
+
+Jasne pasma poniżej to miejsca o stałej $\Delta r$ — hiperbole
+o ogniskach w źródłach. Ich liczbę wyznacza stosunek
+<M v="d">d</M>/<M v="lambda">\lambda</M>: największa możliwa różnica dróg
+to samo $d$, więc rzędy sięgają $m_{max} = \lfloor d/\lambda \rfloor$.
+
+<Sim id="interference" />
+
+**Eksperymenty do wypróbowania**
+
+1. Pionowa linia środkowa jest zawsze jasna. Dlaczego? (Ile wynosi tam
+   $\Delta r$ przy *dowolnych* ustawieniach?)
+2. Zmniejsz <M v="lambda">\lambda</M> przy nieruchomych źródłach: prążki
+   się mnożą. Porównaj odczyt *Maks. rząd* z $\lfloor d/\lambda \rfloor$.
+3. Wypróbuj ustawienie **d = λ**: zostaje tylko maksimum centralne
+   i kierunki $m = \pm1$. Co stanie się ze wzorem, gdy $d < \lambda$?
+4. Sonda leży na linii środkowej — jej natężenie zawsze wynosi 1.
+   Przewiduj, co wskazałaby w połowie drogi między dwoma jasnymi pasmami.
+
+> To ta sama geometria, co w doświadczeniu Younga, układach anten
+> i słuchawkach z redukcją szumów — to samo równanie, inne fale.

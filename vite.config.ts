@@ -1,5 +1,5 @@
 import path from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@mdx-js/rollup";
@@ -31,6 +31,10 @@ export default defineConfig({
   preview: {
     // SPA fallback for client-side routes (default only covers .html).
     port: 4173,
+  },
+  test: {
+    // Playwright specs live in tests/ and run via `npm run test:e2e`.
+    exclude: ["tests/**", "node_modules/**", "dist/**"],
   },
   build: {
     rolldownOptions: {

@@ -172,5 +172,93 @@
     "view": {
       "walls": "Walls are elastic — they change total momentum (external impulse)."
     }
+  },
+  "wave": {
+    "title": "Standing wave on a string",
+    "param": {
+      "n": "Harmonic number",
+      "A": "Amplitude",
+      "v": "Wave speed"
+    },
+    "readout": {
+      "t": "Time",
+      "lambda": "Wavelength",
+      "f": "Frequency",
+      "period": "Period",
+      "yProbe": "Antinode displacement"
+    },
+    "plot": {
+      "probe": "Antinode motion vs time"
+    },
+    "preset": {
+      "fundamental": "Fundamental (n=1)",
+      "second": "2nd harmonic",
+      "fifth": "5th harmonic",
+      "tight": "Higher tension"
+    },
+    "view": {
+      "resultant": "standing wave (sum)",
+      "components": "traveling components",
+      "nodes": "nodes (never move)"
+    }
+  },
+  "interference": {
+    "title": "Two-source interference",
+    "param": {
+      "lambda": "Wavelength",
+      "d": "Source separation"
+    },
+    "readout": {
+      "t": "Time",
+      "ratio": "d / λ",
+      "maxOrder": "Max order m",
+      "probeDelta": "Probe path diff.",
+      "probeIntensity": "Probe intensity"
+    },
+    "preset": {
+      "wide": "Wide fringes",
+      "classic": "Classic",
+      "fine": "Fine fringes",
+      "singleLambda": "d = λ"
+    },
+    "view": {
+      "probe": "probe",
+      "legend": "bright = constructive (Δr = mλ) · dark = destructive (Δr = (m+½)λ)"
+    }
+  },
+  "orbit": {
+    "title": "Orbital mechanics",
+    "param": {
+      "mu": "Gravity μ = GM",
+      "r0": "Start distance",
+      "vt": "Tangential velocity"
+    },
+    "readout": {
+      "t": "Time",
+      "r": "Distance",
+      "speed": "Speed",
+      "energy": "Energy / mass",
+      "energyDrift": "Energy drift",
+      "hDrift": "Ang. momentum drift",
+      "vCircular": "v for circle",
+      "vEscape": "v to escape"
+    },
+    "plot": {
+      "r": "Distance vs time",
+      "drift": "Conservation-law drift"
+    },
+    "preset": {
+      "circular": "Circular",
+      "elliptical": "Elliptical",
+      "comet": "Comet-like",
+      "escape": "Escape",
+      "plunge": "Plunge"
+    },
+    "view": {
+      "crashed": "Crashed into the star — reset to try again",
+      "escaped": "Escaped the system (E > 0) — reset to try again",
+      "bound": "Bound orbit (E < 0)",
+      "unbound": "Unbound trajectory (E > 0)"
+    }
   }
 }

@@ -37,9 +37,9 @@ test.describe("app shell & i18n", () => {
     await page.goto("/en/");
     const nav = page.locator("aside nav");
     const items = nav.locator("ol > li > a");
-    await expect(items).toHaveCount(4);
+    await expect(items).toHaveCount(6);
     await expect(items.nth(0)).toContainText("Kinematics");
-    await expect(items.nth(3)).toContainText("Oscillations");
+    await expect(items.nth(5)).toContainText("Gravitation");
     await items.nth(2).click();
     await expect(page).toHaveURL(/\/en\/chapter\/energy-momentum$/);
     await expect(page.getByRole("heading", { level: 1, name: "Energy & Momentum" })).toBeVisible();
@@ -247,6 +247,80 @@ test.describe("simulation widget — other sims", () => {
   });
 });
 
+test.describe("simulation widget — waves & orbits", () => {
+  test("standing wave: harmonic readouts follow λ=2L/n and f=nv/2L", async ({ page }) => {
+    await page.goto("/en/chapter/waves");
+    const w = page.locator("figure").filter({ hasText: "Standing wave on a string" });
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "5th harmonic" }).click();
+    const lambda = w.locator("dl > div", { hasText: "Wavelength" }).locator("dd");
+    const f = w.locator("dl > div", { hasText: "Frequency" }).locator("dd");
+    expect(await num(lambda)).toBeCloseTo(4, 1); // 2·10/5 = 4 m
+    expect(await num(f)).toBeCloseTo(2, 1); // 5·8/20 = 2 Hz
+    // fundamental: λ = 20 m, f = 0.4 Hz
+    await w.getByRole("button", { name: "Fundamental (n=1)" }).click();
+    expect(await num(lambda)).toBeCloseTo(20, 1);
+    expect(await num(f)).toBeCloseTo(0.4, 1);
+  });
+
+  test("interference: center-line probe is always constructive; max order = floor(d/λ)", async ({ page }) => {
+    await page.goto("/en/chapter/waves");
+    const w = page.locator("figure").filter({ hasText: "Two-source interference" });
+    await showWidget(page, w);
+    const probeI = w.locator("dl > div", { hasText: "Probe intensity" }).locator("dd");
+    const maxOrder = w.locator("dl > div", { hasText: "Max order" }).locator("dd");
+    await expect(probeI).toHaveText("1");
+    expect(await num(maxOrder)).toBe(3); // d=5, λ=1.5
+    // fine preset: d=8, λ=0.7 → floor(11.43) = 11; probe still 1
+    await w.getByRole("button", { name: "Fine fringes" }).click();
+    expect(await num(maxOrder)).toBe(11);
+    await expect(probeI).toHaveText("1");
+    // canvas actually painted (field image, not blank)
+    const painted = await w.locator("canvas").first().evaluate((c: HTMLCanvasElement) => {
+      const d = c.getContext("2d")!.getImageData(0, 0, c.width, c.height).data;
+      let distinct = new Set<number>();
+      for (let i = 0; i < d.length; i += 4096) distinct.add(d[i]);
+      return distinct.size;
+    });
+    expect(painted).toBeGreaterThan(5);
+  });
+
+  test("orbit: circular preset keeps r constant with tiny conservation drift", async ({ page }) => {
+    await page.goto("/en/chapter/gravitation");
+    const w = widget(page);
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Circular", exact: true }).click();
+    const r = w.locator("dl > div", { hasText: "Distance" }).locator("dd");
+    await expect.poll(async () => num(w.locator("dl > div", { hasText: "Time" }).locator("dd")), { timeout: 8000 }).toBeGreaterThan(3);
+    expect(await num(r)).toBeCloseTo(12, 0);
+    const eDrift = await num(w.locator("dl > div", { hasText: "Energy drift" }).locator("dd"));
+    expect(Math.abs(eDrift)).toBeLessThan(0.01);
+  });
+
+  test("orbit: escape preset ends with positive energy and unbound status", async ({ page }) => {
+    test.setTimeout(120_000); // ~80 s of sim time at 2× to cross r = 300 m
+    await page.goto("/en/chapter/gravitation");
+    const w = widget(page);
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Escape", exact: true }).click();
+    const energy = w.locator("dl > div", { hasText: "Energy / mass" }).locator("dd");
+    expect(await num(energy)).toBeGreaterThan(0);
+    // speed 2× to reach the escape boundary sooner
+    await w.locator("figcaption select").selectOption("2");
+    await expect
+      .poll(async () => num(w.locator("dl > div", { hasText: "Distance" }).locator("dd")), { timeout: 100_000 })
+      .toBeGreaterThan(290);
+    await expect(w.locator("figcaption button").first()).toContainText("Reset");
+  });
+
+  test("Polish waves chapter renders with translated sim titles", async ({ page }) => {
+    await page.goto("/pl/chapter/waves");
+    await expect(page.getByRole("heading", { level: 1, name: "Fale" })).toBeVisible();
+    await expect(page.locator("figure").filter({ hasText: "Fala stojąca na strunie" })).toBeAttached();
+    await expect(page.locator("figure").filter({ hasText: "Interferencja dwóch źródeł" })).toBeAttached();
+  });
+});
+
 test.describe("fallback & responsive", () => {
   test("mobile: sidebar is a drawer opened by hamburger", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
@@ -264,7 +338,7 @@ test.describe("fallback & responsive", () => {
     const errors: string[] = [];
     page.on("console", (msg) => msg.type() === "error" && errors.push(msg.text()));
     page.on("pageerror", (err) => errors.push(String(err)));
-    for (const slug of ["kinematics", "newton-laws", "energy-momentum", "oscillations"]) {
+    for (const slug of ["kinematics", "newton-laws", "energy-momentum", "oscillations", "waves", "gravitation"]) {
       await page.goto(`/en/chapter/${slug}`);
       await expect(page.locator("article h1")).toBeVisible();
       await page.waitForTimeout(400);

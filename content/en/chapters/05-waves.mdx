@@ -1,0 +1,96 @@
+---
+slug: waves
+order: 5
+title: Waves
+description: Superposition, standing waves and two-source interference.
+sections:
+  - id: superposition
+    title: Superposition
+  - id: standing-waves
+    title: Standing waves
+  - id: interference
+    title: Two-source interference
+---
+
+# Waves
+
+A wave is a disturbance that travels without transporting matter. The
+single most important fact about waves is the **superposition
+principle**: when two waves overlap, the displacements simply add.
+
+## Superposition
+
+Send two identical waves in opposite directions along a string:
+
+$$
+y_1 = \tfrac{A}{2}\sin(kx - \omega t), \qquad
+y_2 = \tfrac{A}{2}\sin(kx + \omega t)
+$$
+
+Their sum is a **standing wave**:
+
+$$
+y = y_1 + y_2 = A \sin(kx)\,\cos(\omega t)
+$$
+
+The pattern no longer travels — every point oscillates in place with
+amplitude $A\sin(kx)$. Points where $\sin(kx) = 0$ are **nodes** and
+never move at all.
+
+## Standing waves
+
+A string of length $L$ fixed at both ends can only host waves with nodes
+at the ends, so $L = n\,\lambda/2$. The allowed frequencies are
+
+$$
+\lambda_n = \frac{2L}{n}, \qquad
+f_n = \frac{v}{\lambda_n} = n\,\frac{v}{2L}, \qquad n = 1, 2, 3, \dots
+$$
+
+This is why a guitar string sounds a fundamental plus overtones — and
+why tightening it (larger $v = \sqrt{T/\rho}$) raises the pitch.
+
+<Sim id="standing-wave" />
+
+**Experiments to try**
+
+1. Count the nodes for each harmonic <M v="n">n</M>. There are always
+   $n+1$ of them (including the ends). The dashed red and green curves
+   are the traveling components — watch them slide while their sum
+   stays in place.
+2. Switch to **Higher tension**: the pattern is unchanged but everything
+   oscillates faster — $f \propto v$. Verify with the frequency readout.
+3. Watch the *Antinode motion* graph: pure cosine, period $1/f_n$.
+4. Which harmonic has a node exactly at the string's midpoint? Why do
+   even harmonics vanish when you pluck a string precisely at its center?
+
+## Interference
+
+Two coherent point sources emit identical circular waves. At any point,
+the **path difference** $\Delta r = |r_1 - r_2|$ decides the outcome:
+
+$$
+\Delta r = m\lambda \;\Rightarrow\; \text{constructive}, \qquad
+\Delta r = \left(m + \tfrac{1}{2}\right)\lambda \;\Rightarrow\; \text{destructive}
+$$
+
+The bright bands below are the loci of constant $\Delta r$ — hyperbolas
+with the sources as foci. Their number is set by
+<M v="d">d</M>/<M v="lambda">\lambda</M>: the largest possible path
+difference is $d$ itself, so orders run up to $m_{max} = \lfloor d/\lambda \rfloor$.
+
+<Sim id="interference" />
+
+**Experiments to try**
+
+1. The vertical center line is always bright. Why? (What is $\Delta r$
+   there, for *any* settings?)
+2. Shrink <M v="lambda">\lambda</M> with the sources fixed: fringes
+   multiply. Check the *Max order* readout against $\lfloor d/\lambda \rfloor$.
+3. Try the **d = λ** preset: only the central maximum and the $m = \pm1$
+   directions survive. What happens to the pattern as $d < \lambda$?
+4. The probe sits on the center line — its intensity is always 1.
+   Predict what it would read halfway between two bright bands.
+
+> This is the geometry behind Young's double slit, antenna arrays, and
+> noise-cancelling headphones — same equation, different waves.

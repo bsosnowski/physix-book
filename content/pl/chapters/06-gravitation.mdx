@@ -1,0 +1,81 @@
+---
+sourceHash: 3c83fe109eff
+slug: gravitation
+order: 6
+title: Grawitacja i orbity
+description: Uniwersalne prawo Newtona i kształty orbit.
+sections:
+  - id: prawo-odwrotnych-kwadratow
+    title: Prawo odwrotnych kwadratów
+  - id: ksztalty-orbit
+    title: Kształty orbit
+---
+
+# Grawitacja i orbity
+
+Wielka unifikacja Newtona: siła, która upuszcza jabłko, jest tą samą
+siłą, która trzyma Księżyc.
+
+## Prawo odwrotnych kwadratów
+
+Każda para mas przyciąga się wzdłuż łączącej je linii:
+
+$$
+F = G\frac{Mm}{r^2}
+$$
+
+Dla małego ciała krążącego wokół znacznie cięższego liczy się tylko
+kombinacja <M v="mu">\mu = GM</M>. Energia właściwa (na jednostkę masy)
+i właściwy moment pędu są zachowane:
+
+$$
+\varepsilon = \frac{v^2}{2} - \frac{\mu}{r}, \qquad
+h = r\,v_\perp
+$$
+
+Znak $\varepsilon$ klasyfikuje tor raz na zawsze: $\varepsilon < 0$ —
+związana elipsa; $\varepsilon = 0$ — paraboliczna ucieczka;
+$\varepsilon > 0$ — hiperboliczny przelot.
+
+## Kształty orbit
+
+Startuj z odległości <M v="r0">r_0</M> z czysto styczną prędkością
+<M v="vt">v_t</M>. Wszystko porządkują dwie prędkości szczególne:
+
+$$
+v_{circ} = \sqrt{\frac{\mu}{r_0}}, \qquad
+v_{esc} = \sqrt{\frac{2\mu}{r_0}} = \sqrt{2}\;v_{circ}
+$$
+
+- $v_t = v_{circ}$: koło.
+- $v_{circ} < v_t < v_{esc}$: elipsa, start w **peryapsis**.
+- $v_t < v_{circ}$: elipsa, start w **apoapsis** (najpierw spadasz
+  do środka).
+- $v_t \geq v_{esc}$: ucieczka — ciało nie wraca.
+
+Z tych samych równań wypada trzecie prawo Keplera: $T^2 \propto a^3$,
+gdzie $a = -\mu/2\varepsilon$ to półoś wielka.
+
+<Sim id="orbit" />
+
+**Eksperymenty do wypróbowania**
+
+1. Ustawienie **Kołowa**: wykres odległości jest płaski. Porównaj odczyt
+   *v dla koła* z rzeczywistą prędkością.
+2. **Eliptyczna**: ciało przyspiesza blisko gwiazdy i zwalnia daleko —
+   to drugie prawo Keplera (stałe $h$) w akcji.
+3. **Kometa**: skrajna elipsa. Gdzie jest najszybsza? Porównaj $r_{min}$
+   i $r_{max}$.
+4. **Ucieczka**: odczyt *Energia* jest dodatni, a status mówi
+   *niezwiązana*. Zmniejsz $v_t$ odrobinę poniżej $v_{esc}$ — co się
+   zmienia?
+5. Pilnuj wykresu *Dryf wielkości zachowanych*: dryf energii pozostaje
+   minimalny, a dryf momentu pędu jest praktycznie zerowy. To nie
+   przypadek — symulacja używa **całkatora symplektycznego** (velocity
+   Verlet), zaprojektowanego, by szanować zasady zachowania przez
+   miliony kroków.
+6. **Upadek**: za mała prędkość styczna i grawitacja wygrywa. Prawdziwe
+   satelity deorbitują tak samo — zwalniając, a nie celując w dół.
+
+> Wszystko to się skaluje: podstaw $\mu = GM_{Ziemi}$, a metry zamień
+> na kilometry — i liczysz prawdziwe orbity satelitów.

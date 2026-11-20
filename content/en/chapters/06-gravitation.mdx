@@ -1,0 +1,77 @@
+---
+slug: gravitation
+order: 6
+title: Gravitation & Orbits
+description: Newton's universal law and the shapes of orbits.
+sections:
+  - id: the-inverse-square-law
+    title: The inverse-square law
+  - id: the-shapes-of-orbits
+    title: The shapes of orbits
+---
+
+# Gravitation & Orbits
+
+Newton's great unification: the force that drops an apple is the force
+that holds the Moon.
+
+## The inverse-square law
+
+Every pair of masses attracts along the line joining them:
+
+$$
+F = G\frac{Mm}{r^2}
+$$
+
+For a small body orbiting a much heavier one, only the combination
+<M v="mu">\mu = GM</M> matters. The specific energy (per unit mass) and
+specific angular momentum are both conserved:
+
+$$
+\varepsilon = \frac{v^2}{2} - \frac{\mu}{r}, \qquad
+h = r\,v_\perp
+$$
+
+The sign of $\varepsilon$ classifies the trajectory once and for all:
+$\varepsilon < 0$ — bound ellipse; $\varepsilon = 0$ — parabolic escape;
+$\varepsilon > 0$ — hyperbolic flyby.
+
+## The shapes of orbits
+
+Start at distance <M v="r0">r_0</M> with purely tangential speed
+<M v="vt">v_t</M>. Two special speeds organize everything:
+
+$$
+v_{circ} = \sqrt{\frac{\mu}{r_0}}, \qquad
+v_{esc} = \sqrt{\frac{2\mu}{r_0}} = \sqrt{2}\;v_{circ}
+$$
+
+- $v_t = v_{circ}$: circle.
+- $v_{circ} < v_t < v_{esc}$: ellipse, starting at **periapsis**.
+- $v_t < v_{circ}$: ellipse, starting at **apoapsis** (you fall inward first).
+- $v_t \geq v_{esc}$: escape — never returns.
+
+And Kepler's third law falls out of the same equations:
+$T^2 \propto a^3$, where $a = -\mu/2\varepsilon$ is the semi-major axis.
+
+<Sim id="orbit" />
+
+**Experiments to try**
+
+1. **Circular** preset: distance graph is flat. Compare the *v for
+   circle* readout with the actual speed.
+2. **Elliptical**: watch the body speed up near the star and slow down
+   far away — that is Kepler's second law (constant $h$) in action.
+3. **Comet-like**: extreme ellipse. Where is it fastest? Compare $r_{min}$
+   and $r_{max}$.
+4. **Escape**: the *Energy* readout is positive and the status says
+   *unbound*. Nudge $v_t$ just below $v_{esc}$ — what changes?
+5. Keep an eye on the *Conservation-law drift* graph: energy drift stays
+   tiny and angular momentum drift is essentially zero. That is not
+   luck — the simulation uses a **symplectic integrator** (velocity
+   Verlet), designed to respect conservation laws over millions of steps.
+6. **Plunge**: too little tangential speed and gravity wins. Real
+   satellites deorbit the same way — by slowing down, not by aiming down.
+
+> Everything here scales: replace $\mu$ with $GM_{Earth}$ and distances
+> in metres with kilometres, and you are computing real satellite orbits.

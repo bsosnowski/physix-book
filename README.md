@@ -4,8 +4,10 @@ An interactive, multilingual physics textbook: chapters with prose and
 equations on the page, live animated simulations with parameter controls
 embedded in the narrative. See [PLAN.md](./PLAN.md) for the full roadmap.
 
-**Status: M0 (skeleton)** — app shell, MDX + KaTeX pipeline, EN/PL i18n with
-fallback, chapter navigation. Simulation framework arrives in M1.
+**Status: M3 complete** — 6 chapters (EN + PL), 8 interactive simulations
+(projectile, incline, collisions, pendulum, spring, standing waves,
+interference, orbits) with live graphs, presets, EN/PL labels, and
+param↔equation highlighting. 63 unit tests + 27 Playwright E2E tests.
 
 ## Quick start
 
@@ -13,7 +15,8 @@ fallback, chapter navigation. Simulation framework arrives in M1.
 npm install
 npm run dev        # http://localhost:5173
 npm run build      # type-check + static build to dist/
-npm test           # vitest
+npm test           # vitest (physics models + manifest)
+npm run test:e2e   # Playwright against the production build
 npm run i18n:status          # translation report
 npm run i18n:status -- --check   # CI mode (fails on missing keys)
 ```

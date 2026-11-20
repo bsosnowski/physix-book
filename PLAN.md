@@ -301,13 +301,27 @@ suggested experiments ("Set θ=45°, verify range is maximal") → exercises.
 - [x] 43 model tests total (analytic solutions, conservation laws,
       friction thresholds, restitution definition, damping regimes).
 
-### M3 — Waves & gravitation (week 3)
-- [ ] Wave superposition + interference sims (field rendering on canvas).
-- [ ] Orbit sim with adaptive timestep / velocity Verlet + energy readout.
-- [ ] Chapters 5–6; exercises with show/hide solutions.
+### M3 — Waves & gravitation (week 3) ✅ DONE
+- [x] Standing wave sim: analytic solution (zero integration error),
+      traveling components + envelope ghosts, node markers, λ/f readouts,
+      antinode time plot.
+- [x] Two-source interference: analytic cos²(πΔr/λ) intensity field
+      (cached bitmap, recomputed only on param/theme change), expanding
+      wavefront rings, probe readout, max-order = ⌊d/λ⌋.
+- [x] Orbit sim: velocity Verlet ×8 substeps, energy + angular-momentum
+      drift readouts & plot, crash/escape detection, auto-zoom, presets
+      (circular/elliptical/comet/escape/plunge), v_circ & v_esc readouts.
+- [x] Chapters 5–6 EN + PL with derivations + guided experiments,
+      sourceHash-stamped, i18n fully green (164 sim keys).
+- [x] 63 unit tests (superposition identity, nodes, Kepler III T²∝a³,
+      vis-viva periapsis, <0.01% energy drift, h drift ~0, interference
+      symmetry & constructive/destructive conditions).
+- [x] 27 Playwright E2E tests, all green against production build.
+- [ ] Deferred to M4: show/hide exercise solutions component.
 
 ### M4 — Polish & ship (week 4)
-- [ ] Presets per sim ("Moon gravity", "Perfectly inelastic", …).
+- [x] Presets per sim (done alongside each sim: 33 presets total).
+- [ ] Exercise component with show/hide solutions.
 - [ ] Shareable sim state via URL query params (teacher links to a setup).
 - [ ] Search (client-side index **per locale**), keyboard nav, a11y pass
       (incl. `lang` attribute + correct screen-reader pronunciation).
