@@ -1,0 +1,114 @@
+---
+sourceHash: 704e136f165a
+slug: refraction-lenses
+order: 16
+title: Załamanie światła i soczewki
+description: Prawo Snella, całkowite wewnętrzne odbicie i powstawanie obrazów.
+sections:
+  - id: prawo-snella
+    title: Prawo Snella
+  - id: calkowite-wewnetrzne-odbicie
+    title: Całkowite wewnętrzne odbicie
+  - id: soczewki-cienkie
+    title: Soczewki cienkie
+---
+
+# Załamanie światła i soczewki
+
+Światło zwalnia w materii — i ten jeden fakt zakrzywia rzeki fotonów
+w oczy, aparaty i światłowody.
+
+## Prawo Snella
+
+Współczynnik załamania to $n = c/v$ — ile razy światło wolniej biegnie
+w ośrodku. Na granicy czoła fali obracają się tak, że
+
+$$
+n_1 \sin\theta_1 = n_2 \sin\theta_2
+$$
+
+Wejście do gęstszego ośrodka ($n_2 > n_1$) odchyla promień **ku**
+normalnej; wyjście — od niej. Przeciągnij promień padający poniżej albo
+użyj suwaka <M v="theta">\theta_1</M>:
+
+<Sim id="refraction" />
+
+Zauważ słaby promień odbity — część światła zawsze się odbija (około 4%
+na granicy powietrze–szkło, według odczytu *Odbite*). Im jaśniejsze
+odbicie, tym ciemniejsze załamanie: energia jest zachowana.
+
+## Całkowite wewnętrzne odbicie
+
+Z gęstszego do rzadszego ($n_1 > n_2$) promień załamany odchyla się od
+normalnej — aż muska powierzchnię przy **kącie granicznym**:
+
+$$
+\sin\theta_c = \frac{n_2}{n_1}
+$$
+
+Powyżej $\theta_c$ nie ma promienia załamanego wcale: **100% się odbija**.
+Kąt graniczny wody to ≈ 48,8°, diamentu zaledwie ≈ 24,4° — światło
+w szlifowanym diamencie odbija się wewnątrz, zanim ucieknie, i to jest
+ten blask. Światłowody to ta sama sztuczka rozciągnięta na kilometry.
+
+**Eksperymenty do wypróbowania**
+
+1. Ustawienie **Woda → powietrze**: zwiększaj kąt powoli i patrz, jak
+   promień załamany się wypłaszcza, a potem znika dokładnie przy
+   odczycie *Kąt graniczny*.
+2. **Diament**: nawet 20° niemal więzi światło. Porównaj ze szkłem.
+3. Ustaw $n_1 = n_2$: żadnego załamania — granica znaczy coś tylko
+   wtedy, gdy zmienia się prędkość.
+4. Obserwuj, jak procent *Odbite* rośnie do 100% przy zbliżaniu się do
+   kąta granicznego od dołu.
+
+## Soczewki cienkie
+
+Soczewka to załamanie zaprojektowane dwa razy. Dla soczewki cienkiej
+o ogniskowej <M v="f">f</M> odległości przedmiotu i obrazu spełniają
+
+$$
+\frac{1}{f} = \frac{1}{u} + \frac{1}{v}, \qquad m = -\frac{v}{u}
+$$
+
+Dodatnie $f$ — skupiająca; ujemne — rozpraszająca. Optycy wolą **moc**
+w dioptriach: $P = 1/f$ (przy $f$ w metrach). Trzy promienie główne
+poniżej zawsze wyznaczają obraz: równoległy→ognisko, przez środek→prosto,
+przez ognisko→równoległy.
+
+<Sim id="lens" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Aparat**: daleki przedmiot → obraz rzeczywisty, odwrócony,
+   pomniejszony tuż za F. Dokładnie to dzieje się na matrycy telefonu.
+2. Przeciągaj przedmiot ku F: obraz ucieka i rośnie (terytorium
+   **Projektora**). Dokładnie w F ucieka do nieskończoności.
+3. Wejdź do wnętrza F: obraz staje się **pozorny, prosty, powiększony** —
+   trzymasz lupę.
+4. **Soczewka rozpraszająca**: cokolwiek zrobisz, obraz zostaje pozorny,
+   prosty i mały. Dlaczego nigdy nie złapie go ekran?
+
+<Exercise title="Znikający obraz">
+Świeca stoi 15 cm od soczewki o f = 15 cm. Gdzie jest obraz? Wyjaśnij,
+co pokaże ekran ustawiony gdziekolwiek za soczewką.
+
+<Solution>
+$1/v = 1/f - 1/u = 0$ → $v = \infty$: promienie wychodzą równolegle
+i nigdy się nie spotykają. Żadne położenie ekranu nie da ostrego obrazu —
+tylko plamę o stałym rozmiarze. Tak działa kolimator (reflektor): żarówka
+w F daje równoległą wiązkę.
+</Solution>
+</Exercise>
+
+<Exercise title="Budżet światłowodu">
+Rdzeń światłowodu ma n = 1,50, płaszcz n = 1,40. Znajdź kąt graniczny na
+granicy rdzeń–płaszcz. Po co w ogóle płaszcz?
+
+<Solution>
+$\theta_c = \arcsin(1{,}40/1{,}50) \approx 69{,}0°$ — promienie padające
+na ściankę bardziej muskająco zostają uwięzione. Bez płaszcza zadrapania,
+odciski palców czy woda na gołym rdzeniu zmieniałyby lokalnie $n_2$
+i wypuszczały światło; płaszcz utrzymuje granicę czystą i kontrolowaną.
+</Solution>
+</Exercise>

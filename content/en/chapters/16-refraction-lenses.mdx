@@ -1,0 +1,113 @@
+---
+slug: refraction-lenses
+order: 16
+title: Refraction & Lenses
+description: Snell's law, total internal reflection, and image formation.
+sections:
+  - id: snells-law
+    title: Snell's law
+  - id: total-internal-reflection
+    title: Total internal reflection
+  - id: thin-lenses
+    title: Thin lenses
+---
+
+# Refraction & Lenses
+
+Light slows down in matter, and that single fact bends rivers of photons
+into eyes, cameras and optical fibres.
+
+## Snell's law
+
+The index of refraction is $n = c/v$ — how much slower light travels in
+the medium. Crossing a boundary, the wavefronts pivot so that
+
+$$
+n_1 \sin\theta_1 = n_2 \sin\theta_2
+$$
+
+Entering a denser medium ($n_2 > n_1$) bends the ray **toward** the
+normal; leaving it bends away. Drag the incident ray below, or use the
+<M v="theta">\theta_1</M> slider:
+
+<Sim id="refraction" />
+
+Notice the faint reflected ray — some light always bounces (about 4% at
+an air–glass surface, per the *Reflected* readout). The brighter the
+reflection, the dimmer the refraction: energy is conserved.
+
+## Total internal reflection
+
+Going from dense to rare ($n_1 > n_2$), the refracted ray bends away from
+the normal — until it grazes the surface at the **critical angle**:
+
+$$
+\sin\theta_c = \frac{n_2}{n_1}
+$$
+
+Beyond $\theta_c$ there is no refracted ray at all: **100% reflects**.
+Water's critical angle is ≈ 48.8°, diamond's only ≈ 24.4° — light entering
+a cut diamond bounces around inside before escaping, which is the
+sparkle. Optical fibres are the same trick stretched into a kilometre.
+
+**Experiments to try**
+
+1. **Water → air** preset: raise the angle slowly and watch the
+   refracted ray flatten, then vanish exactly at the *Critical angle*
+   readout.
+2. **Diamond**: even 20° is close to trapping light. Compare with glass.
+3. Set $n_1 = n_2$: no bending at all — boundaries only matter when the
+   speed changes.
+4. Watch the *Reflected* percentage grow toward 100% as you approach
+   the critical angle from below.
+
+## Thin lenses
+
+A lens is refraction engineered twice. For a thin lens of focal length
+<M v="f">f</M>, object and image distances obey
+
+$$
+\frac{1}{f} = \frac{1}{u} + \frac{1}{v}, \qquad m = -\frac{v}{u}
+$$
+
+Positive $f$ — converging; negative — diverging. Opticians prefer
+**power** in diopters: $P = 1/f$ (with $f$ in metres). The three
+principal rays below always locate the image: parallel→focus,
+through-center→straight, through-focus→parallel.
+
+<Sim id="lens" />
+
+**Experiments to try**
+
+1. **Camera**: far object → real, inverted, diminished image just beyond
+   F. That is literally what happens on your phone's sensor.
+2. Drag the object toward F: the image races away and grows
+   (**Projector** territory). At exactly F it escapes to infinity.
+3. Cross inside F: the image flips to **virtual, upright, magnified** —
+   you are holding a magnifying glass.
+4. **Diverging lens**: whatever you do, the image stays virtual, upright
+   and small. Why can't it ever catch an image on a screen?
+
+<Exercise title="The disappearing image">
+A candle sits 15 cm from a lens with f = 15 cm. Where is the image?
+Explain what a screen placed anywhere behind the lens would show.
+
+<Solution>
+$1/v = 1/f - 1/u = 0$ → $v = \infty$: the rays exit parallel and never
+meet. No screen position shows a focused image — only a blur of constant
+size. This is how a collimator (searchlight) works: put the bulb at F to
+get a parallel beam.
+</Solution>
+</Exercise>
+
+<Exercise title="Fibre optics budget">
+A glass fibre core has n = 1.50, cladding n = 1.40. Find the critical
+angle at the core–cladding boundary. Why must the cladding exist at all?
+
+<Solution>
+$\theta_c = \arcsin(1.40/1.50) \approx 69.0°$ — rays hitting the wall
+more grazing than that stay trapped. Without cladding, scratches,
+fingerprints or water on the bare core would change $n_2$ locally and
+leak light; the cladding keeps the boundary pristine and controlled.
+</Solution>
+</Exercise>

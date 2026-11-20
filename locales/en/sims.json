@@ -322,5 +322,58 @@
       "timeScale": "Time-lapse: 1 s of animation = 1 min of heating",
       "boiling": "Boiling! Temperature stays at 100 °C"
     }
+  },
+  "refraction": {
+    "title": "Refraction & total internal reflection",
+    "param": {
+      "n1": "Index n₁ (top)",
+      "n2": "Index n₂ (bottom)",
+      "theta": "Incidence angle"
+    },
+    "readout": {
+      "theta2": "Refraction angle",
+      "critical": "Critical angle",
+      "reflect": "Reflected",
+      "tir": "TIR (1=yes)"
+    },
+    "preset": {
+      "airWater": "Air → water",
+      "waterAir": "Water → air",
+      "tir": "Total internal reflection",
+      "diamond": "Diamond → air",
+      "glass": "Air → glass"
+    },
+    "view": {
+      "tir": "Total internal reflection!",
+      "dragHint": "drag in the top medium to aim the ray"
+    }
+  },
+  "lens": {
+    "title": "Thin lens — image formation",
+    "param": {
+      "f": "Focal length",
+      "u": "Object distance",
+      "h": "Object height"
+    },
+    "readout": {
+      "v": "Image distance",
+      "m": "Magnification",
+      "power": "Lens power",
+      "kind": "Image (0=virtual 1=real 2=∞)"
+    },
+    "preset": {
+      "camera": "Camera (far object)",
+      "projector": "Projector (near f)",
+      "magnifier": "Magnifying glass",
+      "diverging": "Diverging lens"
+    },
+    "view": {
+      "real": "real image",
+      "virtual": "virtual image",
+      "atInfinity": "Object at F — image at infinity (rays parallel)",
+      "converging": "converging",
+      "diverging": "diverging",
+      "dragHint": "drag the object arrow along the bench"
+    }
   }
 }

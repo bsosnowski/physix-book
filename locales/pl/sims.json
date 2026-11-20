@@ -322,5 +322,58 @@
       "timeScale": "Przyspieszenie: 1 s animacji = 1 min grzania",
       "boiling": "Wrzenie! Temperatura zostaje na 100 °C"
     }
+  },
+  "refraction": {
+    "title": "Załamanie i całkowite wewnętrzne odbicie",
+    "param": {
+      "n1": "Współczynnik n₁ (góra)",
+      "n2": "Współczynnik n₂ (dół)",
+      "theta": "Kąt padania"
+    },
+    "readout": {
+      "theta2": "Kąt załamania",
+      "critical": "Kąt graniczny",
+      "reflect": "Odbite",
+      "tir": "CWO (1=tak)"
+    },
+    "preset": {
+      "airWater": "Powietrze → woda",
+      "waterAir": "Woda → powietrze",
+      "tir": "Całkowite wewnętrzne odbicie",
+      "diamond": "Diament → powietrze",
+      "glass": "Powietrze → szkło"
+    },
+    "view": {
+      "tir": "Całkowite wewnętrzne odbicie!",
+      "dragHint": "przeciągnij w górnym ośrodku, aby wycelować promień"
+    }
+  },
+  "lens": {
+    "title": "Soczewka cienka — powstawanie obrazu",
+    "param": {
+      "f": "Ogniskowa",
+      "u": "Odległość przedmiotu",
+      "h": "Wysokość przedmiotu"
+    },
+    "readout": {
+      "v": "Odległość obrazu",
+      "m": "Powiększenie",
+      "power": "Moc soczewki",
+      "kind": "Obraz (0=pozorny 1=rzeczywisty 2=∞)"
+    },
+    "preset": {
+      "camera": "Aparat (daleki przedmiot)",
+      "projector": "Projektor (blisko f)",
+      "magnifier": "Lupa",
+      "diverging": "Soczewka rozpraszająca"
+    },
+    "view": {
+      "real": "obraz rzeczywisty",
+      "virtual": "obraz pozorny",
+      "atInfinity": "Przedmiot w F — obraz w nieskończoności (promienie równoległe)",
+      "converging": "skupiająca",
+      "diverging": "rozpraszająca",
+      "dragHint": "przeciągnij strzałkę przedmiotu wzdłuż ławy"
+    }
   }
 }
