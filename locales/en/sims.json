@@ -427,5 +427,74 @@
       "legend": "particles oscillate along the wave — compressions & rarefactions",
       "doppler": "wavefronts bunch ahead, stretch behind"
     }
+  },
+  "mirror": {
+    "title": "Mirrors — plane & spherical",
+    "param": {
+      "type": "Type (0 plane, 1 concave, 2 convex)",
+      "f": "Focal length |f|",
+      "u": "Object distance",
+      "h": "Object height"
+    },
+    "readout": {
+      "v": "Image distance",
+      "m": "Magnification",
+      "R": "Radius R = 2f",
+      "kind": "Image (0=virtual 1=real)"
+    },
+    "preset": {
+      "plane": "Plane mirror",
+      "shaving": "Shaving mirror (inside f)",
+      "concaveFar": "Concave, far object",
+      "car": "Car side mirror (convex)"
+    },
+    "view": {
+      "plane": "plane",
+      "concave": "concave",
+      "convex": "convex",
+      "real": "real image",
+      "virtual": "virtual image",
+      "dragHint": "drag the object arrow"
+    }
+  },
+  "spectrum": {
+    "title": "The electromagnetic spectrum",
+    "param": {
+      "logf": "Frequency (log₁₀ Hz)"
+    },
+    "readout": {
+      "freq": "Frequency",
+      "lambda": "Wavelength",
+      "energy": "Photon energy",
+      "ionizing": "Ionizing (1=yes)"
+    },
+    "preset": {
+      "fm": "FM radio (100 MHz)",
+      "wifi": "Wi-Fi (2.4 GHz)",
+      "green": "Green light",
+      "uvb": "UV-B (sunburn)",
+      "xray": "X-ray"
+    },
+    "band": {
+      "radio": "Radio",
+      "micro": "Microwaves",
+      "ir": "Infrared",
+      "visible": "Visible light",
+      "uv": "Ultraviolet",
+      "xray": "X-rays",
+      "gamma": "Gamma rays"
+    },
+    "use": {
+      "radio": "Broadcasting, Wi-Fi, mobile — antennas sized to λ",
+      "micro": "Radar, satellite links, microwave ovens (water resonance)",
+      "ir": "Thermal cameras, remotes, heat you feel from a fire",
+      "visible": "The only band our eyes evolved to see — 400–790 THz",
+      "uv": "Sterilization, vitamin D — and sunburn (DNA damage)",
+      "xray": "Medical imaging: penetrates tissue, stopped by bone",
+      "gamma": "Nuclear processes, cancer radiotherapy, sterilizing tools"
+    },
+    "view": {
+      "dragHint": "drag the marker along the spectrum — 19 decades of frequency"
+    }
   }
 }

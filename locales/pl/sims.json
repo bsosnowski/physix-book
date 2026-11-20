@@ -427,5 +427,74 @@
       "legend": "cząsteczki drgają wzdłuż fali — zagęszczenia i rozrzedzenia",
       "doppler": "czoła fali ściskają się z przodu, rozciągają z tyłu"
     }
+  },
+  "mirror": {
+    "title": "Zwierciadła — płaskie i kuliste",
+    "param": {
+      "type": "Typ (0 płaskie, 1 wklęsłe, 2 wypukłe)",
+      "f": "Ogniskowa |f|",
+      "u": "Odległość przedmiotu",
+      "h": "Wysokość przedmiotu"
+    },
+    "readout": {
+      "v": "Odległość obrazu",
+      "m": "Powiększenie",
+      "R": "Promień R = 2f",
+      "kind": "Obraz (0=pozorny 1=rzeczywisty)"
+    },
+    "preset": {
+      "plane": "Zwierciadło płaskie",
+      "shaving": "Lusterko do golenia (wewnątrz f)",
+      "concaveFar": "Wklęsłe, daleki przedmiot",
+      "car": "Lusterko samochodowe (wypukłe)"
+    },
+    "view": {
+      "plane": "płaskie",
+      "concave": "wklęsłe",
+      "convex": "wypukłe",
+      "real": "obraz rzeczywisty",
+      "virtual": "obraz pozorny",
+      "dragHint": "przeciągnij strzałkę przedmiotu"
+    }
+  },
+  "spectrum": {
+    "title": "Widmo elektromagnetyczne",
+    "param": {
+      "logf": "Częstotliwość (log₁₀ Hz)"
+    },
+    "readout": {
+      "freq": "Częstotliwość",
+      "lambda": "Długość fali",
+      "energy": "Energia fotonu",
+      "ionizing": "Jonizujące (1=tak)"
+    },
+    "preset": {
+      "fm": "Radio FM (100 MHz)",
+      "wifi": "Wi-Fi (2,4 GHz)",
+      "green": "Zielone światło",
+      "uvb": "UV-B (oparzenia)",
+      "xray": "Rentgen"
+    },
+    "band": {
+      "radio": "Fale radiowe",
+      "micro": "Mikrofale",
+      "ir": "Podczerwień",
+      "visible": "Światło widzialne",
+      "uv": "Ultrafiolet",
+      "xray": "Promieniowanie X",
+      "gamma": "Promieniowanie gamma"
+    },
+    "use": {
+      "radio": "Radio, Wi-Fi, telefony — anteny dopasowane do λ",
+      "micro": "Radar, łącza satelitarne, kuchenki (rezonans wody)",
+      "ir": "Kamery termowizyjne, piloty, ciepło od ognia",
+      "visible": "Jedyne pasmo, które widzą nasze oczy — 400–790 THz",
+      "uv": "Sterylizacja, witamina D — i oparzenia (uszkodzenia DNA)",
+      "xray": "Obrazowanie medyczne: przenika tkanki, zatrzymuje się na kościach",
+      "gamma": "Procesy jądrowe, radioterapia, sterylizacja narzędzi"
+    },
+    "view": {
+      "dragHint": "przeciągnij znacznik po widmie — 19 dekad częstotliwości"
+    }
   }
 }

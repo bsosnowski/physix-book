@@ -1,0 +1,88 @@
+---
+slug: em-spectrum
+order: 14
+title: The Electromagnetic Spectrum
+description: One wave family from radio to gamma — c = λf and E = hf.
+sections:
+  - id: one-family
+    title: One family
+  - id: photons-and-danger
+    title: Photons and danger
+---
+
+# The Electromagnetic Spectrum
+
+Light is an electromagnetic wave — oscillating electric and magnetic
+fields carrying themselves through empty space at
+
+$$
+c = 3\times10^8\ \text{m/s}, \qquad c = \lambda f
+$$
+
+Radio, microwaves, infrared, the colours you see, ultraviolet, X-rays
+and gamma rays are **the same phenomenon** — differing only in
+frequency. Nineteen orders of magnitude of one wave.
+
+## One family
+
+Drag the marker across the whole spectrum:
+
+<Sim id="spectrum" />
+
+The animated wave above compresses as frequency climbs — a visual
+metaphor for shrinking wavelength. The readouts do the honest math:
+$c = \lambda f$ at every point.
+
+**Experiments to try**
+
+1. **FM radio**: λ ≈ 3 m — that is why rooftop antennas are metres
+   long. An efficient antenna is a sizeable fraction of λ.
+2. **Wi-Fi**: λ ≈ 12.5 cm — the antenna hides inside your laptop lid.
+   Why does 5 GHz Wi-Fi struggle through walls more than 2.4 GHz?
+3. **Green light**: λ ≈ 550 nm — a thousand times smaller than a
+   bacterium. No antenna; atoms and molecules do the emitting.
+4. Sweep slowly through the **visible** sliver: the wave changes colour
+   exactly across 400–790 THz. Our entire visual world is one octave of
+   a 19-decade piano.
+
+## Photons and danger
+
+Energy arrives in packets — photons — of size
+
+$$
+E = h f
+$$
+
+This single equation explains the safety labels. A radio photon carries
+~10⁻⁶ eV: a trillion of them cannot break a chemical bond. A UV photon
+carries several eV — enough to damage DNA (sunburn). X-ray and gamma
+photons carry keV–MeV: they ionize atoms outright.
+
+**Intensity is not the issue — frequency is.** A blazing red lamp will
+never give you sunburn; faint UV will. That is the quantum lesson
+hiding inside a classical spectrum.
+
+<Exercise title="Your microwave's wavelength">
+A microwave oven runs at 2.45 GHz. Compute λ. The rotating plate and
+the metal mesh in the door both relate to this number — how?
+
+<Solution>
+$\lambda = c/f = 3\times10^8 / 2.45\times10^9 \approx 12.2$ cm. Standing
+waves in the cavity create hot/cold spots ~6 cm apart — the turntable
+moves food through them. The door mesh holes (~2 mm) are far smaller
+than λ, so microwaves cannot pass, while visible light (λ ~ 0.0005 mm)
+streams through: you can watch, but not cook your face.
+</Solution>
+</Exercise>
+
+<Exercise title="Photon budget">
+A 1 W green laser (λ = 550 nm) emits how many photons per second?
+Compare with a 1 W FM transmitter at 100 MHz.
+
+<Solution>
+$E_{photon} = hc/\lambda \approx 3.6\times10^{-19}$ J → about
+$2.8\times10^{18}$ photons/s. The FM photon is ~$6.6\times10^{-26}$ J →
+$1.5\times10^{25}$ photons/s — ten million times more, each ten million
+times weaker. Same power, radically different granularity.
+</Solution>
+</Exercise>

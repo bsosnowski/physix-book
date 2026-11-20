@@ -16,6 +16,8 @@ const loaders: Record<string, () => Promise<{ default: AnySimModule }>> = {
   circuit: () => import("./sims/circuit"),
   "joule-heating": () => import("./sims/joule-heating"),
   sound: () => import("./sims/sound"),
+  mirror: () => import("./sims/mirror"),
+  spectrum: () => import("./sims/spectrum"),
   refraction: () => import("./sims/refraction"),
   lens: () => import("./sims/lens"),
   charges: () => import("./sims/charges"),

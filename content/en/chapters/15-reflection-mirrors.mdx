@@ -1,0 +1,90 @@
+---
+slug: reflection-mirrors
+order: 15
+title: Reflection & Mirrors
+description: The law of reflection, plane images, concave and convex mirrors.
+sections:
+  - id: the-law-of-reflection
+    title: The law of reflection
+  - id: plane-mirrors
+    title: Plane mirrors
+  - id: spherical-mirrors
+    title: Spherical mirrors
+---
+
+# Reflection & Mirrors
+
+Every surface you see, you see by reflected light. The rule is almost
+insultingly simple — and it builds telescopes.
+
+## The law of reflection
+
+$$
+\theta_{incident} = \theta_{reflected}
+$$
+
+Both measured from the **normal** (perpendicular to the surface). On a
+smooth surface, parallel rays stay parallel — *specular* reflection, a
+mirror. On a rough one they scatter — *diffuse* reflection, which is why
+you can read this page from any angle but see your face only in glass.
+
+## Plane mirrors
+
+A flat mirror forms a **virtual** image: same size, upright, as far
+behind the mirror as you are in front ($v = -u$). No light actually goes
+behind the mirror — your brain extends the diverging rays backwards.
+The image is also *front–back* reversed, which we mislabel "left–right".
+
+## Spherical mirrors
+
+Curve the mirror and rays gain a meeting point. For a spherical mirror
+of radius $R$, paraxial rays focus at
+
+$$
+f = \frac{R}{2}, \qquad \frac{1}{f} = \frac{1}{u} + \frac{1}{v}
+$$
+
+- **Concave** (caved-in, $f>0$): can form **real** images — light truly
+  converges and can be caught on a screen. Object inside $f$ → virtual,
+  magnified (shaving/makeup mirrors).
+- **Convex** (bulging, $f<0$): always virtual, upright, diminished —
+  a wide-angle view. Hence car side mirrors and shop security mirrors.
+
+<Sim id="mirror" />
+
+**Experiments to try**
+
+1. **Plane mirror**: drag the object — the image mirrors it perfectly,
+   always the same size. Check $m = 1$ in the readout.
+2. **Concave, far object**: real, inverted, small image near F. Slide
+   the object toward F and watch the image race away and grow.
+3. **Shaving mirror**: object inside f — upright and magnified. Move
+   your face (the object) slowly outward past F: the image flips!
+4. **Car side mirror**: whatever you do, the image stays small and
+   upright. Why does that make objects "farther than they appear"?
+
+<Exercise title="The full-length mirror">
+How tall must a plane mirror be for you to see your whole body — and
+does walking backwards help?
+
+<Solution>
+Half your height, mounted with its top midway between your eyes and the
+top of your head. Ray geometry: each ray reflects at the midpoint
+between eye and body-point, so the needed mirror spans exactly half
+your height — *independent of distance*. Walking backwards changes
+nothing. (Try it with the object arrow: the rays always hit the mirror
+at half-heights.)
+</Solution>
+</Exercise>
+
+<Exercise title="Solar cooker">
+A concave mirror of radius 80 cm aims at the Sun. Where should the pot
+go, and why does the image of the Sun form there?
+
+<Solution>
+$f = R/2 = 40$ cm from the mirror. The Sun is effectively at infinity
+($u \to \infty$), so $1/v = 1/f$: its image — a tiny, intensely bright
+disk — forms at the focal point. Put the pot there. Same principle as
+a reflecting telescope, run in reverse.
+</Solution>
+</Exercise>

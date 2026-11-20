@@ -1,0 +1,93 @@
+---
+sourceHash: f7f09860676b
+slug: reflection-mirrors
+order: 15
+title: Odbicie światła i zwierciadła
+description: Prawo odbicia, obrazy w zwierciadle płaskim, wklęsłym i wypukłym.
+sections:
+  - id: prawo-odbicia
+    title: Prawo odbicia
+  - id: zwierciadla-plaskie
+    title: Zwierciadła płaskie
+  - id: zwierciadla-kuliste
+    title: Zwierciadła kuliste
+---
+
+# Odbicie światła i zwierciadła
+
+Wszystko, co widzisz, widzisz dzięki odbitemu świetłu. Reguła jest
+obraźliwie prosta — i buduje teleskopy.
+
+## Prawo odbicia
+
+$$
+\theta_{padania} = \theta_{odbicia}
+$$
+
+Oba mierzone od **normalnej** (prostopadłej do powierzchni). Na gładkiej
+powierzchni równoległe promienie zostają równoległe — odbicie
+*kierunkowe*, zwierciadło. Na chropowatej rozbiegają się — odbicie
+*rozproszone*, dzięki któremu czytasz tę stronę pod dowolnym kątem,
+a swoją twarz widzisz tylko w szkle.
+
+## Zwierciadła płaskie
+
+Płaskie zwierciadło tworzy obraz **pozorny**: tej samej wielkości,
+prosty, tak samo daleko za lustrem, jak ty przed nim ($v = -u$). Za
+lustro nie dociera żadne światło — mózg przedłuża rozbieżne promienie
+wstecz. Obraz jest odwrócony *przód–tył*, co mylnie nazywamy
+„lewo–prawo”.
+
+## Zwierciadła kuliste
+
+Zakrzyw zwierciadło, a promienie zyskają punkt spotkania. Dla zwierciadła
+kulistego o promieniu $R$ promienie przyosiowe skupiają się w
+
+$$
+f = \frac{R}{2}, \qquad \frac{1}{f} = \frac{1}{u} + \frac{1}{v}
+$$
+
+- **Wklęsłe** (wgłębione, $f>0$): potrafi tworzyć obrazy **rzeczywiste** —
+  światło naprawdę się zbiega i można je złapać na ekranie. Przedmiot
+  wewnątrz $f$ → pozorny, powiększony (lusterka do golenia/makijażu).
+- **Wypukłe** (wybrzuszone, $f<0$): zawsze pozorny, prosty, pomniejszony —
+  szeroki kąt widzenia. Stąd lusterka samochodowe i sklepowe.
+
+<Sim id="mirror" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Zwierciadło płaskie**: przeciągaj przedmiot — obraz odwzorowuje go
+   idealnie, zawsze tej samej wielkości. Sprawdź $m = 1$ w odczycie.
+2. **Wklęsłe, daleki przedmiot**: rzeczywisty, odwrócony, mały obraz
+   blisko F. Przesuwaj przedmiot ku F i patrz, jak obraz ucieka i rośnie.
+3. **Lusterko do golenia**: przedmiot wewnątrz f — prosty i powiększony.
+   Wysuwaj twarz (przedmiot) powoli za F: obraz się przewraca!
+4. **Lusterko samochodowe**: cokolwiek zrobisz, obraz zostaje mały
+   i prosty. Dlaczego przedmioty są „bliżej, niż się wydaje”?
+
+<Exercise title="Lustro na całą postać">
+Jak wysokie musi być płaskie lustro, żeby zobaczyć całą postać — i czy
+pomaga cofnięcie się?
+
+<Solution>
+Połowa wzrostu, zawieszona tak, by górna krawędź była w połowie między
+oczami a czubkiem głowy. Geometria promieni: każdy odbija się w połowie
+między okiem a punktem ciała, więc potrzebne lustro obejmuje dokładnie
+pół wzrostu — *niezależnie od odległości*. Cofanie nic nie zmienia.
+(Sprawdź strzałką przedmiotu: promienie zawsze trafiają w połowy
+wysokości.)
+</Solution>
+</Exercise>
+
+<Exercise title="Kuchenka słoneczna">
+Wklęsłe zwierciadło o promieniu 80 cm celuje w Słońce. Gdzie postawić
+garnek i dlaczego właśnie tam powstaje obraz Słońca?
+
+<Solution>
+$f = R/2 = 40$ cm od zwierciadła. Słońce jest praktycznie
+w nieskończoności ($u \to \infty$), więc $1/v = 1/f$: jego obraz —
+maleńki, oślepiająco jasny dysk — powstaje w ognisku. Tam garnek. Ta
+sama zasada co teleskop zwierciadlany, tylko odwrotnie.
+</Solution>
+</Exercise>
