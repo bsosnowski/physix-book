@@ -267,17 +267,27 @@ suggested experiments ("Set θ=45°, verify range is maximal") → exercises.
 - [x] Bonus (pulled from M1): `i18n:status` script with sourceHash staleness
       tracking; Vitest set up with manifest tests.
 
-### M1 — Widget framework (days 2–4)
-- [ ] `core/`: vec2, fixed-timestep integrators (semi-implicit Euler, RK4).
-- [ ] `SimulationWidget` + registry + schema-driven ControlPanel + toolbar.
-- [ ] Off-screen pause, reduced-motion, HiDPI canvas, resize handling.
-- [ ] **First sim: projectile** — proves the whole pipeline end-to-end,
-      with all labels via i18n keys (`en` + `pl` catalogs) from the start.
-- [ ] Vitest tests for projectile model (analytic range, apex, energy).
-- [ ] `i18n:status` script (missing keys, missing/stale chapters).
+### M1 — Widget framework (days 2–4) ✅ DONE
+- [x] `core/`: vec2, fixed-timestep integrators (semi-implicit Euler, RK4),
+      locale-aware quantity formatting.
+- [x] `SimulationWidget` + lazy registry + schema-driven ControlPanel
+      (KaTeX slider symbols) + toolbar (play/pause/reset/speed 0.25–2×).
+- [x] Off-screen pause (IntersectionObserver), hidden-tab pause,
+      reduced-motion, HiDPI canvas, ResizeObserver, spiral-of-death guard.
+- [x] **First sim: projectile** — end-to-end, all labels via i18n keys
+      (EN + PL), presets (Earth/Moon/Mars/air drag), live g & drag vs
+      reset-on-change v₀/θ, ghost vacuum parabola, apex/range annotations,
+      velocity vector, 6 numeric readouts.
+- [x] Vitest: 11 projectile tests (analytic range/apex/flight time,
+      energy conservation to 1e-6, drag dissipation, 45° optimality).
+- [x] `i18n:status` script (done in M0).
+- [x] Guided experiments in EN + PL kinematics chapters.
+- [x] `HOW-TO-ADD-A-SIMULATION.md` authoring guide.
+- [x] Bundle hygiene: katex/vendor split; sim = own 5 kB lazy chunk.
 
 ### M2 — Mechanics chapters (week 2)
 - [ ] Live graph component (time-series + phase-space plots).
+- [ ] Step-once button + fullscreen mode in the widget toolbar.
 - [ ] Sims: inclined plane, collisions, pendulum, spring-mass.
 - [ ] Chapters 1–4 written with derivations + guided experiments (EN),
       Polish translations in parallel per chapter.

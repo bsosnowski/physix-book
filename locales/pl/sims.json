@@ -4,5 +4,39 @@
     "pause": "Pauza",
     "reset": "Resetuj",
     "speed": "Prędkość"
+  },
+  "widget": {
+    "presets": "Ustawienia",
+    "loadError": "Nie udało się wczytać symulacji „{{id}}”.",
+    "reducedMotion": "Wykryto preferencję ograniczenia ruchu — symulacje startują zatrzymane; naciśnij Odtwórz."
+  },
+  "projectile": {
+    "title": "Rzut ukośny",
+    "param": {
+      "v0": "Prędkość początkowa",
+      "angle": "Kąt wyrzutu",
+      "g": "Grawitacja",
+      "drag": "Opór powietrza"
+    },
+    "readout": {
+      "t": "Czas",
+      "x": "Odległość",
+      "y": "Wysokość",
+      "speed": "Prędkość",
+      "range": "Zasięg",
+      "maxY": "Maks. wysokość"
+    },
+    "preset": {
+      "earth": "Ziemia",
+      "moon": "Księżyc",
+      "mars": "Mars",
+      "air": "Z oporem powietrza"
+    },
+    "axis": {
+      "x": "x [m]",
+      "y": "y [m]"
+    },
+    "apex": "apogeum",
+    "rangeLabel": "zasięg"
   }
 }

@@ -4,5 +4,39 @@
     "pause": "Pause",
     "reset": "Reset",
     "speed": "Speed"
+  },
+  "widget": {
+    "presets": "Presets",
+    "loadError": "Could not load simulation \"{{id}}\".",
+    "reducedMotion": "Reduced motion is enabled — simulations start paused; press Play to run."
+  },
+  "projectile": {
+    "title": "Projectile motion",
+    "param": {
+      "v0": "Initial speed",
+      "angle": "Launch angle",
+      "g": "Gravity",
+      "drag": "Air drag"
+    },
+    "readout": {
+      "t": "Time",
+      "x": "Distance",
+      "y": "Height",
+      "speed": "Speed",
+      "range": "Range",
+      "maxY": "Apex"
+    },
+    "preset": {
+      "earth": "Earth",
+      "moon": "Moon",
+      "mars": "Mars",
+      "air": "With air drag"
+    },
+    "axis": {
+      "x": "x [m]",
+      "y": "y [m]"
+    },
+    "apex": "apex",
+    "rangeLabel": "range"
   }
 }

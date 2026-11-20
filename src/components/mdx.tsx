@@ -1,5 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 import type { MDXComponents } from "mdx/types";
+import { Sim } from "@/sim/framework/SimulationWidget";
 
 /** Auto-assign ids to h2/h3 so frontmatter `sections` can deep-link. */
 function heading(Tag: "h2" | "h3") {
@@ -19,11 +20,9 @@ function heading(Tag: "h2" | "h3") {
   };
 }
 
-/**
- * Component overrides available inside every MDX chapter.
- * `Sim` will be added in M1 (simulation widget framework).
- */
+/** Component overrides available inside every MDX chapter. */
 export const mdxComponents: MDXComponents = {
   h2: heading("h2"),
   h3: heading("h3"),
+  Sim,
 };
