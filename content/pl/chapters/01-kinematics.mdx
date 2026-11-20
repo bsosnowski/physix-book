@@ -1,0 +1,58 @@
+---
+sourceHash: 3352b2919a1a
+slug: kinematics
+order: 1
+title: Kinematyka — geometria ruchu
+description: Położenie, prędkość i przyspieszenie; rzut ukośny.
+sections:
+  - id: opisywanie-ruchu
+    title: Opisywanie ruchu
+  - id: rzut-ukosny
+    title: Rzut ukośny
+---
+
+# Kinematyka — geometria ruchu
+
+Zanim zapytamy, *dlaczego* ciała się poruszają, potrzebujemy precyzyjnego
+języka opisującego, *jak* się poruszają. Kinematyka jest właśnie tym
+językiem: położenie, prędkość i przyspieszenie — bez wspominania o siłach.
+
+## Opisywanie ruchu
+
+Położenie punktu na płaszczyźnie jest wektorem $\vec{r}(t) = (x(t),\, y(t))$.
+Prędkość jest szybkością jego zmiany, a przyspieszenie — szybkością zmiany
+prędkości:
+
+$$
+\vec{v} = \frac{d\vec{r}}{dt}, \qquad \vec{a} = \frac{d\vec{v}}{dt}
+$$
+
+Gdy przyspieszenie jest stałe, dwukrotne całkowanie daje znane równania
+ruchu:
+
+$$
+\vec{r}(t) = \vec{r}_0 + \vec{v}_0\, t + \tfrac{1}{2}\vec{a}\, t^2
+$$
+
+## Rzut ukośny
+
+Rzuć piłkę z prędkością $v_0$ pod kątem $\theta$ do poziomu. Pomijając opór
+powietrza, jedynym przyspieszeniem jest grawitacja, $a_y = -g$, więc ruch
+poziomy i pionowy są niezależne:
+
+$$
+x(t) = v_0 \cos\theta \cdot t, \qquad
+y(t) = v_0 \sin\theta \cdot t - \tfrac{1}{2} g t^2
+$$
+
+Tor ruchu jest parabolą. Zasięg na płaskim podłożu wynosi
+
+$$
+R = \frac{v_0^2 \sin 2\theta}{g}
+$$
+
+i jest największy dla $\theta = 45^\circ$ — co sprawdzisz za pomocą
+interaktywnej symulacji w kolejnym etapie prac.
+
+> **Wkrótce (M1):** interaktywny widget rzutu ukośnego z suwakami $v_0$,
+> $\theta$ i $g$, trajektoriami na żywo i wykresami czasu.

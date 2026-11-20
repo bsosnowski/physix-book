@@ -1,0 +1,29 @@
+{
+  "app": {
+    "title": "Physix Book",
+    "tagline": "Interaktywny podręcznik fizyki"
+  },
+  "nav": {
+    "chapters": "Rozdziały",
+    "prev": "Poprzedni",
+    "next": "Następny",
+    "home": "Strona główna",
+    "openMenu": "Otwórz menu",
+    "closeMenu": "Zamknij menu",
+    "language": "Język"
+  },
+  "reader": {
+    "untranslated": "Ten rozdział nie jest jeszcze dostępny w Twoim języku — wyświetlamy wersję angielską.",
+    "chapterNotFound": "Nie znaleziono rozdziału.",
+    "backHome": "Wróć do spisu treści"
+  },
+  "home": {
+    "welcome": "Witaj w Physix Book",
+    "intro": "Ucz się fizyki, eksperymentując. Każdy rozdział łączy przystępne wyjaśnienia i równania z animowanymi symulacjami, którymi możesz sterować.",
+    "startReading": "Zacznij czytać",
+    "chapterList": "Spis treści"
+  },
+  "theme": {
+    "toggle": "Przełącz tryb ciemny"
+  }
+}

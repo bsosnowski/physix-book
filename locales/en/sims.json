@@ -1,0 +1,8 @@
+{
+  "toolbar": {
+    "play": "Play",
+    "pause": "Pause",
+    "reset": "Reset",
+    "speed": "Speed"
+  }
+}

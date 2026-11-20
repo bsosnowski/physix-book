@@ -1,0 +1,6 @@
+/** Tiny classnames helper. */
+export default function clsx(
+  ...parts: (string | false | null | undefined)[]
+): string {
+  return parts.filter(Boolean).join(" ");
+}

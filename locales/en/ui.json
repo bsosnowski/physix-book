@@ -1,0 +1,29 @@
+{
+  "app": {
+    "title": "Physix Book",
+    "tagline": "An interactive physics textbook"
+  },
+  "nav": {
+    "chapters": "Chapters",
+    "prev": "Previous",
+    "next": "Next",
+    "home": "Home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "reader": {
+    "untranslated": "This chapter is not yet available in your language — showing the English version.",
+    "chapterNotFound": "Chapter not found.",
+    "backHome": "Back to the table of contents"
+  },
+  "home": {
+    "welcome": "Welcome to Physix Book",
+    "intro": "Learn physics by playing with it. Every chapter pairs clear explanations and equations with live, controllable simulations.",
+    "startReading": "Start reading",
+    "chapterList": "Table of contents"
+  },
+  "theme": {
+    "toggle": "Toggle dark mode"
+  }
+}
