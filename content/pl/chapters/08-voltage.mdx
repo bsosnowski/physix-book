@@ -1,0 +1,88 @@
+---
+sourceHash: f7834023de26
+slug: voltage
+order: 8
+title: Napięcie elektryczne i pojemność
+description: Różnica potencjałów, energia na ładunek i kondensator płaski.
+sections:
+  - id: co-znaczy-napiecie
+    title: Co znaczy napięcie
+  - id: kondensator
+    title: Kondensator
+---
+
+# Napięcie elektryczne i pojemność
+
+Napięcie to *popchnięcie na ładunek* — powód, dla którego prąd w ogóle
+płynie. Ptak na linii 400 kV jest zupełnie bezpieczny, bo obie łapki ma
+na tym samym potencjale: brak różnicy, brak popchnięcia, brak prądu.
+
+## Co znaczy napięcie
+
+Przeniesienie ładunku $q$ przez różnicę potencjałów $V$ wymienia energię
+
+$$
+W = qV \qquad \Rightarrow \qquad V = \frac{W}{q}
+$$
+
+Jeden wolt to dżul na kulomb. W **jednorodnym polu** między okładkami
+potencjał spada równomiernie przez przerwę:
+
+$$
+E = \frac{V}{d}
+$$
+
+Linie pola wskazują „w dół” potencjału; powierzchnie ekwipotencjalne
+przecinają je pod kątem prostym. Elektronowolt — energia elektronu po
+przejściu 1 V — to naturalna waluta atomów: chemia dzieje się przy kilku
+eV, dlatego bateria 1,5 V napędzi zegarek, ale nigdy lampę rentgenowską.
+
+<Sim id="capacitor" />
+
+**Eksperymenty do wypróbowania**
+
+1. Przy stałym <M v="V">V</M> podwój przerwę <M v="d">d</M>: odczyt pola
+   maleje o połowę. To samo popchnięcie rozłożone na dwa razy dłuższą
+   drogę.
+2. Kliknij między okładkami, aby wypuścić ładunek próbny. Przyspiesza
+   jednostajnie — stałe pole, stała siła. Odczyt jego energii rośnie
+   liniowo z przebytą drogą: $W = qEd$.
+3. Wstaw **dielektryk ceramiczny**: pojemność skacze ×6, ale E stoi —
+   bateria przypina V, a E = V/d nie obchodzi wypełnienie.
+
+## Kondensator
+
+Dwie okładki, przerwa i zmagazynowana energia:
+
+$$
+C = \varepsilon_0 \varepsilon_r \frac{A}{d}, \qquad Q = CV, \qquad
+U = \tfrac{1}{2}CV^2
+$$
+
+Większe okładki, ciaśniejsza przerwa, lepszy dielektryk → większa
+pojemność. Aparat zrzuca energię kondensatora w błysk w milisekundach;
+dotykowy ekran telefonu to siatka maleńkich kondensatorów, które twój
+palec rozstraja.
+
+<Exercise title="Energia flesza">
+Kondensator flesza ma 100 µF naładowane do 300 V. Ile energii oddaje
+błysk? Jeśli trwa 2 ms, jaka jest średnia moc?
+
+<Solution>
+$U = \tfrac{1}{2}CV^2 = 0{,}5 \times 10^{-4} \times 9\times10^4 = 4{,}5$ J.
+Przez 2 ms → $P = 2250$ W — sto razy więcej niż stały pobór z gniazdka,
+uwolnione w mgnieniu. Kondensatory wzmacniają moc w czasie: wolne
+ładowanie, szybki zrzut.
+</Solution>
+</Exercise>
+
+<Exercise title="Bezpieczna przerwa">
+Powietrze przebija (iskrzy) przy około 3 kV/mm. Twój kondensator ma
+przerwę 0,5 mm. Jakie jest maksymalne bezpieczne napięcie?
+
+<Solution>
+$V_{max} = E_{przebicia} \times d = 3\ \text{kV/mm} \times 0{,}5\ \text{mm}
+= 1{,}5$ kV. Połowa przerwy to połowa bezpiecznego napięcia — odwieczny
+kompromis kondensatorów: pojemność chce małego d, izolacja dużego.
+</Solution>
+</Exercise>

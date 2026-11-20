@@ -1,0 +1,88 @@
+---
+slug: voltage
+order: 8
+title: Voltage & Capacitance
+description: Potential difference, energy per charge, and the parallel-plate capacitor.
+sections:
+  - id: what-voltage-means
+    title: What voltage means
+  - id: the-capacitor
+    title: The capacitor
+---
+
+# Voltage & Capacitance
+
+Voltage is the *push per charge* — the reason current flows at all.
+A bird on a 400 kV line is perfectly safe because both feet are at the
+same potential: no difference, no push, no current.
+
+## What voltage means
+
+Moving charge $q$ through a potential difference $V$ exchanges energy
+
+$$
+W = qV \qquad \Rightarrow \qquad V = \frac{W}{q}
+$$
+
+One volt = one joule per coulomb. In a **uniform field** between parallel
+plates the potential drops steadily across the gap:
+
+$$
+E = \frac{V}{d}
+$$
+
+Field lines point "downhill" in potential; equipotential surfaces cut
+them at right angles. The electronvolt — the energy one electron gains
+crossing 1 V — is the natural currency of atoms: chemistry happens at a
+few eV, which is why a 1.5 V battery can run a clock but never an X-ray
+tube.
+
+<Sim id="capacitor" />
+
+**Experiments to try**
+
+1. At fixed <M v="V">V</M>, double the gap <M v="d">d</M>: the field
+   readout halves. The same push, spread over twice the distance.
+2. Click between the plates to release a test charge. Watch it
+   accelerate uniformly — constant field, constant force. Its gained
+   energy readout climbs linearly with the distance crossed: $W = qEd$.
+3. Insert the **ceramic dielectric**: capacitance jumps ×6, but E stays
+   put — the battery pins V, and E = V/d doesn't care about the filling.
+
+## The capacitor
+
+Two plates, a gap, and stored energy:
+
+$$
+C = \varepsilon_0 \varepsilon_r \frac{A}{d}, \qquad Q = CV, \qquad
+U = \tfrac{1}{2}CV^2
+$$
+
+Bigger plates, tighter gap, better dielectric → more capacitance.
+Cameras dump a capacitor's energy into a flash in milliseconds; your
+phone's touchscreen is a grid of tiny capacitors that your finger
+detunes.
+
+<Exercise title="Flash energy">
+A camera flash capacitor is 100 µF charged to 300 V. How much energy
+does the flash deliver? If it fires in 2 ms, what is the average power?
+
+<Solution>
+$U = \tfrac{1}{2}CV^2 = 0.5 \times 10^{-4} \times 9\times10^4 = 4.5$ J.
+Over 2 ms → $P = 2250$ W — a hundred times the wall socket's steady
+draw, released in a blink. Capacitors are power amplifiers in time:
+slow charge, fast dump.
+</Solution>
+</Exercise>
+
+<Exercise title="Safe gap">
+Air breaks down (sparks) at about 3 kV/mm. Your capacitor has a 0.5 mm
+air gap. What is the maximum safe voltage?
+
+<Solution>
+$V_{max} = E_{breakdown} \times d = 3\ \text{kV/mm} \times 0.5\ \text{mm}
+= 1.5$ kV. Halve the gap and you halve the safe voltage — the eternal
+trade-off of capacitor design: capacitance wants small d, insulation
+wants large d.
+</Solution>
+</Exercise>

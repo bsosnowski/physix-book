@@ -1,0 +1,94 @@
+---
+sourceHash: aa691aee88eb
+slug: vision
+order: 17
+title: Widzenie
+description: Oko jako układ soczewek; krótkowzroczność, dalekowzroczność i korekcja.
+sections:
+  - id: oko-jako-przyrzad
+    title: Oko jako przyrząd
+  - id: gdy-ognisko-zawodzi
+    title: Gdy ognisko zawodzi
+---
+
+# Widzenie
+
+Oko to soczewka cienka z rozdziału 16, zbudowana z białka: układ
+rogówki i soczewki, który rzuca rzeczywisty, odwrócony, pomniejszony
+obraz na siatkówkę — jakieś 2 cm za soczewką. Mózg odwraca go z powrotem
+i nazywa „światem”.
+
+## Oko jako przyrząd
+
+W przeciwieństwie do aparatu (który przesuwa obiektyw), oko utrzymuje
+odległość obrazu **stałą** — długość gałki — i zmienia zamiast tego
+**moc** soczewki. Mięśnie rzęskowe ściskają soczewkę na grubszą dla
+bliskich przedmiotów: **akomodacja**.
+
+$$
+P_{potrzebna} = \frac{1}{u} + \frac{1}{L} \quad \text{(dioptrie, metry)}
+$$
+
+Czytanie z 25 cm wymaga około 4 D więcej niż patrzenie w dal. Młoda
+soczewka potrafi dodać +10 D akomodacji; po pięćdziesiątce sztywnieje
+ku zeru — **starczowzroczność**, powód, dla którego okulary do czytania
+pojawiają się w każdej kieszeni średniego wieku.
+
+<Sim id="eye" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Zdrowe, dal**: promienie zbiegają się dokładnie na siatkówce —
+   odczyt *Ostro* mówi 1. Zbliż przedmiot bez ruszania mocy: ognisko
+   zsuwa się za siatkówkę, kółko rozmycia rośnie.
+2. Teraz podnoś moc oka, aż znów będzie ostro — to jest akomodacja.
+   Porównaj z odczytem *Moc potrzebna*.
+3. Ustawienie **Czytanie** pokazuje stan zaakomodowany.
+   **Starczowzroczność** — ten sam bliski przedmiot ze sztywną soczewką:
+   dodaj +3 D okularów i patrz, jak rozmycie zapada się do zera.
+
+## Gdy ognisko zawodzi
+
+Dwa geometryczne niedopasowania, dwie przeciwne naprawy:
+
+- **Krótkowzroczność**: gałka za **długa** — dalekie światło ogniskuje
+  się *przed* siatkówką. Naprawa: okulary **rozpraszające** (ujemne),
+  które wstępnie rozszerzają promienie, by ognisko oka padło dalej.
+- **Dalekowzroczność**: gałka za **krótka** — ognisko wypadłoby *za*
+  siatkówką. Naprawa: okulary **skupiające** (dodatnie).
+
+Ponieważ cienkie soczewki w kontakcie dodają moce,
+$P_{calk} = P_{oka} + P_{okularow}$ — cała praca optometrysty to
+znalezienie liczby, która czyni sumę właściwą.
+
+**Eksperymenty:** włącz **Krótkowzroczność**, zanotuj ujemny błąd
+ogniska; przełącz na **Krótkowzroczność + okulary** i patrz, jak ognisko
+wraca na siatkówkę. Powtórz z parą dalekowzroczności. Potem zapisz
+własną receptę: ustaw gałkę na 2,5 cm i znajdź moc okularów zerującą
+błąd dla dalekich przedmiotów.
+
+<Exercise title="Zapisz receptę">
+Krótkowzroczne oko ma 2,4 cm długości i rozluźnioną moc 50 D. Jaka moc
+okularów ogniskuje dalekie przedmioty (u ≈ ∞) dokładnie na siatkówce?
+
+<Solution>
+Potrzeba $P_{calk} = 1/L = 1/0{,}024 \approx 41{,}7$ D dla promieni
+równoległych. $P_{okularow} = 41{,}7 - 50 = -8{,}3$ D — mocny minus.
+(Prawdziwe recepty są mniejsze, bo rogówka wykonuje większość z ~60 D
+oka; nasz model zredukowany zwija wszystko w jedną soczewkę.)
+</Solution>
+</Exercise>
+
+<Exercise title="Dlaczego mrużenie pomaga">
+Przed okularami ludzie mrużą oczy, by zobaczyć dalekie szczegóły.
+Używając idei kółka rozmycia, wyjaśnij, dlaczego wąska szpara powiek
+wyostrza nieostry obraz.
+
+<Solution>
+Średnica kółka rozmycia ≈ rozmiar źrenicy × |błąd ogniska| / odległość
+obrazu. Mrużenie zmniejsza skuteczną aperturę, więc stożek promieni
+docierających do siatkówki się zwęża — kółko maleje proporcjonalnie,
+choć błąd ogniska bez zmian. Ta sama sztuczka co otworkowy aparat:
+zamiana jasności na głębię ostrości.
+</Solution>
+</Exercise>

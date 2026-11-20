@@ -1,0 +1,106 @@
+---
+sourceHash: c82511414d8e
+slug: electromagnets-motor
+order: 12
+title: Elektromagnesy i silnik elektryczny
+description: Solenoidy, siła BIL i jak komutator utrzymuje silnik w ruchu.
+sections:
+  - id: elektromagnes
+    title: Elektromagnes
+  - id: sila-dzialajaca-na-prad
+    title: Siła działająca na prąd
+  - id: silnik-pradu-stalego
+    title: Silnik prądu stałego
+---
+
+# Elektromagnesy i silnik elektryczny
+
+Oersted pokazał, że prąd tworzy pole. Zaprojektuj to — zwiń przewód
+w cewkę, dodaj żelazo — a dostaniesz magnes, który można włączać,
+wzmacniać i odwracać. Zatrudnij pole tego magnesu wobec innego prądu,
+a dostaniesz ruch: silnik.
+
+## Elektromagnes
+
+Pojedyncza pętla skupia pole w środku. Ułóż $n$ pętli na metr
+w **solenoid**, a pola się dodają:
+
+$$
+B = \mu_0 n I
+$$
+
+Wsuń żelazny rdzeń, a atomowe dipole żelaza ustawią się wzdłuż pola
+cewki, mnożąc je setki razy. Żurawie złomowisk podnoszą tonę stali przy
+włączonym prądzie — i zrzucają przy wyłączonym. Ta przełączalność to
+cały sens.
+
+## Siła działająca na prąd
+
+Prąd to ruchomy ładunek, a pole magnetyczne pcha ruchomy ładunek (siła
+Lorentza). Dla przewodu o długości $L$ prostopadłego do pola:
+
+$$
+F = B I L
+$$
+
+Kierunek: znów prawa dłoń — palce wzdłuż I, zagięte ku B, kciuk pcha.
+Odwróć *którekolwiek* — prąd albo pole — a siła się odwraca; odwróć oba,
+a zostaje.
+
+## Silnik prądu stałego
+
+Umieść cewkę między biegunami magnesu. Dwa jej boki prowadzą prąd
+w przeciwnych kierunkach, więc siły $BIL$ pchają je przeciwnie —
+powstaje **moment**:
+
+$$
+\tau = N B I A \sin\theta
+$$
+
+Problem: za pionem $\sin\theta$ zmienia znak i moment pchałby cewkę
+*z powrotem*. Ratunkiem jest **komutator** — przecięty pierścień, który
+odwraca prąd co pół obrotu, więc moment zawsze pcha do przodu. Patrz,
+jak działa — i jak zawodzi:
+
+<Sim id="motor" />
+
+**Eksperymenty do wypróbowania**
+
+1. **Normalna praca**: cewka rozpędza się, potem stabilizuje. Oglądaj
+   wykres *Obroty i prąd*: wraz z prędkością cewka staje się prądnicą —
+   jej **SEM przeciwna** przeciwstawia się baterii i prąd maleje.
+   Silnik sam się reguluje.
+2. **Bez komutatora!**: cewka się wychyla, przestrzeliwuje, wraca —
+   oscyluje wokół pionu i staje. Teraz wiesz dokładnie, po co ten
+   przecięty pierścień.
+3. **Odwrócona polaryzacja**: ten sam silnik, przeciwny obrót. (Odwróć
+   zamiast tego pole — ten sam skutek. Oba — bez zmian!)
+4. **Duże obciążenie**: obroty spadają, średni prąd rośnie. Dlaczego
+   zablokowany silnik się przepala? (Stop → brak SEM → pełny prąd
+   $V/R$.)
+5. **50 zwojów**: większy moment, szybszy rozruch — $\tau \propto N$.
+
+<Exercise title="Dlaczego silniki łykają prąd na starcie">
+Silnik o oporze cewki 2 Ω pracuje na 12 V. Jaki prąd płynie w chwili
+startu i dlaczego jest dużo większy niż podczas biegu?
+
+<Solution>
+Na starcie $\omega = 0$ → SEM = 0 → $I = V/R = 6$ A. Po rozpędzeniu SEM
+odejmuje się od V, więc prąd spada do tego, czego żąda obciążenie. Ten
+udar prądu przyciemnia światła, gdy startuje sprężarka lodówki —
+i dlatego duże silniki potrzebują softstartów.
+</Solution>
+</Exercise>
+
+<Exercise title="Budżet momentu">
+Potrzebujesz podwoić moment przy tym samym prądzie i polu. Podaj dwie
+różne zmiany konstrukcyjne, które to osiągną.
+
+<Solution>
+$\tau = NBIA\sin\theta$: podwój liczbę zwojów $N$ **albo** podwój
+powierzchnię cewki $A$. (Podwojenie B lub I też by działało, ale łamie
+założenia.) Więcej zwojów kosztuje drut i opór; więcej powierzchni
+kosztuje miejsce — prawdziwe projektowanie silników to dokładnie ten
+kompromis.
+</Solution>
+</Exercise>

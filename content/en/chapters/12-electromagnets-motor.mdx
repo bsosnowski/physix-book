@@ -1,0 +1,104 @@
+---
+slug: electromagnets-motor
+order: 12
+title: Electromagnets & the Electric Motor
+description: Solenoids, the force BIL, and how a commutator keeps a motor spinning.
+sections:
+  - id: the-electromagnet
+    title: The electromagnet
+  - id: force-on-a-current
+    title: Force on a current
+  - id: the-dc-motor
+    title: The DC motor
+---
+
+# Electromagnets & the Electric Motor
+
+Oersted showed current makes a field. Engineer it — coil the wire, add
+iron — and you get a magnet you can switch, strengthen and reverse.
+Put that magnet's field to work on another current, and you get motion:
+the motor.
+
+## The electromagnet
+
+A single loop concentrates its field at the center. Stack $n$ loops per
+metre into a **solenoid** and the fields add:
+
+$$
+B = \mu_0 n I
+$$
+
+Slide in an iron core and the atomic dipoles of iron line up with the
+coil's field, multiplying it hundreds of times. Scrapyard cranes lift a
+tonne of steel with current on — and drop it with current off. That
+switchability is the whole point.
+
+## Force on a current
+
+A current is moving charge, and a magnetic field pushes moving charge
+(the Lorentz force). For a wire of length $L$ perpendicular to the
+field:
+
+$$
+F = B I L
+$$
+
+Direction: right hand again — fingers along I, curl toward B, thumb
+pushes. Reverse *either* the current or the field and the force flips;
+reverse both and it stays.
+
+## The DC motor
+
+Put a coil between magnet poles. The two sides carry current in
+opposite directions, so the forces $BIL$ push them oppositely — a
+**torque**:
+
+$$
+\tau = N B I A \sin\theta
+$$
+
+Problem: past the vertical, $\sin\theta$ changes sign and the torque
+would push the coil *back*. The fix is the **commutator** — a split ring
+that flips the current every half-turn, so the torque always pushes
+forward. Watch it work — and watch it fail:
+
+<Sim id="motor" />
+
+**Experiments to try**
+
+1. **Normal run**: the coil spins up, then settles. Watch the *Speed &
+   current* graph: as speed rises, the coil acts as a generator — its
+   **back-EMF** opposes the battery and the current falls. A motor
+   self-regulates.
+2. **No commutator!**: the coil swings, overshoots, swings back — it
+   oscillates around vertical and stalls. Now you know exactly what
+   that split ring is for.
+3. **Reverse polarity**: same motor, opposite spin. (Reverse the field
+   instead — same result. Both — no change!)
+4. **Heavy load**: speed drops, average current rises. Why does a
+   jammed motor burn out? (Stall → no back-EMF → full $V/R$ current.)
+5. **50 turns**: more torque, faster spin-up — $\tau \propto N$.
+
+<Exercise title="Why motors gulp current at startup">
+A motor with coil resistance 2 Ω runs on 12 V. What is the current the
+instant it starts, and why is it much larger than the running current?
+
+<Solution>
+At start $\omega = 0$ → back-EMF = 0 → $I = V/R = 6$ A. Once spinning,
+back-EMF subtracts from V, so current drops to whatever the load
+demands. That inrush is why lights dim when a fridge compressor kicks
+in — and why big motors need soft starters.
+</Solution>
+</Exercise>
+
+<Exercise title="Torque budget">
+You need double the torque at the same current and field. Give two
+different design changes that achieve it.
+
+<Solution>
+$\tau = NBIA\sin\theta$: double the turns $N$, **or** double the coil
+area $A$. (Doubling B or I would also work but violates the
+constraint.) More turns costs wire and resistance; more area costs
+space — real motor design is exactly this trade-off.
+</Solution>
+</Exercise>

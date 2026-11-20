@@ -496,5 +496,112 @@
     "view": {
       "dragHint": "drag the marker along the spectrum — 19 decades of frequency"
     }
+  },
+  "capacitor": {
+    "title": "Parallel-plate capacitor",
+    "param": {
+      "V": "Battery voltage",
+      "d": "Plate separation",
+      "area": "Plate area",
+      "dielectric": "Dielectric εᵣ"
+    },
+    "readout": {
+      "E": "Field E = V/d",
+      "C": "Capacitance",
+      "Q": "Stored charge",
+      "U": "Stored energy",
+      "probeW": "Probe energy gained"
+    },
+    "preset": {
+      "air": "Air gap",
+      "ceramic": "Ceramic dielectric",
+      "tight": "Tight gap (1 mm)",
+      "highV": "High voltage"
+    },
+    "view": {
+      "hint": "click between the plates to release a test charge"
+    }
+  },
+  "magnet": {
+    "title": "Magnetic fields — compass map",
+    "param": {
+      "mode": "Mode (0 magnet, 1 wire)",
+      "strength": "Strength / current",
+      "flip": "Reverse polarity / current"
+    },
+    "readout": {
+      "bProbe": "Field at probe",
+      "angleProbe": "Field direction"
+    },
+    "preset": {
+      "bar": "Bar magnet",
+      "reversed": "Reversed magnet",
+      "wire": "Wire — current out ⊙",
+      "wireRev": "Wire — current in ⊗"
+    },
+    "view": {
+      "legend": "red needle tips point along B (compass north)",
+      "barHint": "drag the magnet",
+      "wireHint": "drag the wire · right-hand rule"
+    }
+  },
+  "motor": {
+    "title": "DC motor",
+    "param": {
+      "V": "Supply voltage",
+      "B": "Magnet field",
+      "N": "Coil turns",
+      "commutator": "Commutator (1 = on)",
+      "load": "Load torque"
+    },
+    "readout": {
+      "rpm": "Speed",
+      "current": "Current",
+      "torque": "Torque",
+      "backEmf": "Back-EMF",
+      "spins": "Half-turns"
+    },
+    "plot": {
+      "omega": "Speed & current vs time"
+    },
+    "preset": {
+      "run": "Normal run",
+      "noCommutator": "No commutator!",
+      "reverse": "Reverse polarity",
+      "heavyLoad": "Heavy load",
+      "manyTurns": "50 turns"
+    },
+    "view": {
+      "legend": "⊙ current out · ⊗ current in · green arrows = force BIL"
+    }
+  },
+  "eye": {
+    "title": "The eye & corrective lenses",
+    "param": {
+      "u": "Object distance",
+      "power": "Eye lens power",
+      "glasses": "Glasses power",
+      "axial": "Eyeball length"
+    },
+    "readout": {
+      "v": "Focus distance",
+      "error": "Focus error (+ behind retina)",
+      "needed": "Power needed for sharp",
+      "sharp": "Sharp (1=yes)"
+    },
+    "preset": {
+      "normal": "Normal, distant",
+      "reading": "Reading (accommodated)",
+      "myopia": "Myopia (long eye)",
+      "myopiaFix": "Myopia + glasses",
+      "hyperopia": "Hyperopia (short eye)",
+      "hyperopiaFix": "Hyperopia + glasses",
+      "presbyopia": "Presbyopia (stiff lens)"
+    },
+    "view": {
+      "sharp": "Sharp image on the retina ✓",
+      "myopic": "Focus in front of retina — myopia",
+      "hyperopic": "Focus behind retina — hyperopia"
+    }
   }
 }

@@ -1,0 +1,93 @@
+---
+slug: vision
+order: 17
+title: The Eye & Vision
+description: The eye as a lens system; myopia, hyperopia and their correction.
+sections:
+  - id: the-eye-as-an-instrument
+    title: The eye as an instrument
+  - id: when-focus-fails
+    title: When focus fails
+---
+
+# The Eye & Vision
+
+The eye is chapter 16's thin lens, built from protein: a cornea-and-lens
+system that projects a real, inverted, diminished image onto the retina
+— about 2 cm behind the lens. Your brain flips it back and calls it
+"the world".
+
+## The eye as an instrument
+
+Unlike a camera (which moves its lens), the eye keeps the image
+distance **fixed** — the eyeball's length — and changes the lens
+**power** instead. Ciliary muscles squeeze the lens fatter for near
+objects: **accommodation**.
+
+$$
+P_{needed} = \frac{1}{u} + \frac{1}{L} \quad \text{(diopters, metres)}
+$$
+
+Reading at 25 cm demands about 4 D more than gazing at the horizon.
+A young lens can supply +10 D of accommodation; by age 50 it stiffens
+toward zero — **presbyopia**, the reason reading glasses appear in
+every middle-aged pocket.
+
+<Sim id="eye" />
+
+**Experiments to try**
+
+1. **Normal, distant**: rays converge exactly on the retina — the
+   *Sharp* readout says 1. Move the object closer without touching the
+   power: the focus slips behind the retina, the blur circle grows.
+2. Now raise the eye power until sharp again — that is accommodation.
+   Compare with the *Power needed* readout.
+3. **Reading** preset shows the accommodated state. **Presbyopia**
+   shows the same near object with a stiff lens: add +3 D of glasses
+   and watch the blur collapse.
+
+## When focus fails
+
+Two geometric mismatches, two opposite fixes:
+
+- **Myopia** (short-sighted): eyeball too **long** — distant light
+  focuses *in front of* the retina. Fix: **diverging** (negative)
+  glasses, which pre-spread the rays so the eye's focus lands further
+  back.
+- **Hyperopia** (far-sighted): eyeball too **short** — focus would land
+  *behind* the retina. Fix: **converging** (positive) glasses.
+
+Because thin lenses in contact add powers,
+$P_{total} = P_{eye} + P_{glasses}$ — the optometrist's whole job is
+finding the number that makes the sum right.
+
+**Experiments:** run **Myopia**, note the negative focus error; switch
+to **Myopia + glasses** and watch the focus walk back onto the retina.
+Repeat with the hyperopia pair. Then prescribe your own: set the
+eyeball length to 2.5 cm and find the glasses power that zeroes the
+error for distant objects.
+
+<Exercise title="Prescribe the glasses">
+A myopic eye is 2.4 cm long with relaxed power 50 D. What glasses power
+focuses distant objects (u ≈ ∞) exactly on its retina?
+
+<Solution>
+Need $P_{total} = 1/L = 1/0.024 \approx 41.7$ D for parallel rays.
+$P_{glasses} = 41.7 - 50 = -8.3$ D — a strong minus lens. (Real
+prescriptions are smaller because the cornea does most of the eye's
+~60 D; our reduced-eye model folds it all into one lens.)
+</Solution>
+</Exercise>
+
+<Exercise title="Why squinting helps">
+Before glasses, people squint to see far details. Using the blur-circle
+idea, explain why a narrow eyelid slit sharpens a defocused image.
+
+<Solution>
+Blur circle diameter ≈ pupil size × |focus error| / image distance.
+Squinting shrinks the effective aperture, so the cone of rays reaching
+the retina narrows — the blur circle shrinks proportionally even though
+the focus error is unchanged. Same trick as a pinhole camera: trade
+brightness for depth of field.
+</Solution>
+</Exercise>

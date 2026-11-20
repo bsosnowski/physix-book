@@ -496,5 +496,112 @@
     "view": {
       "dragHint": "przeciągnij znacznik po widmie — 19 dekad częstotliwości"
     }
+  },
+  "capacitor": {
+    "title": "Kondensator płaski",
+    "param": {
+      "V": "Napięcie baterii",
+      "d": "Odległość okładek",
+      "area": "Powierzchnia okładek",
+      "dielectric": "Dielektryk εᵣ"
+    },
+    "readout": {
+      "E": "Pole E = V/d",
+      "C": "Pojemność",
+      "Q": "Zgromadzony ładunek",
+      "U": "Zgromadzona energia",
+      "probeW": "Energia ładunku próbnego"
+    },
+    "preset": {
+      "air": "Przerwa powietrzna",
+      "ceramic": "Dielektryk ceramiczny",
+      "tight": "Ciasna przerwa (1 mm)",
+      "highV": "Wysokie napięcie"
+    },
+    "view": {
+      "hint": "kliknij między okładkami, aby wypuścić ładunek próbny"
+    }
+  },
+  "magnet": {
+    "title": "Pole magnetyczne — mapa kompasów",
+    "param": {
+      "mode": "Tryb (0 magnes, 1 przewód)",
+      "strength": "Siła / prąd",
+      "flip": "Odwróć bieguny / prąd"
+    },
+    "readout": {
+      "bProbe": "Pole przy sondzie",
+      "angleProbe": "Kierunek pola"
+    },
+    "preset": {
+      "bar": "Magnes sztabkowy",
+      "reversed": "Odwrócony magnes",
+      "wire": "Przewód — prąd do nas ⊙",
+      "wireRev": "Przewód — prąd od nas ⊗"
+    },
+    "view": {
+      "legend": "czerwone końcówki igieł wskazują B (północ kompasu)",
+      "barHint": "przeciągnij magnes",
+      "wireHint": "przeciągnij przewód · reguła prawej dłoni"
+    }
+  },
+  "motor": {
+    "title": "Silnik prądu stałego",
+    "param": {
+      "V": "Napięcie zasilania",
+      "B": "Pole magnesów",
+      "N": "Liczba zwojów",
+      "commutator": "Komutator (1 = wł.)",
+      "load": "Moment obciążenia"
+    },
+    "readout": {
+      "rpm": "Obroty",
+      "current": "Prąd",
+      "torque": "Moment",
+      "backEmf": "SEM przeciwna",
+      "spins": "Półobroty"
+    },
+    "plot": {
+      "omega": "Obroty i prąd od czasu"
+    },
+    "preset": {
+      "run": "Normalna praca",
+      "noCommutator": "Bez komutatora!",
+      "reverse": "Odwrócona polaryzacja",
+      "heavyLoad": "Duże obciążenie",
+      "manyTurns": "50 zwojów"
+    },
+    "view": {
+      "legend": "⊙ prąd do nas · ⊗ prąd od nas · zielone strzałki = siła BIL"
+    }
+  },
+  "eye": {
+    "title": "Oko i soczewki korekcyjne",
+    "param": {
+      "u": "Odległość przedmiotu",
+      "power": "Moc soczewki oka",
+      "glasses": "Moc okularów",
+      "axial": "Długość gałki ocznej"
+    },
+    "readout": {
+      "v": "Odległość ogniskowania",
+      "error": "Błąd ogniska (+ za siatkówką)",
+      "needed": "Moc potrzebna do ostrości",
+      "sharp": "Ostro (1=tak)"
+    },
+    "preset": {
+      "normal": "Zdrowe, dal",
+      "reading": "Czytanie (akomodacja)",
+      "myopia": "Krótkowzroczność (długie oko)",
+      "myopiaFix": "Krótkowzroczność + okulary",
+      "hyperopia": "Dalekowzroczność (krótkie oko)",
+      "hyperopiaFix": "Dalekowzroczność + okulary",
+      "presbyopia": "Starczowzroczność (sztywna soczewka)"
+    },
+    "view": {
+      "sharp": "Ostry obraz na siatkówce ✓",
+      "myopic": "Ognisko przed siatkówką — krótkowzroczność",
+      "hyperopic": "Ognisko za siatkówką — dalekowzroczność"
+    }
   }
 }
