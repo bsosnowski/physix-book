@@ -7,7 +7,9 @@
     "speed": "Speed",
     "fullscreen": "Fullscreen",
     "exitFullscreen": "Exit fullscreen",
-    "share": "Copy link to this setup"
+    "share": "Copy link to this setup",
+    "soundOn": "Enable sound (opt-in)",
+    "soundOff": "Mute sound"
   },
   "widget": {
     "presets": "Presets",
@@ -425,7 +427,8 @@
     },
     "view": {
       "legend": "particles oscillate along the wave — compressions & rarefactions",
-      "doppler": "wavefronts bunch ahead, stretch behind"
+      "doppler": "wavefronts bunch ahead, stretch behind",
+      "listener": "listener"
     }
   },
   "mirror": {

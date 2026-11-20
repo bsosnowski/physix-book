@@ -117,6 +117,8 @@ export interface SimModule<P = Record<string, number>, S = unknown> {
   titleKey: string;
   model: SimModel<P, S>;
   view: SimView<S>;
+  /** Optional opt-in audio layer (user must click 🔊 to enable). */
+  audio?: import("./audio").SimAudio<S>;
 }
 
 export type AnySimModule = SimModule<any, any>;

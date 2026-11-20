@@ -17,6 +17,7 @@ import {
 import { ControlPanel } from "./ControlPanel";
 import { Plot } from "./Plots";
 import { useHighlight } from "./highlight";
+import { SimAudioEngine } from "./audio";
 import { decodeSimParams, decodeSpeed, encodeSimParams } from "./urlState";
 import { formatQuantity } from "../core/units";
 import { useAppStore } from "@/app/store";
@@ -49,6 +50,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   const [readout, setReadout] = useState<Record<string, number>>({});
   const [fullscreen, setFullscreen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
   const setHoverVar = useHighlight((s) => s.setHoverVar);
   const [, setSearchParams] = useSearchParams();
 
@@ -67,6 +69,9 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   sizeRef.current.fullscreen = fullscreen;
   const historyRef = useRef<HistorySample[]>([]);
   const lastSampleTRef = useRef(-Infinity);
+  const audioRef = useRef<SimAudioEngine | null>(null);
+  const soundOnRef = useRef(false);
+  soundOnRef.current = soundOn;
 
   const sample = useCallback((force = false) => {
     const m = moduleRef.current;
@@ -281,6 +286,17 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         acc = 0;
       }
 
+      // opt-in audio follows play state (suspended when paused/off-screen)
+      const engine = audioRef.current;
+      if (engine && m.audio) {
+        if (active) {
+          engine.resume();
+          engine.update(m.audio.voices(stateRef.current));
+        } else {
+          engine.suspend();
+        }
+      }
+
       // Render every frame (cheap; keeps language/theme switches instant).
       const { width, height, dpr } = sizeRef.current;
       const ctx = canvas.getContext("2d");
@@ -315,6 +331,33 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     // also reflect in the address bar so a plain copy of the URL works
     setSearchParams(sp, { replace: true });
   }, [id, setSearchParams]);
+
+  /** Opt-in audio: created only on this explicit user gesture. */
+  const toggleSound = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.dispose();
+      audioRef.current = null;
+      setSoundOn(false);
+      return;
+    }
+    const engine = new SimAudioEngine();
+    audioRef.current = engine;
+    setSoundOn(true);
+    // start playing too — silence with a paused sim would confuse
+    if (!doneRef.current) {
+      explicitPlayRef.current = true;
+      setPlaying(true);
+    }
+  }, []);
+
+  // dispose audio on unmount / sim change
+  useEffect(
+    () => () => {
+      audioRef.current?.dispose();
+      audioRef.current = null;
+    },
+    [id],
+  );
 
   const reducedMotion = useMemo(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -403,6 +446,21 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
         >
           {copied ? "✓" : "🔗"}
         </button>
+        {module.audio && (
+          <button
+            onClick={toggleSound}
+            title={t(soundOn ? "toolbar.soundOff" : "toolbar.soundOn")}
+            aria-pressed={soundOn}
+            className={
+              "inline-flex w-9 items-center justify-center rounded-md border px-2.5 py-1 text-sm " +
+              (soundOn
+                ? "border-emerald-500 bg-emerald-50 dark:border-emerald-600 dark:bg-emerald-950"
+                : "border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800")
+            }
+          >
+            {soundOn ? "🔊" : "🔇"}
+          </button>
+        )}
         <button
           onClick={() => setFullscreen(!fullscreen)}
           title={t(fullscreen ? "toolbar.exitFullscreen" : "toolbar.fullscreen")}

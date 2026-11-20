@@ -19,6 +19,8 @@ export interface SoundState {
 
 export const ARENA = { halfW: 10, halfH: 4 };
 export const WAVE_SPEED = 6; // world m/s (visual)
+/** Fixed listener for the Doppler mode (ear marker + audible pitch). */
+export const LISTENER_X = 6;
 const TIME_SCALE = 0.06; // slow the oscillation so the eye can follow
 
 /** Longitudinal displacement field at (x, y) from source 1 (+ optional 2). */

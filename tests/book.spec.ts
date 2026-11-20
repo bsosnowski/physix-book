@@ -382,6 +382,31 @@ test.describe("simulation widget — waves & orbits", () => {
     await expect(w.locator("figcaption button").first()).toContainText("Reset");
   });
 
+  test("sound sim: opt-in audio toggle appears only on audio-capable sims", async ({ page }) => {
+    // projectile has no audio layer → no speaker button
+    await page.goto("/en/chapter/kinematics");
+    const proj = widget(page);
+    await expect(proj).toBeAttached();
+    await expect(proj.getByTitle("Enable sound (opt-in)")).toHaveCount(0);
+
+    // sound sim has one; enabling flips state and starts playback
+    await page.goto("/en/chapter/sound");
+    const w = widget(page);
+    await showWidget(page, w);
+    const soundBtn = w.getByTitle("Enable sound (opt-in)");
+    await expect(soundBtn).toHaveAttribute("aria-pressed", "false");
+    await soundBtn.click();
+    const muteBtn = w.getByTitle("Mute sound");
+    await expect(muteBtn).toHaveAttribute("aria-pressed", "true");
+    // sim auto-started — the Pause button appears (sound model has no
+    // time readout, so assert on playback state instead)
+    await expect(w.getByRole("button", { name: /Pause/ })).toBeVisible();
+    // pausing the sim suspends audio context (no crash), muting removes it
+    await w.getByRole("button", { name: /Pause/ }).click();
+    await muteBtn.click();
+    await expect(w.getByTitle("Enable sound (opt-in)")).toHaveAttribute("aria-pressed", "false");
+  });
+
   test("Polish waves chapter renders with translated sim titles", async ({ page }) => {
     await page.goto("/pl/chapter/waves");
     await expect(page.getByRole("heading", { level: 1, name: "Fale" })).toBeVisible();

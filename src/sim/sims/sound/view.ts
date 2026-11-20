@@ -1,5 +1,5 @@
 import type { DrawContext, SimView } from "../../framework/types";
-import { ARENA, displacementAt, type SoundState } from "./model";
+import { ARENA, LISTENER_X, displacementAt, type SoundState } from "./model";
 
 /**
  * Longitudinal wave visualized as air-particle density: particles are
@@ -52,6 +52,21 @@ export const soundView: SimView<SoundState> = {
     };
     if (s.doppler > 0) {
       drawSpeaker(s.srcX);
+      // listener (ear) marker — the audible pitch flips as the source passes
+      const lx = X(LISTENER_X);
+      const ly = Y(0);
+      ctx.strokeStyle = c.text;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(lx, ly, 9, -Math.PI * 0.6, Math.PI * 0.6);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(lx, ly, 3, 0, Math.PI * 2);
+      ctx.fillStyle = c.text;
+      ctx.fill();
+      ctx.font = "10px ui-sans-serif, system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText(t("sound.view.listener"), lx, ly + 24);
       // motion arrow
       ctx.strokeStyle = c.speaker;
       ctx.lineWidth = 2;
