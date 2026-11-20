@@ -1,5 +1,11 @@
 # Content Roadmap — curriculum expansion (PL school physics)
 
+> **STATUS: IMPLEMENTED** — all 11 chapters (7–17) shipped EN+PL with
+> 10 new sims (charges, capacitor, circuit, joule-heating, magnet-field,
+> motor, pulse, sound, spectrum, mirror, lens, eye — 12 total), the
+> waves-chapter pulse extension, draggable-object framework support and
+> the opt-in WebAudio Tone component. 176 unit + 41 E2E tests green.
+
 Mapping the requested syllabus onto the existing book. Principle: **never
 duplicate** — extend existing chapters where the topic overlaps, add new
 chapters only for genuinely new physics. All new chapters ship EN + PL

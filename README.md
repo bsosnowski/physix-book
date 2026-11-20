@@ -4,10 +4,12 @@ An interactive, multilingual physics textbook: chapters with prose and
 equations on the page, live animated simulations with parameter controls
 embedded in the narrative. See [PLAN.md](./PLAN.md) for the full roadmap.
 
-**Status: v1 (M4 complete)** — 6 chapters (EN + PL), 8 interactive
-simulations with live graphs, presets, shareable setups (🔗), exercises
-with hidden solutions, full-text search, param↔equation highlighting.
-68 unit tests + 31 Playwright E2E tests. See [PLAN.md](./PLAN.md).
+**Status: curriculum complete** — 17 chapters (EN + PL), 18 interactive
+simulations spanning mechanics, waves, E&M, DC circuits, magnetism,
+optics and vision — with live graphs, presets, draggable objects,
+shareable setups (🔗), audible beats, exercises with hidden solutions,
+full-text search. 176 unit tests + 41 Playwright E2E tests.
+See [PLAN.md](./PLAN.md) and [CONTENT-ROADMAP.md](./CONTENT-ROADMAP.md).
 
 Authoring guides: [write a chapter](./HOW-TO-WRITE-A-CHAPTER.md) ·
 [add a simulation](./HOW-TO-ADD-A-SIMULATION.md)

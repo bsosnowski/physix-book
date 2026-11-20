@@ -37,9 +37,9 @@ test.describe("app shell & i18n", () => {
     await page.goto("/en/");
     const nav = page.locator("aside nav");
     const items = nav.locator("ol > li > a");
-    await expect(items).toHaveCount(6);
+    await expect(items).toHaveCount(17);
     await expect(items.nth(0)).toContainText("Kinematics");
-    await expect(items.nth(5)).toContainText("Gravitation");
+    await expect(items.nth(16)).toContainText("The Eye & Vision");
     await items.nth(2).click();
     await expect(page).toHaveURL(/\/en\/chapter\/energy-momentum$/);
     await expect(page.getByRole("heading", { level: 1, name: "Energy & Momentum" })).toBeVisible();
@@ -400,7 +400,7 @@ test.describe("M4 features", () => {
     await search.fill("zzzz-no-match");
     await expect(page.getByText("No results")).toBeVisible();
     await search.fill("");
-    await expect(items).toHaveCount(6);
+    await expect(items).toHaveCount(17);
     // Polish body search
     await page.goto("/pl/");
     await page.getByLabel("Szukaj", { exact: true }).fill("wahadło");
@@ -413,6 +413,94 @@ test.describe("M4 features", () => {
     const skip = page.getByRole("link", { name: "Skip to content" });
     await expect(skip).toBeFocused();
     await expect(skip).toBeVisible();
+  });
+});
+
+test.describe("expansion chapters — new sims", () => {
+  test("circuit: series KVL holds, parallel branches see full voltage", async ({ page }) => {
+    await page.goto("/en/chapter/current-ohm");
+    const w = widget(page);
+    await showWidget(page, w);
+    const rd = (label: string) => w.locator("dl > div", { hasText: label }).locator("dd");
+    // series defaults: 12V across 10+20+30=60Ω → 0.2 A
+    expect(await num(rd("Total current"))).toBeCloseTo(0.2, 1);
+    const vsum = (await num(rd("V across R₁"))) + (await num(rd("V across R₂"))) + (await num(rd("V across R₃")));
+    expect(vsum).toBeCloseTo(12, 0);
+    await w.getByRole("button", { name: "Parallel", exact: true }).click();
+    expect(await num(rd("V across R₁"))).toBeCloseTo(12, 1);
+    expect(await num(rd("Total current"))).toBeCloseTo(2.2, 1);
+  });
+
+  test("joule heating: temperature rises and power = V²/R", async ({ page }) => {
+    await page.goto("/en/chapter/current-power");
+    const w = widget(page);
+    await showWidget(page, w);
+    const rd = (label: string) => w.locator("dl > div", { hasText: label }).locator("dd");
+    expect(await num(rd("Power"))).toBeCloseTo(480, 0); // 120²/30
+    await w.getByRole("button", { name: /Play/ }).click();
+    await expect
+      .poll(async () => num(rd("Temperature")), { timeout: 8000 })
+      .toBeGreaterThan(25);
+  });
+
+  test("refraction: TIR preset flags total internal reflection", async ({ page }) => {
+    await page.goto("/en/chapter/refraction-lenses");
+    const w = page.locator("figure").filter({ hasText: "Refraction & total internal reflection" });
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Total internal reflection", exact: true }).click();
+    const rd = (label: string) => w.locator("dl > div", { hasText: label }).locator("dd");
+    await expect(rd("TIR (1=yes)")).toHaveText("1");
+    await expect(rd("Reflected")).toContainText("100");
+    expect(await num(rd("Critical angle"))).toBeCloseTo(48.8, 0);
+  });
+
+  test("lens: magnifier preset gives virtual magnified image", async ({ page }) => {
+    await page.goto("/en/chapter/refraction-lenses");
+    const w = page.locator("figure").filter({ hasText: "Thin lens" });
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Magnifying glass" }).click();
+    const rd = (label: string) => w.locator("dl > div", { hasText: label }).locator("dd");
+    expect(await num(rd("Magnification"))).toBeGreaterThan(1);
+    await expect(rd("Image (0=virtual 1=real 2=∞)")).toHaveText("0");
+  });
+
+  test("eye: myopia preset is blurry, glasses preset is sharp", async ({ page }) => {
+    await page.goto("/en/chapter/vision");
+    const w = widget(page);
+    await showWidget(page, w);
+    const sharp = w.locator("dl > div", { hasText: "Sharp (1=yes)" }).locator("dd");
+    await w.getByRole("button", { name: "Myopia (long eye)" }).click();
+    await expect(sharp).toHaveText("0");
+    await w.getByRole("button", { name: "Myopia + glasses" }).click();
+    await expect(sharp).toHaveText("1");
+  });
+
+  test("motor: spins with commutator; Polish chapter renders", async ({ page }) => {
+    await page.goto("/pl/chapter/electromagnets-motor");
+    await expect(page.getByRole("heading", { level: 1, name: "Elektromagnesy i silnik elektryczny" })).toBeVisible();
+    const w = widget(page);
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Normalna praca" }).click();
+    const spins = w.locator("dl > div", { hasText: "Półobroty" }).locator("dd");
+    await expect.poll(async () => parseInt(await spins.innerText(), 10), { timeout: 10_000 }).toBeGreaterThan(2);
+  });
+
+  test("spectrum: Wi-Fi preset reads 12.5 cm and is non-ionizing", async ({ page }) => {
+    await page.goto("/en/chapter/em-spectrum");
+    const w = widget(page);
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Wi-Fi (2.4 GHz)" }).click();
+    const ion = w.locator("dl > div", { hasText: "Ionizing" }).locator("dd");
+    await expect(ion).toHaveText("0");
+  });
+
+  test("pulse: fixed-end reflection inverts the peak", async ({ page }) => {
+    await page.goto("/en/chapter/waves");
+    const w = page.locator("figure").filter({ hasText: "Traveling pulse" });
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Fixed end", exact: true }).click();
+    const peak = w.locator("dl > div", { hasText: "Peak displacement" }).locator("dd");
+    await expect.poll(async () => num(peak), { timeout: 15_000 }).toBeLessThan(-0.4);
   });
 });
 
@@ -433,7 +521,12 @@ test.describe("fallback & responsive", () => {
     const errors: string[] = [];
     page.on("console", (msg) => msg.type() === "error" && errors.push(msg.text()));
     page.on("pageerror", (err) => errors.push(String(err)));
-    for (const slug of ["kinematics", "newton-laws", "energy-momentum", "oscillations", "waves", "gravitation"]) {
+    for (const slug of [
+      "kinematics", "newton-laws", "energy-momentum", "oscillations", "waves", "gravitation",
+      "electrostatics", "voltage", "current-ohm", "current-power", "magnets",
+      "electromagnets-motor", "sound", "em-spectrum", "reflection-mirrors",
+      "refraction-lenses", "vision",
+    ]) {
       await page.goto(`/en/chapter/${slug}`);
       await expect(page.locator("article h1")).toBeVisible();
       await page.waitForTimeout(400);
