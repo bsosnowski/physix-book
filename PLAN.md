@@ -256,13 +256,16 @@ suggested experiments ("Set θ=45°, verify range is maximal") → exercises.
 
 ## 6. Milestones
 
-### M0 — Skeleton (day 1)
-- [ ] Vite + React + TS + Tailwind scaffold, router, dark theme.
-- [ ] MDX pipeline with KaTeX; one dummy chapter renders.
-- [ ] Sidebar from chapter manifest; prev/next nav; responsive drawer.
-- [ ] **i18n plumbing**: `/:locale/…` routes, i18next + `en`/`pl` UI catalogs,
+### M0 — Skeleton (day 1) ✅ DONE
+- [x] Vite + React + TS + Tailwind scaffold, router, dark theme.
+- [x] MDX pipeline with KaTeX; two EN chapters + one PL translation render.
+- [x] Sidebar from chapter manifest (`virtual:chapters`); prev/next nav;
+      responsive drawer; section deep-links.
+- [x] **i18n plumbing**: `/:locale/…` routes, i18next + `en`/`pl` UI catalogs,
       language switcher (keeps current chapter), locale-aware manifest,
       per-locale content dirs with `pl → en` fallback + "untranslated" banner.
+- [x] Bonus (pulled from M1): `i18n:status` script with sourceHash staleness
+      tracking; Vitest set up with manifest tests.
 
 ### M1 — Widget framework (days 2–4)
 - [ ] `core/`: vec2, fixed-timestep integrators (semi-implicit Euler, RK4).
