@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import manifest from "virtual:chapters";
 import { FALLBACK_CHAIN, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
@@ -12,6 +12,8 @@ export function Sidebar() {
   const { t } = useTranslation();
   const { sidebarOpen, setSidebarOpen } = useAppStore();
   const [query, setQuery] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const chain = FALLBACK_CHAIN[locale as Locale] ?? [DEFAULT_LOCALE];
   const sourceChapters = manifest[DEFAULT_LOCALE] ?? [];
@@ -100,6 +102,23 @@ export function Sidebar() {
                       <li key={s.id}>
                         <a
                           href={`#${s.id}`}
+                          onClick={(e) => {
+                            // Plain anchors don't notify the router; push the
+                            // hash through it so the reader scrolls reliably
+                            // (and re-clicking the same section works too).
+                            e.preventDefault();
+                            setSidebarOpen(false);
+                            const target = `/${locale}/chapter/${ch.slug}#${s.id}`;
+                            if (location.pathname + location.hash === target) {
+                              // Same anchor clicked again: no router event will
+                              // fire, so scroll directly.
+                              document
+                                .getElementById(s.id)
+                                ?.scrollIntoView({ block: "start" });
+                            } else {
+                              void navigate(target);
+                            }
+                          }}
                           className="block rounded px-1.5 py-1 text-xs text-zinc-500 hover:text-sky-700 dark:hover:text-sky-400"
                         >
                           {s.title}

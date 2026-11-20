@@ -95,6 +95,42 @@ test.describe("content rendering", () => {
     await page.goto("/pl/chapter/kinematics");
     await expect(page.locator("#rzut-ukosny")).toHaveText("Rzut ukośny");
   });
+
+  test("deep link with #section scrolls to the heading after async load", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations#damping");
+    await expect(page.locator("article h1")).toBeVisible();
+    await expect
+      .poll(async () => page.locator("#damping").evaluate((el) => Math.abs(el.getBoundingClientRect().top)), { timeout: 5000 })
+      .toBeLessThan(120); // near viewport top (below fixed header)
+  });
+
+  test("sidebar subsection links scroll reliably, including re-clicks", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const nearTop = (id: string) =>
+      page.locator(`#${id}`).evaluate((el) => Math.abs(el.getBoundingClientRect().top));
+
+    // 1st subsection click
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => nearTop("damping"), { timeout: 5000 }).toBeLessThan(120);
+    await expect(page).toHaveURL(/#damping$/);
+
+    // scroll away manually, then RE-CLICK the same link (same-hash case)
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect.poll(() => nearTop("damping")).toBeGreaterThan(300);
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => nearTop("damping"), { timeout: 5000 }).toBeLessThan(120);
+
+    // switch to another subsection
+    await aside.getByRole("link", { name: "The pendulum", exact: true }).click();
+    await expect.poll(() => nearTop("the-pendulum"), { timeout: 5000 }).toBeLessThan(120);
+
+    // rapid double-switch should settle on the last target
+    await aside.getByRole("link", { name: "The harmonic oscillator", exact: true }).click();
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => nearTop("damping"), { timeout: 5000 }).toBeLessThan(120);
+  });
 });
 
 test.describe("simulation widget — projectile", () => {

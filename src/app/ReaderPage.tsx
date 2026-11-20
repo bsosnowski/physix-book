@@ -1,5 +1,5 @@
-import { useEffect, useState, type ComponentType } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useCallback, useEffect, useState, type ComponentType } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MDXProvider } from "@mdx-js/react";
 import { loadChapter } from "virtual:chapter-loader";
@@ -11,11 +11,31 @@ type Status = "loading" | "ready" | "notfound";
 
 export function ReaderPage() {
   const { locale = DEFAULT_LOCALE, slug = "" } = useParams();
+  const { hash } = useLocation();
   const { t } = useTranslation();
   const [Chapter, setChapter] = useState<ComponentType | null>(null);
   const [status, setStatus] = useState<Status>("loading");
   const [fellBack, setFellBack] = useState(false);
   const [resolvedLocale, setResolvedLocale] = useState<string>(locale);
+
+  /**
+   * Scroll to the section in the URL hash. Headings render asynchronously
+   * (lazy MDX chunk), so retry briefly until the element exists. The fixed
+   * header is compensated by the headings' scroll-mt classes.
+   */
+  const scrollToHash = useCallback((rawHash: string) => {
+    if (!rawHash) return false;
+    let id = rawHash.slice(1);
+    try {
+      id = decodeURIComponent(id);
+    } catch {
+      /* keep raw */
+    }
+    const el = document.getElementById(id);
+    if (!el) return false;
+    el.scrollIntoView({ block: "start" });
+    return true;
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -33,7 +53,8 @@ export function ReaderPage() {
             setFellBack(loc !== locale);
             setResolvedLocale(loc);
             setStatus("ready");
-            window.scrollTo(0, 0);
+            // Deep link: honour #section if present, else start at the top.
+            if (!scrollToHash(window.location.hash)) window.scrollTo(0, 0);
             return;
           }
         }
@@ -47,7 +68,23 @@ export function ReaderPage() {
     return () => {
       cancelled = true;
     };
-  }, [locale, slug]);
+  }, [locale, slug, scrollToHash]);
+
+  // Same-chapter anchor navigation (sidebar subsection links): the chapter
+  // effect above does not re-run, so handle hash changes here. Retry a few
+  // frames in case the heading is still mounting.
+  useEffect(() => {
+    if (status !== "ready" || !hash) return;
+    if (scrollToHash(hash)) return;
+    let tries = 0;
+    let raf = 0;
+    const retry = () => {
+      if (scrollToHash(hash) || ++tries > 30) return;
+      raf = requestAnimationFrame(retry);
+    };
+    raf = requestAnimationFrame(retry);
+    return () => cancelAnimationFrame(raf);
+  }, [hash, status, scrollToHash]);
 
   if (status === "loading") {
     return (
