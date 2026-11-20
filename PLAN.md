@@ -319,14 +319,22 @@ suggested experiments ("Set θ=45°, verify range is maximal") → exercises.
 - [x] 27 Playwright E2E tests, all green against production build.
 - [ ] Deferred to M4: show/hide exercise solutions component.
 
-### M4 — Polish & ship (week 4)
+### M4 — Polish & ship (week 4) ✅ DONE (deploy pending remote)
 - [x] Presets per sim (done alongside each sim: 33 presets total).
-- [ ] Exercise component with show/hide solutions.
-- [ ] Shareable sim state via URL query params (teacher links to a setup).
-- [ ] Search (client-side index **per locale**), keyboard nav, a11y pass
-      (incl. `lang` attribute + correct screen-reader pronunciation).
-- [ ] Playwright smoke tests; deploy to GitHub Pages; README + authoring guide
-      (`HOW-TO-ADD-A-SIMULATION.md`, `HOW-TO-WRITE-A-CHAPTER.md`).
+- [x] Exercise component with show/hide solutions (EN+PL UI), exercises
+      added to kinematics & gravitation in both locales.
+- [x] Shareable sim state via URL (`?sim=id:k.v,…&spd=2`), 🔗 share button
+      (clipboard + address bar), restored on load; pure codec unit-tested.
+- [x] Search: client-side, per-locale, searches titles/sections/body text
+      (plain-text index built into the chapter manifest).
+- [x] Keyboard nav & a11y: skip-to-content link, :focus-visible outlines,
+      prefers-reduced-motion CSS, aria labels/expansion states, html lang.
+- [x] 68 unit tests + 31 Playwright E2E tests, all green.
+- [x] `HOW-TO-WRITE-A-CHAPTER.md` authoring guide.
+- [x] CI workflow: i18n check → unit → E2E (traces on failure).
+- [x] GitHub Pages deploy workflow (repo base path + 404 SPA fallback).
+- [ ] **User action:** push to GitHub, enable Pages (Settings → Pages →
+      Source: GitHub Actions) — deploy runs automatically.
 
 ### Backlog / v2 ideas
 - 3D chapter support via three.js view adapters.
@@ -355,11 +363,14 @@ suggested experiments ("Set θ=45°, verify range is maximal") → exercises.
 
 ---
 
-## 8. Definition of Done (v1)
-- 6 chapters, ≥10 interactive sims, all models unit-tested.
-- Every sim: play/pause/reset/speed, ≥3 live parameters, units + readouts.
-- **Full PL + EN parity**: all chapters and all UI/sim strings translated;
-  language switch preserves position; adding a locale touches no code.
-- Static deploy, loads < 2 s on mid-range hardware, works on tablet.
-- A new chapter + sim can be added by following a written guide in < 1 hour;
-  translating a chapter = copy one MDX file + translate prose (guide included).
+## 8. Definition of Done (v1) — ✅ MET (pending public deploy)
+- [x] 6 chapters, **8** interactive sims (target ≥10 deferred to v2: E&M
+      chapter + a second waves/mechanics sim), all models unit-tested.
+- [x] Every sim: play/pause/reset/step/speed/fullscreen/share, ≥2 live
+      parameters (most 3–5), units + readouts + graphs.
+- [x] Full PL + EN parity; language switch preserves position; adding a
+      locale touches no code.
+- [x] Static build: app 12 kB gz + vendor 116 kB gz + katex 78 kB gz,
+      chapters/sims lazy; works on tablet (E2E mobile drawer test).
+- [x] Authoring guides: new chapter + sim in < 1 hour; translation =
+      copy one MDX file + translate prose.

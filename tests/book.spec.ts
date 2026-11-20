@@ -321,6 +321,65 @@ test.describe("simulation widget — waves & orbits", () => {
   });
 });
 
+test.describe("M4 features", () => {
+  test("exercise: solution hidden by default, toggles in both locales", async ({ page }) => {
+    await page.goto("/en/chapter/kinematics");
+    const ex = page.locator("article div", { hasText: "Range on the Moon" }).last();
+    await expect(page.getByText("about six Earth ranges")).toBeHidden();
+    await page.getByRole("button", { name: "Show solution" }).first().click();
+    await expect(page.getByText("about six Earth ranges")).toBeVisible();
+    await page.getByRole("button", { name: "Hide solution" }).first().click();
+    await expect(page.getByText("about six Earth ranges")).toBeHidden();
+    void ex;
+    await page.goto("/pl/chapter/kinematics");
+    await page.getByRole("button", { name: "Pokaż rozwiązanie" }).first().click();
+    await expect(page.getByText("około sześć zasięgów ziemskich")).toBeVisible();
+  });
+
+  test("share: URL encodes params; reload restores the setup", async ({ page }) => {
+    await page.goto("/en/chapter/kinematics");
+    const w = widget(page);
+    await showWidget(page, w);
+    await w.getByRole("button", { name: "Moon" }).click();
+    await w.getByRole("button", { name: /Pause/ }).click();
+    await w.getByTitle("Copy link to this setup").click();
+    await expect(page).toHaveURL(/sim=projectile/);
+    const url = page.url();
+    expect(url).toContain("g.1.62");
+    // fresh load of the shared URL restores gravity 1.62 on the slider
+    await page.goto(url);
+    const w2 = widget(page);
+    await expect(w2).toBeAttached();
+    await expect(w2.getByLabel("Gravity")).toHaveValue("1.62");
+    await expect(w2.getByLabel("Gravity").locator("..")).toContainText("1.62");
+  });
+
+  test("search filters chapters by body text, per locale", async ({ page }) => {
+    await page.goto("/en/");
+    const search = page.getByLabel("Search", { exact: true });
+    await search.fill("restitution");
+    const items = page.locator("aside nav ol > li > a");
+    await expect(items).toHaveCount(1);
+    await expect(items.first()).toContainText("Energy & Momentum");
+    await search.fill("zzzz-no-match");
+    await expect(page.getByText("No results")).toBeVisible();
+    await search.fill("");
+    await expect(items).toHaveCount(6);
+    // Polish body search
+    await page.goto("/pl/");
+    await page.getByLabel("Szukaj", { exact: true }).fill("wahadło");
+    expect(await page.locator("aside nav ol > li > a").count()).toBeGreaterThanOrEqual(1);
+  });
+
+  test("skip link is keyboard-reachable", async ({ page }) => {
+    await page.goto("/en/");
+    await page.keyboard.press("Tab");
+    const skip = page.getByRole("link", { name: "Skip to content" });
+    await expect(skip).toBeFocused();
+    await expect(skip).toBeVisible();
+  });
+});
+
 test.describe("fallback & responsive", () => {
   test("mobile: sidebar is a drawer opened by hamburger", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });

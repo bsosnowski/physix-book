@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 import { loadSim } from "../registry";
 import {
   defaultParams,
@@ -16,6 +17,7 @@ import {
 import { ControlPanel } from "./ControlPanel";
 import { Plot } from "./Plots";
 import { useHighlight } from "./highlight";
+import { decodeSimParams, decodeSpeed, encodeSimParams } from "./urlState";
 import { formatQuantity } from "../core/units";
 import { useAppStore } from "@/app/store";
 
@@ -46,7 +48,9 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   const [speed, setSpeed] = useState(1);
   const [readout, setReadout] = useState<Record<string, number>>({});
   const [fullscreen, setFullscreen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const setHoverVar = useHighlight((s) => s.setHoverVar);
+  const [, setSearchParams] = useSearchParams();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,7 +94,13 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     void loadSim(id)
       .then((m) => {
         if (cancelled) return;
-        const initial = { ...defaultParams(m.model), ...paramOverrides };
+        const initial = {
+          ...defaultParams(m.model),
+          ...paramOverrides,
+          ...decodeSimParams(window.location.search)[id],
+        };
+        const urlSpeed = decodeSpeed(window.location.search);
+        if (urlSpeed) setSpeed(urlSpeed);
         setModule(m);
         setParams(initial);
         stateRef.current = m.model.init(initial);
@@ -286,6 +296,26 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     return () => cancelAnimationFrame(raf);
   }, [module, sample]);
 
+  /** Copy a deep link reproducing this widget's parameters and speed. */
+  const share = useCallback(() => {
+    const all = decodeSimParams(window.location.search);
+    all[id] = paramsRef.current;
+    const sp = new URLSearchParams(window.location.search);
+    sp.set("sim", encodeSimParams(all));
+    if (speedRef.current !== 1) sp.set("spd", String(speedRef.current));
+    else sp.delete("spd");
+    const url = `${window.location.origin}${window.location.pathname}?${sp.toString()}`;
+    void navigator.clipboard?.writeText(url).then(
+      () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      },
+      () => {},
+    );
+    // also reflect in the address bar so a plain copy of the URL works
+    setSearchParams(sp, { replace: true });
+  }, [id, setSearchParams]);
+
   const reducedMotion = useMemo(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     [],
@@ -360,6 +390,13 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
             ))}
           </select>
         </label>
+        <button
+          onClick={share}
+          title={t("toolbar.share")}
+          className="rounded-md border border-zinc-300 px-2.5 py-1 text-sm hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800"
+        >
+          {copied ? "✓" : "🔗"}
+        </button>
         <button
           onClick={() => setFullscreen(!fullscreen)}
           title={t(fullscreen ? "toolbar.exitFullscreen" : "toolbar.fullscreen")}

@@ -10,7 +10,8 @@
     "home": "Home",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "language": "Language"
+    "language": "Language",
+    "skipToContent": "Skip to content"
   },
   "reader": {
     "untranslated": "This chapter is not yet available in your language — showing the English version.",
@@ -25,5 +26,16 @@
   },
   "theme": {
     "toggle": "Toggle dark mode"
+  },
+  "exercise": {
+    "label": "Exercise",
+    "showSolution": "Show solution",
+    "hideSolution": "Hide solution",
+    "solution": "Solution"
+  },
+  "search": {
+    "placeholder": "Search chapters…",
+    "noResults": "No results",
+    "label": "Search"
   }
 }

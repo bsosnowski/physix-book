@@ -1,5 +1,5 @@
 ---
-sourceHash: 3c83fe109eff
+sourceHash: 87d61c846180
 slug: gravitation
 order: 6
 title: Grawitacja i orbity
@@ -79,3 +79,31 @@ gdzie $a = -\mu/2\varepsilon$ to półoś wielka.
 
 > Wszystko to się skaluje: podstaw $\mu = GM_{Ziemi}$, a metry zamień
 > na kilometry — i liczysz prawdziwe orbity satelitów.
+
+<Exercise title="Budżet ucieczki">
+Jesteś na orbicie kołowej o promieniu $r_0$. Ile razy musisz zwiększyć
+prędkość, aby uciec? Ile dodatkowej energii kinetycznej to oznacza
+względem orbity kołowej?
+
+<Solution>
+$v_{esc}/v_{circ} = \sqrt{2} \approx 1{,}41$ — wystarczy 41% szybciej.
+Energia kinetyczna rośnie jak $v^2$, więc dokładnie **dwukrotnie**.
+Sprawdź odczyty: ustawienie kołowe ≈ 4,08 m/s, ucieczka wymaga ≈ 5,77 m/s.
+</Solution>
+</Exercise>
+
+<Exercise title="Dlaczego symplektyczność ma znaczenie">
+Wykres dryfu pokazuje, że błąd energii pozostaje ograniczony przez
+minuty symulacji. Energia naiwnego całkatora Eulera rośnie bez granic.
+Wyjaśnij, dlaczego ograniczony dryf jest kluczowy dla planety krążącej
+miliard lat — i dlaczego moment pędu jest tu zachowany *dokładnie*.
+
+<Solution>
+Velocity Verlet jest symplektyczny: dokładnie zachowuje pobliski
+hamiltonian „cieniowy”, więc błąd energii oscyluje w stałym paśmie,
+zamiast się kumulować. Siły centralne dają zerowy moment obrotowy
+względem gwiazdy, a aktualizacje Verleta utrzymują
+$\vec{r}\times\vec{v}$ niezmiennym z dokładnością do zaokrągleń —
+stąd odczyt dryfu h ≈ 0%.
+</Solution>
+</Exercise>

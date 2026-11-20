@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import manifest from "virtual:chapters";
@@ -10,6 +11,7 @@ export function Sidebar() {
   const { locale = DEFAULT_LOCALE, slug } = useParams();
   const { t } = useTranslation();
   const { sidebarOpen, setSidebarOpen } = useAppStore();
+  const [query, setQuery] = useState("");
 
   const chain = FALLBACK_CHAIN[locale as Locale] ?? [DEFAULT_LOCALE];
   const sourceChapters = manifest[DEFAULT_LOCALE] ?? [];
@@ -20,6 +22,17 @@ export function Sidebar() {
     }
     return { ...ch, untranslated: true };
   });
+
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? chapters.filter(
+        (ch) =>
+          ch.title.toLowerCase().includes(q) ||
+          ch.description?.toLowerCase().includes(q) ||
+          ch.text.toLowerCase().includes(q) ||
+          ch.sections.some((s) => s.title.toLowerCase().includes(q)),
+      )
+    : chapters;
 
   return (
     <>
@@ -42,9 +55,20 @@ export function Sidebar() {
         <h2 className="mb-3 px-2 font-sans text-xs font-semibold tracking-widest text-zinc-400 uppercase">
           {t("nav.chapters")}
         </h2>
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t("search.placeholder")}
+          aria-label={t("search.label")}
+          className="mb-3 w-full rounded-md border border-zinc-300 bg-transparent px-2.5 py-1.5 text-sm placeholder:text-zinc-400 focus:border-sky-400 focus:outline-none dark:border-zinc-700"
+        />
+        {q && filtered.length === 0 && (
+          <p className="px-2 text-sm text-zinc-400">{t("search.noResults")}</p>
+        )}
         <nav>
           <ol className="space-y-0.5">
-            {chapters.map((ch) => (
+            {filtered.map((ch) => (
               <li key={ch.slug}>
                 <NavLink
                   to={`/${locale}/chapter/${ch.slug}`}

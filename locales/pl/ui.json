@@ -10,7 +10,8 @@
     "home": "Strona główna",
     "openMenu": "Otwórz menu",
     "closeMenu": "Zamknij menu",
-    "language": "Język"
+    "language": "Język",
+    "skipToContent": "Przejdź do treści"
   },
   "reader": {
     "untranslated": "Ten rozdział nie jest jeszcze dostępny w Twoim języku — wyświetlamy wersję angielską.",
@@ -25,5 +26,16 @@
   },
   "theme": {
     "toggle": "Przełącz tryb ciemny"
+  },
+  "exercise": {
+    "label": "Ćwiczenie",
+    "showSolution": "Pokaż rozwiązanie",
+    "hideSolution": "Ukryj rozwiązanie",
+    "solution": "Rozwiązanie"
+  },
+  "search": {
+    "placeholder": "Szukaj w rozdziałach…",
+    "noResults": "Brak wyników",
+    "label": "Szukaj"
   }
 }

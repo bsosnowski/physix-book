@@ -7,6 +7,7 @@ declare module "virtual:chapters" {
     title: string;
     description?: string;
     sections: { id: string; title: string }[];
+    text: string;
   }
   const manifest: Record<string, ChapterMeta[]>;
   export default manifest;

@@ -1,5 +1,5 @@
 ---
-sourceHash: c10b35264012
+sourceHash: 86d4c8f09a6b
 slug: kinematics
 order: 1
 title: Kinematyka — geometria ruchu
@@ -73,3 +73,28 @@ i jest największy dla $\theta = 45^\circ$. Sprawdź to samodzielnie:
 
 > Przerywana krzywa to idealna parabola; ciągły ślad to wynik równań
 > ruchu dla Twoich ustawień.
+
+<Exercise title="Zasięg na Księżycu">
+Astronauci uderzają piłeczkę golfową z $v_0 = 20$ m/s pod kątem
+$\theta = 45^\circ$ na Księżycu ($g = 1{,}62$ m/s²). Jak daleko poleci
+i jak długo będzie w powietrzu?
+
+<Solution>
+$R = v_0^2 \sin 2\theta / g = 400 / 1{,}62 \approx 247$ m — około sześć
+zasięgów ziemskich. Czas lotu $t = 2 v_0 \sin\theta / g \approx 17{,}5$ s.
+Sprawdź oba wyniki ustawieniem **Księżyc**.
+</Solution>
+</Exercise>
+
+<Exercise title="Dwa kąty, jeden cel">
+Pokaż, że $\theta$ i $90^\circ - \theta$ dają ten sam zasięg. Który rzut
+trafi wcześniej, a który przeleci nad wysokim murem?
+
+<Solution>
+$\sin 2(90^\circ - \theta) = \sin(180^\circ - 2\theta) = \sin 2\theta$,
+więc $R$ jest identyczny. Niższy kąt ma mniejsze $v_{0y}$, czyli krótszy
+lot — trafia wcześniej. Wyższy kąt osiąga większe apogeum
+($\propto \sin^2\theta$), więc przelatuje nad murem. Porównaj $30^\circ$
+i $60^\circ$ w symulacji.
+</Solution>
+</Exercise>

@@ -16,6 +16,12 @@ export function AppShell() {
 
   return (
     <div className="min-h-screen">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[70] focus:rounded-md focus:bg-sky-600 focus:px-3 focus:py-1.5 focus:text-white"
+      >
+        {t("nav.skipToContent")}
+      </a>
       <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center gap-3 border-b border-zinc-200 bg-white/90 px-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/90">
         <button
           className="rounded-md p-1.5 hover:bg-zinc-100 lg:hidden dark:hover:bg-zinc-900"
@@ -48,7 +54,7 @@ export function AppShell() {
 
       <Sidebar />
 
-      <main className="pt-14 lg:pl-72">
+      <main id="main-content" className="pt-14 lg:pl-72">
         <Outlet />
       </main>
     </div>

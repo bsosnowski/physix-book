@@ -75,3 +75,30 @@ $T^2 \propto a^3$, where $a = -\mu/2\varepsilon$ is the semi-major axis.
 
 > Everything here scales: replace $\mu$ with $GM_{Earth}$ and distances
 > in metres with kilometres, and you are computing real satellite orbits.
+
+<Exercise title="Escape budget">
+You are in a circular orbit at $r_0$. By what *factor* must you increase
+your speed to escape? How much extra kinetic energy is that, relative to
+the circular orbit?
+
+<Solution>
+$v_{esc}/v_{circ} = \sqrt{2} \approx 1{,}41$ — only 41% faster. Kinetic
+energy scales as $v^2$, so it exactly **doubles**. Check with the
+readouts: circular preset speed ≈ 4.08 m/s, escape needs ≈ 5.77 m/s.
+</Solution>
+</Exercise>
+
+<Exercise title="Why symplectic matters">
+The drift graph shows energy error staying bounded for minutes of
+simulation. A naive Euler integrator's energy grows without limit.
+Explain why bounded drift matters for a planet orbiting for a billion
+years — and why angular momentum here is conserved *exactly*.
+
+<Solution>
+Velocity Verlet is symplectic: it exactly preserves a nearby
+"shadow" Hamiltonian, so energy error oscillates within a fixed band
+instead of accumulating. Central forces produce zero torque about the
+star, and Verlet's kick-drift-kick updates keep $\vec{r}\times\vec{v}$
+invariant to round-off — hence the ~0% h-drift readout.
+</Solution>
+</Exercise>

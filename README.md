@@ -4,10 +4,20 @@ An interactive, multilingual physics textbook: chapters with prose and
 equations on the page, live animated simulations with parameter controls
 embedded in the narrative. See [PLAN.md](./PLAN.md) for the full roadmap.
 
-**Status: M3 complete** — 6 chapters (EN + PL), 8 interactive simulations
-(projectile, incline, collisions, pendulum, spring, standing waves,
-interference, orbits) with live graphs, presets, EN/PL labels, and
-param↔equation highlighting. 63 unit tests + 27 Playwright E2E tests.
+**Status: v1 (M4 complete)** — 6 chapters (EN + PL), 8 interactive
+simulations with live graphs, presets, shareable setups (🔗), exercises
+with hidden solutions, full-text search, param↔equation highlighting.
+68 unit tests + 31 Playwright E2E tests. See [PLAN.md](./PLAN.md).
+
+Authoring guides: [write a chapter](./HOW-TO-WRITE-A-CHAPTER.md) ·
+[add a simulation](./HOW-TO-ADD-A-SIMULATION.md)
+
+## Deploying
+
+Push to GitHub and enable **Settings → Pages → Source: GitHub Actions**;
+`.github/workflows/deploy.yml` builds with the repo base path and adds an
+SPA fallback. CI (`.github/workflows/ci.yml`) runs the i18n check, unit
+tests and the full Playwright suite on every push/PR.
 
 ## Quick start
 

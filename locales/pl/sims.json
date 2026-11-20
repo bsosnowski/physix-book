@@ -6,7 +6,8 @@
     "step": "Krok",
     "speed": "Prędkość",
     "fullscreen": "Pełny ekran",
-    "exitFullscreen": "Zamknij pełny ekran"
+    "exitFullscreen": "Zamknij pełny ekran",
+    "share": "Kopiuj link do tych ustawień"
   },
   "widget": {
     "presets": "Ustawienia",

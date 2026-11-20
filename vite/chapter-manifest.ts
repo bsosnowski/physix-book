@@ -12,6 +12,8 @@ export interface ChapterMeta {
   title: string;
   description?: string;
   sections: { id: string; title: string }[];
+  /** Plain-text body for client-side search (frontmatter/JSX/math stripped). */
+  text: string;
 }
 
 export type ChapterManifest = Record<string, ChapterMeta[]>;
@@ -26,13 +28,22 @@ export function buildManifest(contentDir: string): ChapterManifest {
     const chapters: ChapterMeta[] = [];
     for (const file of fs.readdirSync(chaptersDir)) {
       if (!file.endsWith(".mdx")) continue;
-      const { data } = matter.read(path.join(chaptersDir, file));
+      const { data, content } = matter.read(path.join(chaptersDir, file));
+      const text = content
+        .replace(/\$\$[\s\S]*?\$\$/g, " ") // display math
+        .replace(/\$[^$\n]*\$/g, " ") // inline math
+        .replace(/<[^>]*>/g, " ") // JSX tags
+        .replace(/[#>*_`|]/g, " ") // md punctuation
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 4000);
       chapters.push({
         slug: data.slug ?? file.replace(/^\d+-/, "").replace(/\.mdx$/, ""),
         order: data.order ?? 999,
         title: data.title ?? file,
         description: data.description,
         sections: data.sections ?? [],
+        text,
       });
     }
     manifest[locale] = chapters.sort((a, b) => a.order - b.order);

@@ -6,7 +6,8 @@
     "step": "Step",
     "speed": "Speed",
     "fullscreen": "Fullscreen",
-    "exitFullscreen": "Exit fullscreen"
+    "exitFullscreen": "Exit fullscreen",
+    "share": "Copy link to this setup"
   },
   "widget": {
     "presets": "Presets",
