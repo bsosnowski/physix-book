@@ -1,0 +1,110 @@
+---
+slug: sound
+order: 13
+title: Sound
+description: Longitudinal waves, pitch and loudness, beats and the Doppler effect.
+sections:
+  - id: what-sound-is
+    title: What sound is
+  - id: beats
+    title: Beats
+  - id: the-doppler-effect
+    title: The Doppler effect
+---
+
+# Sound
+
+Sound is a wave you can feel in your chest. Unlike the string waves of
+chapter 5, air cannot carry shear — so sound is **longitudinal**: the
+air molecules oscillate *along* the direction of travel, creating
+compressions and rarefactions.
+
+## What sound is
+
+A speaker cone pushes and pulls; pressure ripples propagate at
+≈ 343 m/s in room-temperature air (faster in water ≈ 1480 m/s, steel
+≈ 5000 m/s — stiffer media transmit faster). The universal wave relation
+holds:
+
+$$
+v = \lambda f
+$$
+
+- **Frequency ↔ pitch**: 300 Hz is a low hum, 800 Hz a clear tone.
+- **Amplitude ↔ loudness**: measured logarithmically in decibels;
+  halving amplitude drops about 6 dB.
+
+<Sim id="sound" />
+
+Watch the particles: they jiggle left–right (along the wave!), never
+travelling with it. The dark bands are compressions — that is what your
+eardrum feels.
+
+## Beats
+
+Two nearby frequencies superpose into a tone that *throbs*:
+
+$$
+\sin(2\pi f_1 t) + \sin(2\pi f_2 t)
+= 2\cos\!\left(2\pi \tfrac{f_1-f_2}{2} t\right)\sin\!\left(2\pi \tfrac{f_1+f_2}{2} t\right)
+$$
+
+The envelope pulses at the **beat frequency** $|f_1 - f_2|$. Piano
+tuners listen for the throbbing to slow to zero. Try it with your ears:
+
+<Tone f1={300} f2={340} />
+
+Set f₂ a few Hz from f₁ and count the slow wah-wah-wah. Now set them
+equal — one steady tone. That null is how instruments get tuned.
+
+**Experiments to try**
+
+1. **Beats** preset in the simulation: the probe graph shows the
+   envelope; the readout says 40 Hz. (The animation is slowed so your
+   eye can follow — your ears above hear the real frequencies.)
+2. **Octave**: 200 + 400 Hz — no throbbing, a consonant blend. Beats
+   need *close* frequencies.
+3. Halve the amplitude: the loudness readout drops ≈ 6 dB, the pattern
+   is unchanged.
+
+## The Doppler effect
+
+A moving source chases its own wavefronts: ahead of it they bunch
+(shorter λ, higher pitch), behind they stretch:
+
+$$
+f_{ahead} = \frac{f_0}{1 - \beta}, \qquad
+f_{behind} = \frac{f_0}{1 + \beta}, \qquad \beta = \frac{v_{source}}{v_{sound}}
+$$
+
+<Sim id="sound" params={{ f1: 400, doppler: 0.5 }} />
+
+**Experiments:** raise <M v="doppler">\beta</M> toward 0.8 — the heard-
+ahead frequency explodes toward infinity as the source approaches the
+wave speed. At $\beta = 1$ the fronts pile into a single shock: the
+sonic boom. Ambulances, race cars and redshifted galaxies all run this
+same equation.
+
+<Exercise title="Tuning by beats">
+A tuning fork at 440 Hz sounds against a piano string; you hear 3 beats
+per second. Is the string at 437 or 443 Hz? How can one small
+adjustment tell you which?
+
+<Solution>
+Either — beats give $|f - 440| = 3$. Tighten the string slightly
+(raises f): if beats *slow*, you were at 437 moving toward 440; if they
+*speed up*, you were at 443 moving away. The direction of change
+disambiguates.
+</Solution>
+</Exercise>
+
+<Exercise title="Ambulance arithmetic">
+A siren at 800 Hz approaches at 30 m/s (sound: 343 m/s). What frequency
+do you hear before and after it passes? What is the total drop?
+
+<Solution>
+Approaching: $800/(1 - 30/343) \approx 879$ Hz. Receding:
+$800/(1 + 30/343) \approx 736$ Hz. The famous *nee-naw* drop is ≈ 143 Hz
+— about three semitones, right in the ear's most sensitive range.
+</Solution>
+</Exercise>

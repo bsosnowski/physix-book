@@ -398,5 +398,34 @@
     "view": {
       "dragHint": "przeciągaj ładunki · zmieniaj znaki suwakami"
     }
+  },
+  "sound": {
+    "title": "Dźwięk — fale podłużne",
+    "param": {
+      "f1": "Częstotliwość 1",
+      "f2": "Częstotliwość 2 (0 = wył.)",
+      "A": "Amplituda",
+      "doppler": "Prędkość źródła v/c"
+    },
+    "readout": {
+      "lambda1": "Długość fali w powietrzu",
+      "beat": "Częstotliwość dudnień",
+      "fAhead": "Słyszane z przodu",
+      "fBehind": "Słyszane z tyłu",
+      "spl": "Głośność (wzgl.)"
+    },
+    "plot": {
+      "probe": "Ciśnienie przy sondzie od czasu"
+    },
+    "preset": {
+      "pure": "Czysty ton",
+      "beats": "Dudnienia (300 + 340 Hz)",
+      "octave": "Oktawa (200 + 400 Hz)",
+      "siren": "Jadąca syrena"
+    },
+    "view": {
+      "legend": "cząsteczki drgają wzdłuż fali — zagęszczenia i rozrzedzenia",
+      "doppler": "czoła fali ściskają się z przodu, rozciągają z tyłu"
+    }
   }
 }

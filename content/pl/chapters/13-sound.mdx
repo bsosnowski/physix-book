@@ -1,0 +1,112 @@
+---
+sourceHash: 2ed86ab8af8f
+slug: sound
+order: 13
+title: Dźwięk
+description: Fale podłużne, wysokość i głośność, dudnienia i efekt Dopplera.
+sections:
+  - id: czym-jest-dzwiek
+    title: Czym jest dźwięk
+  - id: dudnienia
+    title: Dudnienia
+  - id: efekt-dopplera
+    title: Efekt Dopplera
+---
+
+# Dźwięk
+
+Dźwięk to fala, którą czujesz w klatce piersiowej. W przeciwieństwie do
+fal na strunie z rozdziału 5, powietrze nie przenosi ścinania — więc
+dźwięk jest **podłużny**: cząsteczki drgają *wzdłuż* kierunku biegu fali,
+tworząc zagęszczenia i rozrzedzenia.
+
+## Czym jest dźwięk
+
+Membrana głośnika pcha i ciągnie; fale ciśnienia biegną z prędkością
+≈ 343 m/s w powietrzu pokojowym (szybciej w wodzie ≈ 1480 m/s, w stali
+≈ 5000 m/s — sztywniejsze ośrodki przekazują szybciej). Obowiązuje
+uniwersalna relacja falowa:
+
+$$
+v = \lambda f
+$$
+
+- **Częstotliwość ↔ wysokość**: 300 Hz to niski buczenie, 800 Hz czysty
+  ton.
+- **Amplituda ↔ głośność**: mierzona logarytmicznie w decybelach;
+  połowa amplitudy to spadek o około 6 dB.
+
+<Sim id="sound" />
+
+Patrz na cząsteczki: dygoczą lewo–prawo (wzdłuż fali!), nigdy nie
+wędrują razem z nią. Ciemne pasma to zagęszczenia — to czuje twoja
+błona bębenkowa.
+
+## Dudnienia
+
+Dwie bliskie częstotliwości składają się w ton, który *pulsuje*:
+
+$$
+\sin(2\pi f_1 t) + \sin(2\pi f_2 t)
+= 2\cos\!\left(2\pi \tfrac{f_1-f_2}{2} t\right)\sin\!\left(2\pi \tfrac{f_1+f_2}{2} t\right)
+$$
+
+Obwiednia pulsuje z **częstotliwością dudnień** $|f_1 - f_2|$. Stroiciele
+fortepianów nasłuchują, aż pulsowanie zwolni do zera. Sprawdź uszami:
+
+<Tone f1={300} f2={340} />
+
+Ustaw f₂ kilka Hz od f₁ i policz powolneła-ła-ła. Teraz ustaw je równo —
+jeden równy ton. To zero jest tym, po czym stroi się instrumenty.
+
+**Eksperymenty do wypróbowania**
+
+1. Ustawienie **Dudnienia** w symulacji: wykres sondy pokazuje
+   obwiednię; odczyt mówi 40 Hz. (Animacja jest spowolniona, żeby oko
+   nadążyło — uszy powyżej słyszą prawdziwe częstotliwości.)
+2. **Oktawa**: 200 + 400 Hz — żadnego pulsowania, współbrzmienie.
+   Dudnienia wymagają *bliskich* częstotliwości.
+3. Zmniejsz amplitudę o połowę: odczyt głośności spada ≈ 6 dB, wzór bez
+   zmian.
+
+## Efekt Dopplera
+
+Ruchome źródło goni własne czoła fali: przed nim się ściskają (krótsza
+λ, wyższy ton), za nim rozciągają:
+
+$$
+f_{przod} = \frac{f_0}{1 - \beta}, \qquad
+f_{tyl} = \frac{f_0}{1 + \beta}, \qquad \beta = \frac{v_{zrodla}}{v_{dzwieku}}
+$$
+
+<Sim id="sound" params={{ f1: 400, doppler: 0.5 }} />
+
+**Eksperymenty:** zwiększaj <M v="doppler">\beta</M> ku 0,8 —
+częstotliwość słyszana z przodu eksploduje, gdy źródło zbliża się do
+prędkości fali. Przy $\beta = 1$ czoła piętrzą się w jeden wstrząs:
+grom soniczny. Karetki, auta wyścigowe i galaktyki z przesunięciem ku
+czerwieni — wszystkie jadą na tym samym równaniu.
+
+<Exercise title="Strojenie po dudnieniach">
+Kamerton 440 Hz brzmi razem ze struną fortepianu; słyszysz 3 dudnienia
+na sekundę. Czy struna ma 437 czy 443 Hz? Jak jedna mała korekta to
+rozstrzygnie?
+
+<Solution>
+Któreś z nich — dudnienia dają $|f - 440| = 3$. Naciągnij strunę
+odrobinę (podnosi f): jeśli dudnienia *zwalniają*, byłeś na 437
+i idziesz ku 440; jeśli *przyspieszają*, byłeś na 443 i oddalasz się.
+Kierunek zmiany rozstrzyga.
+</Solution>
+</Exercise>
+
+<Exercise title="Arytmetyka karetki">
+Syrena 800 Hz zbliża się z 30 m/s (dźwięk: 343 m/s). Jaką częstotliwość
+słyszysz przed i po przejechaniu? Jaki jest całkowity spadek?
+
+<Solution>
+Zbliżanie: $800/(1 - 30/343) \approx 879$ Hz. Oddalanie:
+$800/(1 + 30/343) \approx 736$ Hz. Słynne *ni-no* to spadek ≈ 143 Hz —
+około trzech półtonów, dokładnie w najczulszym zakresie ucha.
+</Solution>
+</Exercise>

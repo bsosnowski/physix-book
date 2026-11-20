@@ -398,5 +398,34 @@
     "view": {
       "dragHint": "drag the charges · flip signs with the sliders"
     }
+  },
+  "sound": {
+    "title": "Sound — longitudinal waves",
+    "param": {
+      "f1": "Frequency 1",
+      "f2": "Frequency 2 (0 = off)",
+      "A": "Amplitude",
+      "doppler": "Source speed v/c"
+    },
+    "readout": {
+      "lambda1": "Wavelength in air",
+      "beat": "Beat frequency",
+      "fAhead": "Heard ahead",
+      "fBehind": "Heard behind",
+      "spl": "Loudness (rel.)"
+    },
+    "plot": {
+      "probe": "Pressure at probe vs time"
+    },
+    "preset": {
+      "pure": "Pure tone",
+      "beats": "Beats (300 + 340 Hz)",
+      "octave": "Octave (200 + 400 Hz)",
+      "siren": "Moving siren"
+    },
+    "view": {
+      "legend": "particles oscillate along the wave — compressions & rarefactions",
+      "doppler": "wavefronts bunch ahead, stretch behind"
+    }
   }
 }

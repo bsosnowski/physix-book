@@ -37,5 +37,10 @@
     "placeholder": "Search chapters…",
     "noResults": "No results",
     "label": "Search"
+  },
+  "tone": {
+    "play": "Play tones",
+    "stop": "Stop",
+    "hint": "Set f₂ close to f₁ to hear beats. Sound starts only on click."
   }
 }

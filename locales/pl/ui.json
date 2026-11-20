@@ -37,5 +37,10 @@
     "placeholder": "Szukaj w rozdziałach…",
     "noResults": "Brak wyników",
     "label": "Szukaj"
+  },
+  "tone": {
+    "play": "Odtwórz tony",
+    "stop": "Zatrzymaj",
+    "hint": "Ustaw f₂ blisko f₁, aby usłyszeć dudnienia. Dźwięk tylko po kliknięciu."
   }
 }

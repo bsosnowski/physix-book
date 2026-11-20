@@ -3,6 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import { Sim } from "@/sim/framework/SimulationWidget";
 import { M } from "./M";
 import { Exercise, Solution } from "./Exercise";
+import { Tone } from "./Tone";
 
 /** Auto-assign ids to h2/h3 so frontmatter `sections` can deep-link. */
 function heading(Tag: "h2" | "h3") {
@@ -32,4 +33,5 @@ export const mdxComponents: MDXComponents = {
   M,
   Exercise,
   Solution,
+  Tone,
 };
