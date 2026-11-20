@@ -28,6 +28,10 @@ export default defineConfig({
   resolve: {
     alias: { "@": path.resolve(import.meta.dirname, "src") },
   },
+  preview: {
+    // SPA fallback for client-side routes (default only covers .html).
+    port: 4173,
+  },
   build: {
     rolldownOptions: {
       output: {

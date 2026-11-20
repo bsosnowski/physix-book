@@ -30,7 +30,7 @@ export const projectileModel: SimModel<ProjectileParams, ProjectileState> = {
   params: [
     { key: "v0", symbol: "v_0", labelKey: "projectile.param.v0", unit: "m/s", min: 5, max: 50, step: 0.5, default: 20, apply: "reset" },
     { key: "angle", symbol: "\\theta", labelKey: "projectile.param.angle", unit: "°", min: 5, max: 85, step: 1, default: 45, apply: "reset", digits: 0 },
-    { key: "g", symbol: "g", labelKey: "projectile.param.g", unit: "m/s²", min: 1, max: 25, step: 0.01, default: 9.81, apply: "live" },
+    { key: "g", symbol: "g", labelKey: "projectile.param.g", unit: "m/s²", min: 1, max: 25, step: 0.01, default: 9.81, apply: "live", digits: 2 },
     { key: "drag", symbol: "k", labelKey: "projectile.param.drag", unit: "1/m", min: 0, max: 0.05, step: 0.001, default: 0, apply: "live", digits: 3 },
   ],
   readouts: [

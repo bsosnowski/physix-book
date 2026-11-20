@@ -24,19 +24,25 @@ export function ReaderPage() {
 
     const chain = FALLBACK_CHAIN[locale as Locale] ?? [DEFAULT_LOCALE];
     void (async () => {
-      for (const loc of chain) {
-        const mod = await loadChapter(loc, slug);
-        if (cancelled) return;
-        if (mod) {
-          setChapter(() => mod);
-          setFellBack(loc !== locale);
-          setResolvedLocale(loc);
-          setStatus("ready");
-          window.scrollTo(0, 0);
-          return;
+      try {
+        for (const loc of chain) {
+          const mod = await loadChapter(loc, slug);
+          if (cancelled) return;
+          if (mod) {
+            setChapter(() => mod);
+            setFellBack(loc !== locale);
+            setResolvedLocale(loc);
+            setStatus("ready");
+            window.scrollTo(0, 0);
+            return;
+          }
         }
+        if (!cancelled) setStatus("notfound");
+      } catch (err) {
+        // A failed chunk fetch must not leave the reader stuck on "loading".
+        console.error("Failed to load chapter", slug, err);
+        if (!cancelled) setStatus("notfound");
       }
-      if (!cancelled) setStatus("notfound");
     })();
     return () => {
       cancelled = true;

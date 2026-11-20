@@ -56,6 +56,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   const doneRef = useRef(false);
   const speedRef = useRef(1);
   const visibleRef = useRef(false);
+  const explicitPlayRef = useRef(false);
   const moduleRef = useRef<AnySimModule | null>(null);
   const langRef = useRef({ t, locale: i18n.language, dark });
   const sizeRef = useRef({ width: 0, height: 0, dpr: 1, fullscreen: false });
@@ -145,6 +146,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
       setParams(next);
       paramsRef.current = next;
       reset(next);
+      explicitPlayRef.current = true;
       setPlaying(true);
     },
     [reset],
@@ -152,6 +154,7 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
 
   const restart = useCallback(() => {
     reset();
+    explicitPlayRef.current = true;
     setPlaying(true);
   }, [reset]);
 
@@ -197,12 +200,13 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
   // --- visibility: pause off-screen / hidden tab, optional autoplay ---------
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || !module) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const io = new IntersectionObserver(
       ([entry]) => {
         visibleRef.current = entry.isIntersecting;
         if (entry.isIntersecting && autoplay && !reduced && !doneRef.current) {
+          explicitPlayRef.current = false;
           setPlaying(true);
         }
       },
@@ -210,7 +214,9 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [autoplay]);
+    // `module` dep is essential: on first render the container div does not
+    // exist yet (skeleton is shown), so the observer must attach after load.
+  }, [autoplay, module]);
 
   // --- main loop: fixed-timestep physics, rAF rendering ----------------------
   useEffect(() => {
@@ -228,11 +234,13 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
       const elapsed = Math.min((now - last) / 1000, 0.25);
       last = now;
 
+      // Explicit Play always runs (user intent beats off-screen pausing);
+      // visibility gating applies to autoplay so off-screen sims stay idle.
       const active =
         playingRef.current &&
         !doneRef.current &&
-        visibleRef.current &&
-        !document.hidden;
+        !document.hidden &&
+        (explicitPlayRef.current || visibleRef.current);
 
       if (active) {
         acc += elapsed * speedRef.current;
@@ -312,7 +320,11 @@ export function Sim({ id, params: paramOverrides, autoplay = false }: Props) {
           {t(module.titleKey)}
         </span>
         <button
-          onClick={() => (done ? restart() : setPlaying(!playing))}
+          onClick={() => {
+            if (done) return restart();
+            explicitPlayRef.current = !playing;
+            setPlaying(!playing);
+          }}
           className="rounded-md bg-sky-600 px-3 py-1 text-sm font-medium text-white hover:bg-sky-500"
         >
           {done ? `⟲ ${t("toolbar.reset")}` : playing ? `⏸ ${t("toolbar.pause")}` : `▶ ${t("toolbar.play")}`}

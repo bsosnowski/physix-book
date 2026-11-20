@@ -19,7 +19,7 @@ export function M({ v, children }: { v?: string; children: string }) {
   return (
     <span
       className={
-        "rounded px-0.5 transition-colors " +
+        "inline-block rounded px-0.5 transition-colors " +
         (active ? "bg-amber-200 dark:bg-amber-500/40" : "") +
         (v ? " cursor-help" : "")
       }

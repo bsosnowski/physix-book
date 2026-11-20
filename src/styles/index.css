@@ -7,9 +7,8 @@
   --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* No smooth scrolling: it fights scrollIntoView during fast navigation
+   and leaves IntersectionObserver stale. Anchor jumps are instant. */
 
 body {
   @apply bg-white text-zinc-800 antialiased dark:bg-zinc-950 dark:text-zinc-200;

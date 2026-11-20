@@ -11,7 +11,9 @@ function heading(Tag: "h2" | "h3") {
       rest.id ??
       text
         ?.toLowerCase()
-        .replace(/[^\p{L}\p{N}]+/gu, "-")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f\u0142]/g, "") // strip diacritics (incl. ł)
+        .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "");
     return (
       <Tag id={id} {...rest}>
