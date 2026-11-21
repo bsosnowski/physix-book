@@ -14,6 +14,12 @@ See [PLAN.md](./PLAN.md) and [CONTENT-ROADMAP.md](./CONTENT-ROADMAP.md).
 Authoring guides: [write a chapter](./HOW-TO-WRITE-A-CHAPTER.md) ·
 [add a simulation](./HOW-TO-ADD-A-SIMULATION.md)
 
+## License
+
+[MIT](./LICENSE) © 2025 Bartosz Sosnowski — covers all code and content in
+this repository. Fork it, translate it, teach with it; just keep the
+license notice.
+
 ## Deploying
 
 Push to GitHub and enable **Settings → Pages → Source: GitHub Actions**;
