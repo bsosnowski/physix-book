@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import manifest from "virtual:chapters";
@@ -29,11 +29,23 @@ export function Sidebar() {
 
   const q = query.trim().toLowerCase();
   const activeChapter = chapters.find((c) => c.slug === slug);
-  // Scroll-spy: highlight the subsection actually being read, not just
-  // the last one clicked.
+  // Explicit navigation intent: set on subsection click AND on hash
+  // changes (deep links / back-forward). Nonce makes same-id re-clicks
+  // re-assert the target.
+  const [intent, setIntent] = useState<{ id: string; nonce: number } | null>(null);
+  const hashId = location.hash.slice(1);
+  useEffect(() => {
+    if (hashId && activeChapter?.sections.some((s) => s.id === hashId)) {
+      setIntent((prev) => ({ id: hashId, nonce: (prev?.nonce ?? 0) + 1 }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hashId, slug]);
+  // Scroll-spy: highlight the subsection being read; explicit clicks win
+  // until arrival or manual scroll (short sections never cross the line).
   const activeSection = useScrollSpy(
     activeChapter?.sections.map((s) => s.id) ?? [],
     !!activeChapter,
+    intent,
   );
   const filtered = q
     ? chapters.filter(
@@ -121,7 +133,9 @@ export function Sidebar() {
                             const target = `/${locale}/chapter/${ch.slug}#${s.id}`;
                             if (location.pathname + location.hash === target) {
                               // Same anchor clicked again: no router event will
-                              // fire, so scroll directly (animated).
+                              // fire, so scroll directly (animated) and
+                              // re-assert the highlight intent.
+                              setIntent((prev) => ({ id: s.id, nonce: (prev?.nonce ?? 0) + 1 }));
                               const el = document.getElementById(s.id);
                               if (el) scrollToElement(el);
                             } else {

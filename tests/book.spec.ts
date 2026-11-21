@@ -154,8 +154,12 @@ test.describe("content rendering", () => {
     await aside.getByRole("link", { name: "Damping", exact: true }).click();
     await expect(current).toHaveText("Damping", { timeout: 3000 });
     // manually scroll back to the top → highlight follows to the first
-    // section (or none in the intro), NOT stuck on the clicked one
-    await page.evaluate(() => window.scrollTo(0, 0));
+    // section (or none in the intro), NOT stuck on the clicked one.
+    // Use the wheel: it cancels any in-flight scroll animation and signals
+    // user takeover to the spy (a bare scrollTo would be fought by the
+    // animator — by design, programmatic scroll owns the window until done).
+    await page.mouse.move(640, 400);
+    await page.mouse.wheel(0, -10000);
     await expect.poll(async () => (await current.count()) ? current.innerText() : "", { timeout: 3000 }).not.toBe("Damping");
     // scroll to the pendulum heading → its link becomes active
     await page.locator("#the-pendulum").evaluate((el) => el.scrollIntoView());
@@ -163,6 +167,33 @@ test.describe("content rendering", () => {
     // active chapter block wraps subsections in the lighter tint
     const tint = await aside.locator("ul.rounded-b-md").count();
     expect(tint).toBe(1);
+  });
+
+  test("short sections fitting on one screen: click switches highlight and stays", async ({ page }) => {
+    // Vision chapter: two subsections, second one near the page bottom —
+    // both can be visible simultaneously; the lower heading can never
+    // cross the scroll-spy activation line.
+    await page.setViewportSize({ width: 1280, height: 1000 });
+    await page.goto("/en/chapter/vision");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const current = aside.locator("ul a[aria-current='location']");
+    await aside.getByRole("link", { name: "The eye as an instrument", exact: true }).click();
+    await expect(current).toHaveText("The eye as an instrument", { timeout: 3000 });
+    // switch to the lower section — highlight must move AND stay there
+    await aside.getByRole("link", { name: "When focus fails", exact: true }).click();
+    await expect(current).toHaveText("When focus fails", { timeout: 3000 });
+    await page.waitForTimeout(600); // after the scroll animation settles
+    await expect(current).toHaveText("When focus fails");
+    // switch back up — also works
+    await aside.getByRole("link", { name: "The eye as an instrument", exact: true }).click();
+    await expect(current).toHaveText("The eye as an instrument", { timeout: 3000 });
+    await page.waitForTimeout(600);
+    await expect(current).toHaveText("The eye as an instrument");
+    // manual wheel scroll hands control back to position-based spy
+    await page.mouse.move(640, 500);
+    await page.mouse.wheel(0, 3000);
+    await expect(current).toHaveText("When focus fails", { timeout: 3000 });
   });
 
   test("section navigation moves focus to the heading", async ({ page }) => {
