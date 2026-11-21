@@ -5,13 +5,9 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+# Minimal default: everything else is granted per-job below.
 permissions:
   contents: read
-  pages: write
-  id-token: write
-  # configure-pages `enablement: true` creates the Pages site via the
-  # admin repo API, which requires administration access.
-  administration: write
 
 concurrency:
   group: pages
@@ -20,6 +16,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # checkout
+      pages: read # configure-pages metadata lookup
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -31,11 +30,8 @@ jobs:
         run: npm run build -- --base=/${{ github.event.repository.name }}/
       - name: SPA fallback (client-side routes on refresh)
         run: cp dist/index.html dist/404.html
+      # Pages must already be enabled (Settings -> Pages -> GitHub Actions).
       - uses: actions/configure-pages@v6
-        with:
-          # auto-create the Pages site if not enabled yet (needs the
-          # pages:write permission granted above)
-          enablement: true
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
@@ -43,6 +39,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write # deploy to Pages
+      id-token: write # OIDC token proving deployment origin
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
