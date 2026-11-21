@@ -18,11 +18,18 @@ export interface ChapterMeta {
 
 export type ChapterManifest = Record<string, ChapterMeta[]>;
 
+/**
+ * Only filesystem-safe identifiers may be interpolated into generated module
+ * code (locale dir names, slugs, chapter filenames). Anything else is skipped.
+ */
+const SAFE_SEGMENT = /^[a-zA-Z0-9_-]+$/;
+
 /** Scan content/<locale>/chapters/*.mdx frontmatter for every locale. */
 export function buildManifest(contentDir: string): ChapterManifest {
   const manifest: ChapterManifest = {};
   if (!fs.existsSync(contentDir)) return manifest;
   for (const locale of fs.readdirSync(contentDir)) {
+    if (!SAFE_SEGMENT.test(locale)) continue;
     const chaptersDir = path.join(contentDir, locale, "chapters");
     if (!fs.existsSync(chaptersDir)) continue;
     const chapters: ChapterMeta[] = [];
@@ -37,8 +44,13 @@ export function buildManifest(contentDir: string): ChapterManifest {
         .replace(/\s+/g, " ")
         .trim()
         .slice(0, 4000);
+      const slug = data.slug ?? file.replace(/^\d+-/, "").replace(/\.mdx$/, "");
+      if (typeof slug !== "string" || !SAFE_SEGMENT.test(slug)) {
+        console.warn(`[chapter-manifest] skipping unsafe slug in ${file}: ${slug}`);
+        continue;
+      }
       chapters.push({
-        slug: data.slug ?? file.replace(/^\d+-/, "").replace(/\.mdx$/, ""),
+        slug,
         order: data.order ?? 999,
         title: data.title ?? file,
         description: data.description,
@@ -107,7 +119,7 @@ export function chapterLoader(contentDir: string): Plugin {
               f.endsWith(".mdx") &&
               f.replace(/^\d+-/, "").replace(/\.mdx$/, "") === ch.slug,
           );
-          if (!file) continue;
+          if (!file || !SAFE_SEGMENT.test(file.replace(/\.mdx$/, ""))) continue;
           const p = path.join(contentDir, locale, "chapters", file);
           entries.push(
             `  ${JSON.stringify(`${locale}/${ch.slug}`)}: () => import(${JSON.stringify(p)}),`,
