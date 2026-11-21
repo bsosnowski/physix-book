@@ -104,6 +104,106 @@ test.describe("content rendering", () => {
       .toBeLessThan(120); // near viewport top (below fixed header)
   });
 
+  test("rapid subsection switching mid-animation settles on the last target", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const nearTop = (id: string) =>
+      page.locator(`#${id}`).evaluate((el) => Math.abs(el.getBoundingClientRect().top));
+    // click A, then B ~80ms later — mid-flight interrupt, last click wins
+    await aside.getByRole("link", { name: "The pendulum", exact: true }).click();
+    await page.waitForTimeout(80);
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => nearTop("damping"), { timeout: 3000 }).toBeLessThan(120);
+    // and it stays there (no snap-back to A)
+    await page.waitForTimeout(400);
+    expect(await nearTop("damping")).toBeLessThan(120);
+    expect(await nearTop("the-pendulum")).toBeGreaterThan(200);
+  });
+
+  test("reduced motion: section jumps are instant", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: "Damping", exact: true }).click();
+    // no animation: position correct almost immediately
+    await page.waitForTimeout(100);
+    const top = await page.locator("#damping").evaluate((el) => Math.abs(el.getBoundingClientRect().top));
+    expect(top).toBeLessThan(120);
+  });
+
+  test("user wheel during animation cancels it without snap-back", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: "Damping", exact: true }).click();
+    await page.waitForTimeout(60); // mid-flight
+    await page.mouse.wheel(0, -300); // user takes over
+    await page.waitForTimeout(150);
+    const y1 = await page.evaluate(() => window.scrollY);
+    await page.waitForTimeout(400); // animator must NOT continue
+    const y2 = await page.evaluate(() => window.scrollY);
+    expect(Math.abs(y2 - y1)).toBeLessThan(40);
+  });
+
+  test("scroll-spy: subsection highlight follows reading position", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const current = aside.locator("ul a[aria-current='location']");
+    // click Damping → after landing it is the active subsection
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect(current).toHaveText("Damping", { timeout: 3000 });
+    // manually scroll back to the top → highlight follows to the first
+    // section (or none in the intro), NOT stuck on the clicked one.
+    // Use the wheel: it cancels any in-flight scroll animation and signals
+    // user takeover to the spy (a bare scrollTo would be fought by the
+    // animator — by design, programmatic scroll owns the window until done).
+    await page.mouse.move(640, 400);
+    await page.mouse.wheel(0, -10000);
+    await expect.poll(async () => (await current.count()) ? current.innerText() : "", { timeout: 3000 }).not.toBe("Damping");
+    // scroll to the pendulum heading → its link becomes active
+    await page.locator("#the-pendulum").evaluate((el) => el.scrollIntoView());
+    await expect(current).toHaveText("The pendulum", { timeout: 3000 });
+    // active chapter block wraps subsections in the lighter tint
+    const tint = await aside.locator("ul.rounded-b-md").count();
+    expect(tint).toBe(1);
+  });
+
+  test("short sections fitting on one screen: click switches highlight and stays", async ({ page }) => {
+    // Vision chapter: two subsections, second one near the page bottom —
+    // both can be visible simultaneously; the lower heading can never
+    // cross the scroll-spy activation line.
+    await page.setViewportSize({ width: 1280, height: 1000 });
+    await page.goto("/en/chapter/vision");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const current = aside.locator("ul a[aria-current='location']");
+    await aside.getByRole("link", { name: "The eye as an instrument", exact: true }).click();
+    await expect(current).toHaveText("The eye as an instrument", { timeout: 3000 });
+    // switch to the lower section — highlight must move AND stay there
+    await aside.getByRole("link", { name: "When focus fails", exact: true }).click();
+    await expect(current).toHaveText("When focus fails", { timeout: 3000 });
+    await page.waitForTimeout(600); // after the scroll animation settles
+    await expect(current).toHaveText("When focus fails");
+    // switch back up — also works
+    await aside.getByRole("link", { name: "The eye as an instrument", exact: true }).click();
+    await expect(current).toHaveText("The eye as an instrument", { timeout: 3000 });
+    await page.waitForTimeout(600);
+    await expect(current).toHaveText("The eye as an instrument");
+    // manual wheel scroll hands control back to position-based spy
+    await page.mouse.move(640, 500);
+    await page.mouse.wheel(0, 3000);
+    await expect(current).toHaveText("When focus fails", { timeout: 3000 });
+  });
+
+  test("section navigation moves focus to the heading", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: "Damping", exact: true }).click();
+    await expect.poll(() => page.evaluate(() => document.activeElement?.id), { timeout: 3000 }).toBe("damping");
+    await expect(page.locator("aside a[aria-current='location']")).toHaveText("Damping");
+  });
+
   test("sidebar subsection links scroll reliably, including re-clicks", async ({ page }) => {
     await page.goto("/en/chapter/oscillations");
     await expect(page.locator("article h1")).toBeVisible();
