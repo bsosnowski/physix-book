@@ -6,6 +6,7 @@ import { FALLBACK_CHAIN, DEFAULT_LOCALE, type Locale } from "@/i18n/config";
 import { useAppStore } from "./store";
 import clsx from "@/util/clsx";
 import { scrollToElement } from "@/util/smoothScroll";
+import { useScrollSpy } from "./useScrollSpy";
 
 /** Localized TOC with per-chapter fallback to the source locale. */
 export function Sidebar() {
@@ -27,6 +28,13 @@ export function Sidebar() {
   });
 
   const q = query.trim().toLowerCase();
+  const activeChapter = chapters.find((c) => c.slug === slug);
+  // Scroll-spy: highlight the subsection actually being read, not just
+  // the last one clicked.
+  const activeSection = useScrollSpy(
+    activeChapter?.sections.map((s) => s.id) ?? [],
+    !!activeChapter,
+  );
   const filtered = q
     ? chapters.filter(
         (ch) =>
@@ -78,10 +86,10 @@ export function Sidebar() {
                   onClick={() => setSidebarOpen(false)}
                   className={({ isActive }) =>
                     clsx(
-                      "block rounded-md px-2 py-1.5 text-sm",
+                      "block px-2 py-1.5 text-sm",
                       isActive || slug === ch.slug
-                        ? "bg-sky-50 font-medium text-sky-800 dark:bg-sky-950 dark:text-sky-300"
-                        : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900",
+                        ? "rounded-md bg-sky-50 font-medium text-sky-800 dark:bg-sky-950 dark:text-sky-300"
+                        : "rounded-md text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900",
                     )
                   }
                 >
@@ -98,12 +106,12 @@ export function Sidebar() {
                   )}
                 </NavLink>
                 {(slug === ch.slug) && ch.sections.length > 0 && (
-                  <ul className="mt-0.5 ml-4 space-y-0.5 border-l border-zinc-200 pl-2 dark:border-zinc-800">
+                  <ul className="mb-1 space-y-0.5 rounded-b-md bg-sky-50/50 px-2 pt-0.5 pb-1.5 dark:bg-sky-950/40">
                     {ch.sections.map((s) => (
                       <li key={s.id}>
                         <a
                           href={`#${s.id}`}
-                          aria-current={location.hash === `#${s.id}` ? "location" : undefined}
+                          aria-current={activeSection === s.id ? "location" : undefined}
                           onClick={(e) => {
                             // Plain anchors don't notify the router; push the
                             // hash through it so the reader scrolls reliably
@@ -120,7 +128,12 @@ export function Sidebar() {
                               void navigate(target);
                             }
                           }}
-                          className="block rounded px-1.5 py-1 text-xs text-zinc-500 hover:text-sky-700 dark:hover:text-sky-400"
+                          className={clsx(
+                            "block rounded border-l-2 px-1.5 py-1 text-xs transition-colors",
+                            activeSection === s.id
+                              ? "border-sky-500 bg-sky-100/80 font-medium text-sky-900 dark:border-sky-400 dark:bg-sky-900/60 dark:text-sky-200"
+                              : "border-transparent text-zinc-500 hover:bg-sky-100/50 hover:text-sky-700 dark:text-zinc-400 dark:hover:bg-sky-900/30 dark:hover:text-sky-400",
+                          )}
                         >
                           {s.title}
                         </a>

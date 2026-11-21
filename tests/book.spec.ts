@@ -145,6 +145,26 @@ test.describe("content rendering", () => {
     expect(Math.abs(y2 - y1)).toBeLessThan(40);
   });
 
+  test("scroll-spy: subsection highlight follows reading position", async ({ page }) => {
+    await page.goto("/en/chapter/oscillations");
+    await expect(page.locator("article h1")).toBeVisible();
+    const aside = page.locator("aside");
+    const current = aside.locator("ul a[aria-current='location']");
+    // click Damping → after landing it is the active subsection
+    await aside.getByRole("link", { name: "Damping", exact: true }).click();
+    await expect(current).toHaveText("Damping", { timeout: 3000 });
+    // manually scroll back to the top → highlight follows to the first
+    // section (or none in the intro), NOT stuck on the clicked one
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect.poll(async () => (await current.count()) ? current.innerText() : "", { timeout: 3000 }).not.toBe("Damping");
+    // scroll to the pendulum heading → its link becomes active
+    await page.locator("#the-pendulum").evaluate((el) => el.scrollIntoView());
+    await expect(current).toHaveText("The pendulum", { timeout: 3000 });
+    // active chapter block wraps subsections in the lighter tint
+    const tint = await aside.locator("ul.rounded-b-md").count();
+    expect(tint).toBe(1);
+  });
+
   test("section navigation moves focus to the heading", async ({ page }) => {
     await page.goto("/en/chapter/oscillations");
     await expect(page.locator("article h1")).toBeVisible();
