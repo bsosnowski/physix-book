@@ -9,6 +9,9 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # configure-pages `enablement: true` creates the Pages site via the
+  # admin repo API, which requires administration access.
+  administration: write
 
 concurrency:
   group: pages
